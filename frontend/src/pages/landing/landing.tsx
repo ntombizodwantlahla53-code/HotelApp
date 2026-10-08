@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './landing.module.css'
 import {navbar as Navbar} from '../../components/navbar/navbar'
 
