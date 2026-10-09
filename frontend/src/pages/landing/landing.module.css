@@ -18,3 +18,77 @@
     text-align: center;
     margin-top: 30px;
 }
+.firstplace{
+    background-image: url("../../assets/img1.jpg");
+    width: 35vw;
+    height: 50vh;
+    background-size: cover;
+}
+.secondplace{
+    background-image: url("../../assets/img2.jpg");
+    width: 65vw;
+    height: 50vh;
+    
+}
+.flex{
+    display: flex;
+    gap:30px;
+}
+
+.secrow{
+    display: flex;
+    gap:30px;
+    margin-top: 30px;
+
+}
+
+.thirdplace{
+    background-image: url("../../assets/img3.jpg");
+     background-size: cover;
+    width: 33vw;
+    height: 50vh;
+}
+
+.fourthplace{
+    background-image: url("../../assets/img4.jpg");
+    background-size: cover;
+    width: 33vw;
+    height: 50vh;
+}
+.lastplace{
+    background-image: url("../../assets/img5.webp");
+     background-size: cover;
+    width: 33vw;
+    height: 50vh;
+}
+.durban{
+    color:white;
+    padding: 10px;
+    margin-top: 430px;
+    background-size: contain;
+    background-color:cadetblue
+}
+.cape{
+   color:white;
+    padding: 10px;
+    margin-top: 430px;
+    background-color:cadetblue
+}
+.jhb{
+    color:white;
+    padding: 10px;
+    margin-top: 430px;
+    background-color:cadetblue
+}
+.pmb{
+    color:white;
+    padding: 10px;
+    margin-top: 430px;
+    background-color:cadetblue
+}
+.EL{
+    color:white;
+    padding: 10px;
+    margin-top: 430px;
+    background-color:cadetblue
+}
