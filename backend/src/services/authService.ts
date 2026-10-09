@@ -8,6 +8,7 @@ export const findUserByEmail = async (email: string): Promise<User | null> => {
 };
 
 export const createUser = async (
+  name: string,
   email: string,
   password: string,
   role: "Customer" | "Admin" = "Customer"
@@ -16,8 +17,8 @@ export const createUser = async (
   const password_hash = await bcrypt.hash(password, salt);
 
   const { rows } = await query(
-    "INSERT INTO users (email, password_hash, role) VALUES ($1, $2, $3) RETURNING id, email, role",
-    [email, password_hash, role]
+    "INSERT INTO users (name, email, password_hash, role) VALUES ($1, $2, $3, $4) RETURNING id, name, email, role",
+    [name, email, password_hash, role]
   );
   return rows[0];
 };
