@@ -1,4 +1,5 @@
 import styles from './navbar.module.css'
+// import { Link } from 'react-router-dom'
 
 
 export const navbar = () => {
@@ -11,8 +12,8 @@ export const navbar = () => {
             </div>
             
             <div className={styles.links}>
-            <a href="/#" className={styles.link}>Sign In</a>
-            <a href="/#" className={styles.link}>Sign Up</a>
+            <a href="/Login" className={styles.link}>Sign In</a>
+            <a href="/Register" className={styles.link}>Sign Up</a>
             </div>
         </div>
 

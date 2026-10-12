@@ -1,7 +1,6 @@
 import styles from './landing.module.css'
 import {navbar as Navbar} from '../../components/navbar/navbar'
 
-
 export const landing = () => {
   return (
     <div>
@@ -14,7 +13,7 @@ export const landing = () => {
 
         <div>
             <h2 className={styles.hotels}>Available Hotels</h2>
-            <p className={styles.hotels}>Explore ..................jkjnkkk</p>
+            <p className={styles.hotels}>Explore</p>
         </div>
         <div className={styles.flex}>
             <div className={styles.firstplace} >
