@@ -1,0 +1,28 @@
+nav{
+    background-color: #13509C;
+    color:white;
+   padding: 10px;
+
+}
+.navbar{
+    display: flex;
+     align-items: center;
+    justify-content: space-between;
+}
+.links{
+    display: flex;
+    gap:10px
+}
+.link{
+    cursor: zoom-in;
+}
+.link:hover{
+    color: rgb(27, 24, 24)
+}
+.logo{
+    display: flex;
+    gap:10px;
+}
+.blue{
+    color:lightseagreen;
+}
