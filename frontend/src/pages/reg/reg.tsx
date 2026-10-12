@@ -3,6 +3,8 @@ import { IoIosAddCircle } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../Redux/store";
 import { fetchRegs, updateRegister, clearRegister } from "../../components/features/regslice";
+import { Link } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
 
 type ButtonProps = {
   type?: "button" | "submit" | "reset";
@@ -61,6 +63,12 @@ export const reg = () => {
   return (
     <div className={styles.linkContainer}>
       <div className={styles.Topic}>
+        
+        <Link to="/">
+        <div className={styles.bc}>
+         <FaHome/>
+        </div>
+      </Link>
         <h1 className={styles.Mytitle}>Create Account</h1>
 
         <p className={styles.Myp}>
@@ -121,7 +129,9 @@ export const reg = () => {
             {error && <p>{error}</p>}
             <p className={styles.text}>
               Already have an account?
-            </p>
+            <Link to="/Login">
+              Sign In
+            </Link></p>
          
           </div>
         </div>
