@@ -1,4 +1,5 @@
 import {landing as Landing} from "./pages/landing/landing"
+import {reg as Reg} from "./pages/reg/reg"
 // import heroImg from './assets/hero.png'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from './assets/vite.svg'
@@ -9,7 +10,8 @@ function App() {
 
   return (
     <>
-      <Landing />
+      {/* <Landing /> */}
+      <Reg/>
     </>
   )
 }
