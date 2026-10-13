@@ -22,3 +22,20 @@ export const createUser = async (
   );
   return rows[0];
 };
+
+export const findAllUsers = async (): Promise<User[]> => {
+  const { rows } = await query(
+    "SELECT * FROM users",
+  );
+  return rows;
+};
+
+export const deleteUser = async (
+  id: number,
+): Promise<User | null> => {
+  const { rows } = await query(
+    "DELETE FROM users WHERE id = $1 RETURNING *",
+    [id],
+  );
+  return rows[0] || null;
+};

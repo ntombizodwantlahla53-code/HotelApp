@@ -58,3 +58,26 @@ export const login = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Error logging in" });
     }
 };
+
+
+export const getAllusers = async (req: Request, res: Response) => {
+  try {
+    const users = await userService.findAllUsers();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Error retreiving users" });
+  }
+};
+
+export const deleteUserById = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id as string, 10);
+    const deleteUser = await userService.deleteUser(id);
+    if (!deleteUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ message: "User Deleted Succesfully" });
+  } catch (error) {
+    res.status(500).json({ message: "error deleting user" });
+  }
+};
