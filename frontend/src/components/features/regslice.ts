@@ -31,22 +31,12 @@ export const fetchRegs = createAsyncThunk(
   "regs/fetchRegs",
   async (register:reg,thunkAPI) => {
     try {
-      const encryptedPassword = CryptoJS.AES.encrypt(
-        register.password,
-        "mySecretKey"
-      ).toString();
-
-      const encryptedRegister = {
-        ...register,
-        password: encryptedPassword,
-        confirmPassword: encryptedPassword,
-      };
       const response = await fetch('api/auth/register', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(encryptedRegister),
+        body: JSON.stringify(register),
       });
 
       if (!response.ok) {

@@ -1,6 +1,7 @@
 import {landing as Landing} from "./pages/landing/landing"
 import {reg as Reg} from "./pages/reg/reg"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {log as Log} from "./pages/login/login"
 // import heroImg from './assets/hero.png'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from './assets/vite.svg'
@@ -15,6 +16,7 @@ function App() {
       <Routes>
       <Route path = "/" element={<Landing/>}/>
       <Route path = "/Register" element={<Reg/>}/>
+      <Route path = "/Login" element={<Log/>}/>
       </Routes>
       </Router>
     </>
