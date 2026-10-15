@@ -71,7 +71,7 @@ export const fetchHotel = createAsyncThunk("hotel/fetchHotel",async (addhotels: 
 );
 export const fetchHotels = createAsyncThunk("hotel/fetchHotels", async (user_id: number,thunkAPI) => {
     try {
-      const response = await fetch(`api/hotels`);
+      const response = await fetch(`api/hotels?user_id=${user_id}`);
       if (!response.ok) {
         throw new Error("Failed to get hotels");
       }

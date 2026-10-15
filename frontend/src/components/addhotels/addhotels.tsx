@@ -128,12 +128,11 @@ export const Addhotels = () => {
             <div className={styles.desc}><label></label>
               </div>
               <div className={styles.btn}>
-                <Link to="/Hotels">
               <button type="submit">
                 <IoIosAddCircle /> ADD LIST
               </button>
-              </Link></div>
-              {error && (<p>{error}</p>)} {/*if thes error, show the error message*/}
+            </div>
+              {error && (<p>{error}fytujgnh</p>)} {/*if thes error, show the error message*/}
             </div>
           </div>
         </form>
