@@ -20,7 +20,6 @@ export const addHotel = async (
     res.status(500).json({ message: "Error in creating hotel" });
   }
 };
-
 export const getAllhotels = async (req: Request, res: Response) => {
   try {
     const hotels = await hotelService.findAllHotels();
@@ -40,7 +39,6 @@ export const deleteHotelById = async (req: Request, res: Response) => {
         }
     const hotel_id = parseInt(req.params.hotel_id as string, 10);
     const deleteHotel = await hotelService.deleteHotel(hotel_id);
-
     if (!deleteHotel) {
       return res.status(404).json({ message: "Hotel not found" });
     }

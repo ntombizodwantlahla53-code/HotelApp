@@ -10,6 +10,5 @@ export interface Hotel{
     star_rating: number | null,
     created_at: Date,
     updated_at: Date
-
 }
 export type NewHotel = Omit<Hotel, 'hotel_id' | 'created_at' | 'updated_at'>
