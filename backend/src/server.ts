@@ -3,10 +3,14 @@ import dotenv from "dotenv";
 import {textDbConnection} from "./config/database"
 import authRoutes from "./routes/authRoutes"
 import hotelRoutes from "./routes/hotelRoutes"
+import cors from "cors"
 
 dotenv.config();
 
 const app = express();
+app.use(cors({
+    origin: 'http://localhost:5173', // Replace with your frontend URL
+}));
 
 const PORT = process.env.PORT || 5000;
 
