@@ -1,6 +1,7 @@
 import styles from './landing.module.css'
 import {navbar as Navbar} from '../../components/navbar/navbar'
 
+
 export const landing = () => {
   return (
     <div>
@@ -41,3 +42,4 @@ export const landing = () => {
   )
 }
 export default landing
+
