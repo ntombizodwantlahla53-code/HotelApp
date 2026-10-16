@@ -35,6 +35,10 @@ export const fetchLogs = createAsyncThunk(
         },
         body: JSON.stringify(login),
       });
+      const data = await response.json();
+if (data.token) {
+  localStorage.setItem("token", data.token);
+}
 
       if (!response.ok) {
         throw new Error("Failed to login");
