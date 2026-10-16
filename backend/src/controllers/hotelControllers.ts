@@ -12,8 +12,8 @@ export const addHotel = async (
         if (req.user.role.toLowerCase() !== "admin") {
             return res.status(403).json({message: "Only admins can add hotels"});
         }
-    const newHotel = await hotelService.createHotel(req.body);
-    await hotelService.createHotel(req.body);
+    const newHotel = await hotelService.createHotel(req.body,req.user.id);
+    await hotelService.createHotel(req.body,req.user.id);
 
     res.status(201).json(newHotel);
   } catch (error) {
