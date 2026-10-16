@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import CryptoJS from "crypto-js";
 
 export interface log {
   id?: number;
@@ -36,6 +35,10 @@ export const fetchLogs = createAsyncThunk(
         },
         body: JSON.stringify(login),
       });
+      const data = await response.json();
+if (data.token) {
+  localStorage.setItem("token", data.token);
+}
 
       if (!response.ok) {
         throw new Error("Failed to login");
