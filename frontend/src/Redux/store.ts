@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import registerReducer from '../components/features/regslice'
 import loginReducer from '../components/features/loginslice'
-import addhotelsReducer from "../components/features/hotelslice";
+import addhotelsReducer from "../components/features/hotelslice"
 import roomsReducer from "../components/features/roomslice";
+import hotelReducer from "../components/features/hotelslice"
 
 
 
@@ -11,7 +12,8 @@ export const store = configureStore({
         register : registerReducer,
         login : loginReducer,
         addhotels: addhotelsReducer,
-        rooms:roomsReducer
+        rooms:roomsReducer,
+        hotels: hotelReducer
         
 
     }
