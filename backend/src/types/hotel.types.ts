@@ -11,4 +11,4 @@ export interface Hotel{
     created_at: Date,
     updated_at: Date
 }
-export type NewHotel = Omit<Hotel, 'hotel_id' | 'created_at' | 'updated_at'>
+export type NewHotel = Omit<Hotel, 'hotel_id' | 'created_at' | 'updated_at' | 'user_id'>

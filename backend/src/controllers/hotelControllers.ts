@@ -12,14 +12,15 @@ export const addHotel = async (
         if (req.user.role.toLowerCase() !== "admin") {
             return res.status(403).json({message: "Only admins can add hotels"});
         }
-    const newHotel = await hotelService.createHotel(req.body);
-    await hotelService.createHotel(req.body);
+    const newHotel = await hotelService.createHotel(req.body,req.user.id);
+    await hotelService.createHotel(req.body,req.user.id);
 
     res.status(201).json(newHotel);
   } catch (error) {
     res.status(500).json({ message: "Error in creating hotel" });
   }
 };
+
 export const getAllhotels = async (req: Request, res: Response) => {
   try {
     const hotels = await hotelService.findAllHotels();
@@ -39,6 +40,7 @@ export const deleteHotelById = async (req: Request, res: Response) => {
         }
     const hotel_id = parseInt(req.params.hotel_id as string, 10);
     const deleteHotel = await hotelService.deleteHotel(hotel_id);
+
     if (!deleteHotel) {
       return res.status(404).json({ message: "Hotel not found" });
     }
