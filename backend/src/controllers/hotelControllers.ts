@@ -13,8 +13,6 @@ export const addHotel = async (
             return res.status(403).json({message: "Only admins can add hotels"});
         }
     const newHotel = await hotelService.createHotel(req.body,req.user.id);
-    await hotelService.createHotel(req.body,req.user.id);
-
     res.status(201).json(newHotel);
   } catch (error) {
     res.status(500).json({ message: "Error in creating hotel" });
