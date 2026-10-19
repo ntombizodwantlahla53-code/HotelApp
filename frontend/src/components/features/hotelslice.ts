@@ -16,6 +16,7 @@ export interface hotel {
 
 interface LoginState {
   info: hotel;
+  hotels:hotel[]
   loading: boolean;
   error: string | null;
 }
@@ -31,9 +32,29 @@ const initialState: LoginState = {
     star_rating:null,
 
   },
+  hotels:[],
   loading: false,
   error: null,
 };
+export const fetchHotel = createAsyncThunk(
+  "hotels/fetchHotels",
+  async (_,thunkAPI) => {
+    try {
+       const response = await fetch('api/hotels'); 
+      if (!response.ok) {
+        throw new Error("Failed to get hotels");
+      }
+
+      return await response.json() as hotel[];
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong"
+      );
+    }
+  }
+);
 
 export const fetchHotels = createAsyncThunk(
   "hotels/fetchHotels",
@@ -99,13 +120,27 @@ export const hotelSlice = createSlice({
       .addCase(fetchHotels.fulfilled, (state, action) => {
         state.loading = false;
         state.info = action.payload;
+        state.hotels.push(action.payload)
       })
 
       .addCase(fetchHotels.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })
+      .addCase(fetchHotel.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
 
+      .addCase(fetchHotel.fulfilled, (state, action) => {
+        state.loading = false;
+        state.hotels = action.payload;
+      })
+
+      .addCase(fetchHotel.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
   },
 });
 
