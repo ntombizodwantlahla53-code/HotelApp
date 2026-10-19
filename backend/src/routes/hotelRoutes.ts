@@ -3,10 +3,11 @@ import { addHotel, getAllhotels, deleteHotelById } from "../controllers/hotelCon
 import { protect } from "../middleware/authmiddleware";
 
 const router = Router();
-router.use(protect)
 
-router.post('/hotels', addHotel);
 router.get('/hotels', getAllhotels)
+
+router.use(protect)
+router.post('/hotels', addHotel);
 router.delete('/hotels/:hotel_id', deleteHotelById)
 
 export default router;
