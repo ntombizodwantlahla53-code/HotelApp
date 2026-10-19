@@ -1,12 +1,14 @@
 import { Router } from "express";
-import { addRoom } from "../controllers/roomControllers";
+import { addRoom ,getAllrooms, deleteRoomById,} from "../controllers/roomControllers";
 import { protect } from "../middleware/authmiddleware";
 
 const router = Router();
 
+router.get('/rooms', getAllrooms)
 router.use(protect)
 
 router.post('/rooms', addRoom);
+router.delete('/rooms/:room_id', deleteRoomById)
 
 
 export default router;

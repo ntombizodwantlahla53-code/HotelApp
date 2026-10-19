@@ -12,3 +12,20 @@ export const createRoom = async (
     );
     return rows[0];
 };
+
+export const findAllRooms = async (): Promise<Room[]> => {
+  const { rows } = await query(
+    "SELECT * FROM rooms",
+  );
+  return rows;
+};
+
+export const deleteRoom = async (
+  room_id: number,
+): Promise<Room | null> => {
+  const { rows } = await query(
+    "DELETE FROM rooms WHERE room_id = $1 RETURNING *",
+    [room_id],
+  );
+  return rows[0] || null;
+};
