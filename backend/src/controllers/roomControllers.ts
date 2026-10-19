@@ -13,8 +13,7 @@ export const addRoom = async (
         if (req.user.role.toLowerCase() !== "admin") {
             return res.status(403).json({message: "Only admins can add rooms"});
         }
-    const newRoom = await roomService.createRoom(req.body,req.user.id);
-      await roomService.createRoom(req.body,req.user.id);
+    const newRoom = await roomService.createRoom(req.body,Number(req.body.hotel.id));
 
     res.status(201).json(newRoom);
   } catch (error) {
