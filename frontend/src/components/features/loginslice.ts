@@ -36,15 +36,13 @@ export const fetchLogs = createAsyncThunk(
         body: JSON.stringify(login),
       });
       const data = await response.json();
+      if(!response.ok){
+        throw new Error(data.message || "failed to login")
+      }
 if (data.token) {
   localStorage.setItem("token", data.token);
 }
-
-      if (!response.ok) {
-        throw new Error("Failed to login");
-      }
-
-      return await response.json();
+return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error instanceof Error

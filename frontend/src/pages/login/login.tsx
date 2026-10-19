@@ -2,7 +2,7 @@ import styles from "./login.module.css";
 import { IoIosAddCircle } from "react-icons/io";
 import {useSelector,useDispatch,} from "react-redux";
 import type {RootState,AppDispatch,} from "../../Redux/store";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {fetchLogs,updateLogin,clearLogin,} from "../../components/features/loginslice"
 import { MdArrowBackIos } from "react-icons/md";
 
@@ -12,6 +12,7 @@ export const log = () => {
   const error = useSelector((state: RootState) => state.login.error);
 
   const dispatch = useDispatch<AppDispatch>();
+   const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
  
@@ -35,8 +36,14 @@ export const log = () => {
         password: info.password,
       }))
       .unwrap()
-      .then(() => {
+      .then((data) => {
         dispatch(clearLogin());
+
+        if(data.user.role === 'Admin'){
+          navigate('/admin')
+        }else{
+          navigate('/')
+        }
      
       })
       .catch(() => {});
