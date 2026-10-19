@@ -20,11 +20,11 @@ export const findAllHotels = async (): Promise<Hotel[]> => {
 };
 
 export const deleteHotel = async (
-  id: number,
+  hotel_id: number,
 ): Promise<Hotel | null> => {
   const { rows } = await query(
     "DELETE FROM hotels WHERE hotel_id = $1 RETURNING *",
-    [id],
+    [hotel_id],
   );
   return rows[0] || null;
 };
