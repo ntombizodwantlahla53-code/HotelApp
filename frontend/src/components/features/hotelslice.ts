@@ -37,7 +37,7 @@ const initialState: LoginState = {
   error: null,
 };
 export const fetchHotel = createAsyncThunk(
-  "hotels/fetchHotels",
+  "hotels/fetchHotel",
   async (_,thunkAPI) => {
     try {
        const response = await fetch('api/hotels'); 
