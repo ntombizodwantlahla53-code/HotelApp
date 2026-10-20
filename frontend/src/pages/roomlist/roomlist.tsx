@@ -3,7 +3,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import {useSelector,useDispatch,} from "react-redux";
 import type {RootState,AppDispatch,} from "../../Redux/store"
 import {Link} from "react-router-dom";
-import {addRooms,updateRoom,clearRoom,fetchRoom} from "../../components/features/roomslice"
+import {fetchRoom} from "../../components/features/roomslice"
 import { MdArrowBackIos } from "react-icons/md";
 import { useEffect } from "react";
 
