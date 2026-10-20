@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface room {
     room_id?: number,
-    hotel_id?: number,
+    hotel_id: number,
     description: string,
     ammenities: string,
     capacity: number, 
@@ -21,6 +21,7 @@ interface LoginState {
 
 const initialState: LoginState = {
   info: {
+    hotel_id:1,
     description: "",
     ammenities: "",
     capacity: 0, 
@@ -95,6 +96,7 @@ export const roomSlice = createSlice({
 
     clearRoom: (state) => {
       state.info = {
+        hotel_id:1,
         description: "",
         ammenities: "",
         capacity: 0,

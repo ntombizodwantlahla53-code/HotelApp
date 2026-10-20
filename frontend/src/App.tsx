@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {log as Log} from "./pages/login/login"
 import { hotel as Hotel } from "./pages/hotels/hotels";
 import {room as Room} from "./pages/rooms/rooms"
+import {admin as Admin} from "./pages/admin/admin"
+import {roomlist as Roomlist} from "./pages/roomlist/roomlist"
 // import heroImg from './assets/hero.png'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from './assets/vite.svg'
@@ -21,8 +23,10 @@ function App() {
       <Route path = "/Register" element={<Reg/>}/>
       <Route path = "/Login" element={<Log/>}/>
       <Route path = "/Hotels" element={<Hotel/>}/>
+      <Route path = "/Admin" element={<Admin/>}/>
       <Route path = "/Rooms" element= {<Room/>}/>
-      <Route path = "/Rooms/:name" element= {<Room/>}/>
+      <Route path = "/Roomlist/:name" element= {<Roomlist/>}/>
+      <Route path = "/Roomlist" element= {<Roomlist/>}/>
       {/* <Route path = "/addhotels" element ={<Addhotels/>}/> */}
       </Routes>
       </Router>
