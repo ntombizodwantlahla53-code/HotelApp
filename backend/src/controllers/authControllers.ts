@@ -43,7 +43,6 @@ export const login = async (req: Request, res: Response) => {
         if (!isMatch) {
             return res.status(401).json({ message: "Invalid password" });
         }
-
         const payload = { 
             userId: user.id, 
             email: user.email, 
