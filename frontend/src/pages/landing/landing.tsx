@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../Redux/store";
 import { fetchHotel} from "../../components/features/hotelslice";
+import { Link } from 'react-router-dom';
+import { HiEye } from "react-icons/hi";
 
 export const landing = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -52,6 +54,11 @@ useEffect(() => {
       <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
       <p>Amenities: {hotel.ammenities}</p>
       <p>Star rating:{hotel.star_rating ?? "Not rated"}</p>
+                <Link to={`/Rooms/${hotel.name}`}>
+                    <div className={styles.buttnV}>
+                      <button className={styles.viewb}><HiEye/></button>
+                    </div>
+                  </Link>
     </div>
   ))}
 </div>

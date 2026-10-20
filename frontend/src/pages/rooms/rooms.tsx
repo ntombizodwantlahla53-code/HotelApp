@@ -1,4 +1,4 @@
-import styles from "./hotels.module.css"
+import styles from "./rooms.module.css"
 import { IoIosAddCircle } from "react-icons/io";
 import {useSelector,useDispatch,} from "react-redux";
 import type {RootState,AppDispatch,} from "../../Redux/store"
@@ -8,34 +8,16 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useEffect } from "react";
 
 export const room = () => {
-  const info = useSelector((state: RootState) => state.rooms.info);
+  const dispatch = useDispatch<AppDispatch>();
   const rooms = useSelector((state: RootState) => state.rooms.rooms);
   const loading = useSelector((state: RootState) => state.rooms.loading);
   const error = useSelector((state: RootState) => state.rooms.error);
 
-  const dispatch = useDispatch<AppDispatch>();
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
 
 useEffect(() => {
   dispatch(fetchRoom());
 }, [dispatch]);
 
-dispatch(
-     addRooms({
-        description: info.description,
-        ammenities: info.ammenities,
-        capacity: info.capacity,
-        quantity: info.quantity,
-        price: info.price,
-      }))
-      .unwrap()
-      .then(() => {
-        dispatch(clearRoom());
-     
-      })
-      .catch(() => {});
-  };
 
   return (
     <div className={styles.linkContainer}>
@@ -64,70 +46,7 @@ dispatch(
     </div>
   ))}
 </div>
-        <p className={styles.Myp}>
-        ADD HOTELS
-        </p>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className={styles.insideContainer}>
-          <div className={styles.linkss}>
-            <div className={styles.title}>
-              <label>description</label>
-              <input className={styles.inputtitle}
-                value={info.description}
-                type="text"
-                onChange={(e) => dispatch(updateRoom({ description: e.target.value }))}
-                placeholder="Description"/>
-            </div>
-            <div className={styles.title}>
-              <label>address</label>
-              <input className={styles.inputtitle}
-                value={info.ammenities}
-                type="text"
-                onChange={(e) => dispatch(updateRoom({ ammenities: e.target.value }))}
-                placeholder="Ammenities"/>
-            </div>
-            <div className={styles.title}>
-              <label>city</label>
-              <input className={styles.inputtitle}
-                value={info.capacity}
-                type="text"
-                onChange={(e) => dispatch(updateRoom({ capacity: Number(e.target.value) }))}
-                placeholder="Capacity"/>
-            </div>
-            <div className={styles.title}>
-              <label>country</label>
-              <input className={styles.inputtitle}
-                value={info.quantity}
-                type="text"
-                onChange={(e) => dispatch(updateRoom({ quantity: Number(e.target.value)  }))}
-                placeholder="Quantity"/>
-            </div>
-            <div className={styles.title}>
-              <label>satr_rating</label>
-              <input className={styles.inputtitle}
-                value={info.price}
-                type="text"
-                onChange={(e) => dispatch(updateRoom({ price: Number(e.target.value) }))}
-                placeholder="Price"/>
-            </div>
-
-            
-            <button type="submit" className={styles.inputting}>
-              <IoIosAddCircle /> {loading ? "Rooms..." : "addrooms"}
-            </button>
-
-            {error && (<p>{error}</p>
-            )}
-            {/* <p className={styles.text}>
-              Don't have an account?
-            </p> */}
-            {/* <Link to="/register">
-              Sign Up
-            </Link> */}
-          </div>
-        </div>
-      </form>
+</div>
     </div>
   );
 };
