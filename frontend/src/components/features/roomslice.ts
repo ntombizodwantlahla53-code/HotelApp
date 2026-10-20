@@ -33,7 +33,7 @@ const initialState: LoginState = {
   error: null,
 };
 export const fetchRoom = createAsyncThunk(
-  "roomss/fetchRoom",
+  "rooms/fetchRoom",
   async (_,thunkAPI) => {
     try {
        const response = await fetch('api/rooms'); 
