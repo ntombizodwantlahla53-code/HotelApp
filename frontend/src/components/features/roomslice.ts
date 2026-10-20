@@ -1,110 +1,146 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export interface Room {
-    room_id: number,
-    hotel_id: number,
+export interface room {
+    room_id?: number,
+    hotel_id?: number,
     description: string,
     ammenities: string,
     capacity: number, 
     quantity: number,
-    price: number,
-    created_at: Date,
-    updated_at: Date
-  
+    price: number
+
 }
 
-interface RoomsState {
-  rooms: Room[];
-  inputDescription: string;
-  inputAmmenities: string;
-  inputCapacity: string;
-  inputQuantity:string | number;
-  addIndex: string | null;
-  openIndex: string | null;
+interface LoginState {
+  info: room;
+  rooms:room[]
   loading: boolean;
   error: string | null;
-  sortBy: "az"| "za"| "newest" | "oldest";
-
 }
 
-const initialState: RoomsState = {
-  rooms: [],
-  inputDescription: "",
-  inputAmmenities: "",
-  inputCapacity: "",
-  inputQuantity:1,
-  addIndex: null,
-  openIndex: null,
+const initialState: LoginState = {
+  info: {
+    description: "",
+    ammenities: "",
+    capacity: 0, 
+    quantity: 0,
+    price: 0
+
+  },
+  rooms:[],
   loading: false,
   error: null,
-  sortBy:"newest",
 };
-export const fetchRoom = createAsyncThunk("rooms/fetchRoom", async (room: Room) => 
-  {
-  const response = await fetch('api/rooms', {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(room),
-  });
-  if (!response.ok) throw new Error("Failed to add room");
-  return await response.json();
-});
+export const fetchRoom = createAsyncThunk(
+  "roomss/fetchRoom",
+  async (_,thunkAPI) => {
+    try {
+       const response = await fetch('api/rooms'); 
+      if (!response.ok) {
+        throw new Error("Failed to get rooms");
+      }
 
-export const fetchRooms = createAsyncThunk("rooms/fetchRooms", async (_user_id: number) => 
-  {
-  const response = await fetch('api/rooms');
-  if (!response.ok) throw new Error("Failed to get rooms");
-  return await response.json();
-});
+      return await response.json() as room[];
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong"
+      );
+    }
+  }
+);
 
-export const roomsSlice = createSlice({
+export const addRooms = createAsyncThunk(
+  "rooms/addRooms",
+  async (rooms:room,thunkAPI) => {
+    try {
+        const token = localStorage.getItem("token"); 
+      const response = await fetch('api/rooms', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(rooms),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add room");
+      }
+
+      return await response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong"
+      );
+    }
+  }
+);
+
+
+export const roomSlice = createSlice({
   name: "rooms",
   initialState,
+
   reducers: {
-    setItemDescription: (state, action: PayloadAction<string>) => { 
-      state.inputDescription = action.payload; 
+    updateRoom: (
+      state,action: PayloadAction<Partial<room>>) => {
+      state.info = {...state.info,...action.payload,
+      };
     },
-    setItemAmmenities: (state, action: PayloadAction<string>) => { 
-      state.inputAmmenities = action.payload; 
+
+    clearRoom: (state) => {
+      state.info = {
+        description: "",
+        ammenities: "",
+        capacity: 0,
+        quantity: 0,
+        price: 0,
+      };
     },
-    setItemCapacity: (state, action: PayloadAction<string>) => { 
-      state.inputCapacity = action.payload; 
-    },
-    setItemQuantity: (state, action: PayloadAction<string>) => { 
-      state.inputQuantity = action.payload; 
-    },
-    toggleDropdown: (state, action: PayloadAction<string | null>) => { 
-      state.openIndex = action.payload; 
-    },
-    setAddIndex: (state, action: PayloadAction<string | null>) => { 
-      state.addIndex = action.payload; 
-    },
-    
-    clearAddForm: (state) => { 
-      state.inputDescription = "";
-      state.inputAmmenities = "";
-      state.inputCapacity = "";
-      state.inputQuantity = 1;
-      state.addIndex = null; 
-    },
-    setItemSortBy:(state,action: PayloadAction<"az"| "za"| "newest" | "oldest">) => {
-      state.sortBy=action.payload;
-    }
   },
+
   extraReducers: (builder) => {
     builder
-    .addCase(fetchRoom.fulfilled, (state, action) => {
-        state.rooms.push(action.payload);
-        state.inputDescription = "";
-        state.inputAmmenities = "";
-        state.inputCapacity = "";
-        state.inputQuantity = 1;
+      .addCase(addRooms.pending, (state) => {
+        state.loading = true;
+        state.error = null;
       })
-    .addCase(fetchRooms.fulfilled, (state, action) => { state.rooms = action.payload; 
 
-    })
+      .addCase(addRooms.fulfilled, (state, action) => {
+        state.loading = false;
+        state.info = action.payload;
+        state.rooms.push(action.payload)
+      })
+
+      .addCase(addRooms.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(fetchRoom.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+
+      .addCase(fetchRoom.fulfilled, (state, action) => {
+        state.loading = false;
+        state.rooms = action.payload;
+      })
+
+      .addCase(fetchRoom.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
   },
 });
 
-export const { setItemDescription, setItemAmmenities, setItemCapacity, setItemQuantity, toggleDropdown, setAddIndex,setItemSortBy} = roomsSlice.actions;
-export default roomsSlice.reducer;
+export const {
+  updateRoom,
+  clearRoom,
+} = roomSlice.actions;
+
+export default roomSlice.reducer;
