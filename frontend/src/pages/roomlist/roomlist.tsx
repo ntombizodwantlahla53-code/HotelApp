@@ -3,13 +3,15 @@ import { IoIosAddCircle } from "react-icons/io";
 import {useSelector,useDispatch,} from "react-redux";
 import type {RootState,AppDispatch,} from "../../Redux/store"
 import {Link, useParams} from "react-router-dom";
-import {fetchRoom} from "../../components/features/roomslice"
+import {fetchRoom, updateRoom} from "../../components/features/roomslice"
+import {fetchHotel} from "../../components/features/hotelslice"
 import { MdArrowBackIos } from "react-icons/md";
 import { useEffect } from "react";
 
 export const roomlist = () => {
+ const hotels = useSelector((state: RootState) => state.hotels.hotels);
      const dispatch = useDispatch<AppDispatch>();
-  const { hotel_id } = useParams<{ hotel_id: string }>();
+  const { hotel_id } = useParams();
   const rooms = useSelector((state: RootState) => state.rooms.rooms);
   const loading = useSelector((state: RootState) => state.rooms.loading);
   const error = useSelector((state: RootState) => state.rooms.error);
@@ -17,9 +19,13 @@ export const roomlist = () => {
 
 useEffect(() => {
   if(hotel_id){
-  dispatch(fetchRoom(Number(hotel_id)));
+  dispatch(fetchRoom(Number(hotel_id)))
   }
 }, [dispatch, hotel_id]);
+
+const hotelRooms = rooms.filter(
+  (room) => room.hotel_id === Number(hotel_id)
+)
 
   return (
     <div className={styles.linkContainer}>
@@ -37,9 +43,9 @@ useEffect(() => {
   <p>No rooms are available yet.</p>
 )}
 <div className={styles.flex}>
-  {rooms.map((room) => (
+  {hotelRooms.map((room) => (
     <div className={styles.firstplace} key={room.room_id}>
-      <h2>{room.hotel_id}</h2>
+      <h2>{room.room_id}</h2>
       <p>{room.description}</p>
       <p>Amenities: {room.ammenities}</p>
       <p>Capacity: {room.capacity}</p>
@@ -48,7 +54,7 @@ useEffect(() => {
     </div>
   ))}
 </div>
-  <Link to ="/Rooms">
+  <Link to= {`/Rooms/${hotel_id}`}>
             <button type="submit" className={styles.inputting}>
               <IoIosAddCircle /> {loading ? "Rooms..." : "addrooms"}
             </button></Link>

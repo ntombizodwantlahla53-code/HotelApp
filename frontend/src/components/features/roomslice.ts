@@ -37,7 +37,7 @@ export const fetchRoom = createAsyncThunk(
   "rooms/fetchRoom",
   async (hotel_id:number,thunkAPI) => {
     try {
-       const response = await fetch(`api/hotels/${hotel_id}/rooms`);
+       const response = await fetch(`api/hotels/${hotel_id} rooms`);
       if (!response.ok) {
         throw new Error("Failed to get rooms");
       }
@@ -58,7 +58,7 @@ export const addRooms = createAsyncThunk(
   async (rooms:room,thunkAPI) => {
     try {
         const token = localStorage.getItem("token"); 
-      const response = await fetch('api/rooms', {
+      const response = await fetch("api/rooms", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
