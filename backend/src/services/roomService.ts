@@ -13,9 +13,12 @@ export const createRoom = async (
     return rows[0];
 };
 
-export const findAllRooms = async (): Promise<Room[]> => {
+export const findAllRooms = async (
+  hotel_id: number
+): Promise<Room[]> => {
   const { rows } = await query(
-    "SELECT * FROM rooms",
+    "SELECT * FROM rooms WHERE hotel_id = $1",
+    [hotel_id]
   );
   return rows;
 };

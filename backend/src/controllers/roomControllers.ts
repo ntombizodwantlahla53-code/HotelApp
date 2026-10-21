@@ -27,7 +27,11 @@ export const addRoom = async (
 
 export const getAllrooms = async (req: Request, res: Response) => {
   try {
-    const rooms = await roomService.findAllRooms();
+    const hotel_id = parseInt(req.params.hotel_id as string, 10);
+    if(!hotel_id || isNaN(hotel_id)){
+          return res.status(400).json({ message: "hotel_id is required"})
+        }
+    const rooms = await roomService.findAllRooms(hotel_id);
     res.status(200).json(rooms);
   } catch (error) {
     res.status(500).json({ message: "Error retreiving rooms" });

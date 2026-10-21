@@ -4,7 +4,7 @@ import { protect } from "../middleware/authmiddleware";
 
 const router = Router();
 
-router.get('/rooms', getAllrooms)
+router.get('/hotels/:hotel_id/rooms', getAllrooms)
 router.use(protect)
 
 router.post('/rooms', addRoom);
