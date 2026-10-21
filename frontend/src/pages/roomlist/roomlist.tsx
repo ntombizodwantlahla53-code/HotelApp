@@ -37,7 +37,7 @@ const hotelRooms = rooms.filter(
         {loading && <p>Loading rooms...</p>}
 {error && <p>{error}</p>}
 
-            {!loading && !error && rooms.length === 0 && (
+            {!loading && !error && hotelRooms.length === 0 && (
   <p>No rooms are available yet.</p>
 )}
 <div className={styles.flex}>
@@ -70,3 +70,4 @@ const hotelRooms = rooms.filter(
     </div>
   )
 };
+export default roomlist;

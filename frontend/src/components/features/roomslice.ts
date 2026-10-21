@@ -21,7 +21,7 @@ interface LoginState {
 
 const initialState: LoginState = {
   info: {
-    hotel_id:1,
+    hotel_id:0,
     description: "",
     ammenities: "",
     capacity: 0, 
@@ -37,9 +37,10 @@ export const fetchRoom = createAsyncThunk(
   "rooms/fetchRoom",
   async (hotel_id:number,thunkAPI) => {
     try {
-       const response = await fetch(`api/hotels/${hotel_id} rooms`);
+       const response = await fetch(`api/hotels/${hotel_id}/rooms`);
+       const data = await response.json();
       if (!response.ok) {
-        throw new Error("Failed to get rooms");
+        throw new Error(data.message || "Failed to get rooms");
       }
 
       return await response.json() as room[];
@@ -55,7 +56,7 @@ export const fetchRoom = createAsyncThunk(
 
 export const addRooms = createAsyncThunk(
   "rooms/addRooms",
-  async (rooms:room,thunkAPI) => {
+  async (newRoom:room,thunkAPI) => {
     try {
         const token = localStorage.getItem("token"); 
       const response = await fetch("api/rooms", {
@@ -64,11 +65,12 @@ export const addRooms = createAsyncThunk(
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify(rooms),
+        body: JSON.stringify(newRoom),
       });
+      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error("Failed to add room");
+        throw new Error(data.message || "Failed to add room");
       }
 
       return await response.json();
@@ -96,7 +98,7 @@ export const roomSlice = createSlice({
 
     clearRoom: (state) => {
       state.info = {
-        hotel_id:1,
+        hotel_id:0,
         description: "",
         ammenities: "",
         capacity: 0,

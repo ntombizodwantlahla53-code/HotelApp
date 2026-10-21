@@ -13,6 +13,8 @@ export const admin = () => {
 const hotels = useSelector((state: RootState) => state.hotels.hotels);
 const loading = useSelector((state: RootState) => state.hotels.loading);
 const error = useSelector((state: RootState) => state.hotels.error);
+const saveUser = localStorage.getItem("user");
+const adminProfile = saveUser ? JSON.parse(saveUser) : null
 
 useEffect(() => {
   dispatch(fetchHotel());
@@ -26,7 +28,18 @@ useEffect(() => {
             <p className={styles.explore}>Lets start exploring the world</p>
 
         </div>
-
+        <div>
+          <h2>profile</h2>
+          {adminProfile ? (
+            <div>
+              <p>Name: {adminProfile.name}</p>
+              <p>Email: {adminProfile.email}</p>
+              <p>Role: {adminProfile.role}</p>
+            </div>
+          ) : (
+            <p>no profile</p>
+          )}
+        </div>
         <div>
             <Link to="/hotels">
             <h2 className={styles.hotels}>Add Hotels</h2></Link>
@@ -55,7 +68,7 @@ useEffect(() => {
       <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
       <p>Amenities: {hotel.ammenities}</p>
       <p>Star rating:{hotel.star_rating ?? "Not rated"}</p>
-         <Link to={`/Roomlist/${hotel.name}`}>
+         <Link to={`/hotels/${hotel.hotel_id}/rooms`}>
                     <div className={styles.buttnV}>
                       <button className={styles.viewb}><HiEye/></button>
                     </div>
