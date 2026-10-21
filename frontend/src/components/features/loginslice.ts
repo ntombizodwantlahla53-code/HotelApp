@@ -42,6 +42,9 @@ export const fetchLogs = createAsyncThunk(
 if (data.token) {
   localStorage.setItem("token", data.token);
 }
+if (data.user) {
+  localStorage.setItem("user", JSON.stringify(data.user));
+}
 return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
