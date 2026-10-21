@@ -3,13 +3,11 @@ import { IoIosAddCircle } from "react-icons/io";
 import {useSelector,useDispatch,} from "react-redux";
 import type {RootState,AppDispatch,} from "../../Redux/store"
 import {Link, useParams} from "react-router-dom";
-import {fetchRoom, updateRoom} from "../../components/features/roomslice"
-import {fetchHotel} from "../../components/features/hotelslice"
+import {fetchRoom} from "../../components/features/roomslice"
 import { MdArrowBackIos } from "react-icons/md";
 import { useEffect } from "react";
 
 export const roomlist = () => {
- const hotels = useSelector((state: RootState) => state.hotels.hotels);
      const dispatch = useDispatch<AppDispatch>();
   const { hotel_id } = useParams();
   const rooms = useSelector((state: RootState) => state.rooms.rooms);

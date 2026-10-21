@@ -5,7 +5,6 @@ import type {RootState,AppDispatch,} from "../../Redux/store"
 import {Link} from "react-router-dom";
 import {addRooms,updateRoom,clearRoom} from "../../components/features/roomslice"
 import { MdArrowBackIos } from "react-icons/md";
-import { fetchHotel} from "../../components/features/hotelslice";
 
 export const room = () => {
   const info = useSelector((state: RootState) => state.rooms.info);
