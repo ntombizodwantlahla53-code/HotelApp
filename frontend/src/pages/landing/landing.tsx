@@ -54,7 +54,7 @@ useEffect(() => {
       <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
       <p>Amenities: {hotel.ammenities}</p>
       <p>Star rating:{hotel.star_rating ?? "Not rated"}</p>
-                <Link to="/Roomlist">
+                <Link to={`/hotels/${hotel.hotel_id}/rooms`}>
                     <div className={styles.buttnV}>
                       <button className={styles.viewb}><HiEye/></button>
                     </div>

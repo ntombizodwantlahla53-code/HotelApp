@@ -2,21 +2,24 @@ import styles from "./roomlist.module.css"
 import { IoIosAddCircle } from "react-icons/io";
 import {useSelector,useDispatch,} from "react-redux";
 import type {RootState,AppDispatch,} from "../../Redux/store"
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {fetchRoom} from "../../components/features/roomslice"
 import { MdArrowBackIos } from "react-icons/md";
 import { useEffect } from "react";
 
 export const roomlist = () => {
      const dispatch = useDispatch<AppDispatch>();
+  const { hotel_id } = useParams<{ hotel_id: string }>();
   const rooms = useSelector((state: RootState) => state.rooms.rooms);
   const loading = useSelector((state: RootState) => state.rooms.loading);
   const error = useSelector((state: RootState) => state.rooms.error);
 
 
 useEffect(() => {
-  dispatch(fetchRoom());
-}, [dispatch]);
+  if(hotel_id){
+  dispatch(fetchRoom(Number(hotel_id)));
+  }
+}, [dispatch, hotel_id]);
 
   return (
     <div className={styles.linkContainer}>
@@ -26,7 +29,7 @@ useEffect(() => {
         </div>
       </Link>
       <div className={styles.Topic}>
-        <h1 className={styles.Mytitle}> Rooms</h1>
+        <h1 className={styles.Mytitle}> Rooms for hotel {hotel_id}</h1>
         {loading && <p>Loading rooms...</p>}
 {error && <p>{error}</p>}
 

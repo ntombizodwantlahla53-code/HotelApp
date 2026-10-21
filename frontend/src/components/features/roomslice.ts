@@ -35,9 +35,9 @@ const initialState: LoginState = {
 };
 export const fetchRoom = createAsyncThunk(
   "rooms/fetchRoom",
-  async (_,thunkAPI) => {
+  async (hotel_id:number,thunkAPI) => {
     try {
-       const response = await fetch('api/rooms'); 
+       const response = await fetch(`api/hotels/${hotel_id}/rooms`);
       if (!response.ok) {
         throw new Error("Failed to get rooms");
       }
