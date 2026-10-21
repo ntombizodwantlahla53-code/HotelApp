@@ -2,9 +2,11 @@ import styles from "./rooms.module.css"
 import { IoIosAddCircle } from "react-icons/io";
 import {useSelector,useDispatch,} from "react-redux";
 import type {RootState,AppDispatch,} from "../../Redux/store"
-import {Link} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {addRooms,updateRoom,clearRoom} from "../../components/features/roomslice"
 import { MdArrowBackIos } from "react-icons/md";
+import { useEffect } from "react";
+import { fetchHotel } from "../../components/features/hotelslice";
 
 export const room = () => {
   const info = useSelector((state: RootState) => state.rooms.info);
@@ -13,6 +15,16 @@ export const room = () => {
   const hotels = useSelector((state: RootState) => state.hotels.hotels);
 
   const dispatch = useDispatch<AppDispatch>();
+  const {hotel_id} =useParams();
+  const navigate = useNavigate();
+
+  useEffect(()=> {
+    dispatch(fetchHotel())
+
+  if(hotel_id){
+    dispatch(updateRoom({hotel_id:Number(hotel_id)}))
+    }
+  },[dispatch, hotel_id]);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -32,7 +44,9 @@ dispatch(
       }))
       .unwrap()
       .then(() => {
+        const selectedHotelId = info.hotel_id;
         dispatch(clearRoom());
+        navigate (`/hotels/${selectedHotelId}/rooms`);
      
       })
       .catch(() => {});
@@ -40,7 +54,7 @@ dispatch(
 
   return (
     <div className={styles.linkContainer}>
-      <Link to="/">
+      <Link to={hotel_id ? `/hotels/${hotel_id}/rooms` :"/Admin"}>
         <div className={styles.bc}>
           <MdArrowBackIos />
         </div>
