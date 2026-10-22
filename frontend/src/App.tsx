@@ -6,7 +6,7 @@ import { hotel as Hotel } from "./pages/hotels/hotels";
 import {room as Room} from "./pages/rooms/rooms"
 import {admin as Admin} from "./pages/admin/admin"
 import {roomlist as Roomlist} from "./pages/roomlist/roomlist"
-import RequireAdmin from "./components/RequireAdmin/RequireAdmin"
+import RequireAdmin from "./components/requireadmin/requireadmin"
 // import heroImg from './assets/hero.png'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from './assets/vite.svg'
