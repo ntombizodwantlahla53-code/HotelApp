@@ -6,7 +6,6 @@ import { Link, useParams } from "react-router-dom";
 import { fetchRoom } from "../../components/features/roomslice"
 import { MdArrowBackIos } from "react-icons/md";
 import { useEffect } from "react";
-import { isAdmin } from "../../components/features/loginslice";
 
 export const roomlist = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -30,6 +29,7 @@ export const roomlist = () => {
 
   return (
     <div className={styles.linkContainer}>
+
       <Link to={isAdmin ? "/Admin" : "/"}>
         <div className={styles.bc}>
           <MdArrowBackIos />
