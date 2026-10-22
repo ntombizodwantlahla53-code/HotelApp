@@ -28,6 +28,7 @@ function App() {
       <Route path = "/Rooms" element= {<RequireAdmin><Room/></RequireAdmin>}/>
       <Route path = "/Rooms/:hotel_id" element= {<RequireAdmin><Room/></RequireAdmin>}/>
       <Route path = "/hotels/:hotel_id/rooms" element={<Roomlist/>}/>
+      <Route path = "/Admin/hotels/:hotel_id/rooms" element={<RequireAdmin><Roomlist/></RequireAdmin>}/>
       <Route path = "/Roomlist" element= {<Roomlist/>}/>
       {/* <Route path = "/addhotels" element ={<Addhotels/>}/> */}
       </Routes>

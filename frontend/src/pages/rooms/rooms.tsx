@@ -46,7 +46,7 @@ dispatch(
       .then(() => {
         const selectedHotelId = info.hotel_id;
         dispatch(clearRoom());
-        navigate (`/hotels/${selectedHotelId}/rooms`);
+        navigate(`/Admin/hotels/${selectedHotelId}/rooms`);
      
       })
       .catch(() => {});
@@ -54,7 +54,7 @@ dispatch(
 
   return (
     <div className={styles.linkContainer}>
-      <Link to={hotel_id ? `/hotels/${hotel_id}/rooms` :"/Admin"}>
+      <Link to={hotel_id ? `/Admin/hotels/${hotel_id}/rooms` :"/Admin"}>
         <div className={styles.bc}>
           <MdArrowBackIos />
         </div>
