@@ -45,6 +45,10 @@ export const hotel = () => {
     alert("Please write ur rating.");
       return;
     }
+    if (!info.image_url) {
+    alert("where's image");
+      return;
+    }
     dispatch(
       fetchHotels({
         name: info.name,
@@ -54,6 +58,7 @@ export const hotel = () => {
         country: info.country,
         ammenities: info.ammenities,
         star_rating: info.star_rating,
+        image_url: info.image_url
       }))
       .unwrap()
       .then(() => {
@@ -136,6 +141,17 @@ export const hotel = () => {
                 placeholder="Star rating"/>
             </div>
 
+             <div className={styles.title}>
+              <label>image</label>
+              <input className={styles.inputtitle}
+                value={info.image_url}
+                type="text"
+                onChange={(e) => dispatch(updateHotel({ image_url:(e.target.value) }))}
+                placeholder="Image"/>
+                {info.image_url && (
+                  <img src= {info.image_url} alt ="preview"/>
+                )}
+            </div>
             
             <button type="submit" className={styles.inputting}>
               <IoIosAddCircle /> {loading ? "Hotels..." : "addhotels"}

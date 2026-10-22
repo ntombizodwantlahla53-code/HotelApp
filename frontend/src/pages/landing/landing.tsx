@@ -48,6 +48,9 @@ useEffect(() => {
 <div className={styles.flex}>
   {hotels.map((hotel) => (
     <div className={styles.firstplace} key={hotel.hotel_id}>
+      {hotel.image_url && (
+                  <img src= {hotel.image_url} alt ={hotel.name}/>
+                )}
       <h2>{hotel.name}</h2>
       <p>{hotel.description}</p>
       

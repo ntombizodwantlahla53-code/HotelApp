@@ -69,7 +69,6 @@ dispatch(
         <div className={styles.insideContainer}>
           <div className={styles.linkss}>
 
-            {/* CHANGED: select which hotel receives this room */}
             <div className={styles.title}>
               <label>Select hotel</label>
               <select

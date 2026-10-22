@@ -11,6 +11,7 @@ export interface hotel {
     country: string,
     ammenities: string,
     star_rating: number | null,
+    image_url: string
 
 }
 
@@ -30,6 +31,7 @@ const initialState: LoginState = {
     country: "",
     ammenities: "",
     star_rating:null,
+    image_url:""
 
   },
   hotels:[],
@@ -106,6 +108,7 @@ export const hotelSlice = createSlice({
     country: "",
     ammenities: "",
     star_rating:null,
+    image_url:""
       };
     },
   },
