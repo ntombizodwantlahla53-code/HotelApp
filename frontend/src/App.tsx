@@ -6,6 +6,7 @@ import { hotel as Hotel } from "./pages/hotels/hotels";
 import {room as Room} from "./pages/rooms/rooms"
 import {admin as Admin} from "./pages/admin/admin"
 import {roomlist as Roomlist} from "./pages/roomlist/roomlist"
+import RequireAdmin from "./components/requireadmin/requireadmin"
 // import heroImg from './assets/hero.png'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from './assets/vite.svg'
@@ -22,10 +23,10 @@ function App() {
       <Route path = "/" element={<Landing/>}/>
       <Route path = "/Register" element={<Reg/>}/>
       <Route path = "/Login" element={<Log/>}/>
-      <Route path = "/Hotels" element={<Hotel/>}/>
-      <Route path = "/Admin" element={<Admin/>}/>
-      <Route path = "/Rooms" element= {<Room/>}/>
-      <Route path = "/Rooms/:hotel_id" element= {<Room/>}/>
+      <Route path = "/Hotels" element={<RequireAdmin><Hotel/></RequireAdmin>}/>
+      <Route path = "/Admin" element={<RequireAdmin><Admin/></RequireAdmin>}/>
+      <Route path = "/Rooms" element= {<RequireAdmin><Room/></RequireAdmin>}/>
+      <Route path = "/Rooms/:hotel_id" element= {<RequireAdmin><Room/></RequireAdmin>}/>
       <Route path = "/hotels/:hotel_id/rooms" element={<Roomlist/>}/>
       <Route path = "/Roomlist" element= {<Roomlist/>}/>
       {/* <Route path = "/addhotels" element ={<Addhotels/>}/> */}

@@ -14,6 +14,9 @@ export const roomlist = () => {
   const rooms = useSelector((state: RootState) => state.rooms.rooms);
   const loading = useSelector((state: RootState) => state.rooms.loading);
   const error = useSelector((state: RootState) => state.rooms.error);
+  const saveUser = localStorage.getItem("user");
+  const profile = saveUser ? JSON.parse(saveUser) : null;
+  const isAdmin = profile?.role === "Admin";
 
   useEffect(() => {
     if (hotel_id) {
@@ -22,12 +25,12 @@ export const roomlist = () => {
   }, [dispatch, hotel_id]);
 
   const hotelRooms = rooms.filter(
-    (room) => Number(room.hotel_id) === Number(hotel_id)
+    (r) => Number(r.hotel_id) === Number(hotel_id)
   );
 
   return (
     <div className={styles.linkContainer}>
-      <Link to={isAdmin() ? "/Admin" : "/"}>
+      <Link to={isAdmin ? "/Admin" : "/"}>
         <div className={styles.bc}>
           <MdArrowBackIos />
         </div>
@@ -52,7 +55,7 @@ export const roomlist = () => {
             </div>
           ))}
         </div>
-        {isAdmin() && (
+        {isAdmin && (
           <Link to={`/Rooms/${hotel_id}`}>
             <button type="button" className={styles.inputting}>
               <IoIosAddCircle /> Add rooms

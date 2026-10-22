@@ -1,8 +1,14 @@
 import styles from './navbar.module.css'
-// import { Link } from 'react-router-dom'
-
 
 export const navbar = () => {
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/";
+  };
+
   return (
     <nav>
         <div className={styles.navbar}>
@@ -10,14 +16,18 @@ export const navbar = () => {
                 <h1 className={styles.blue}>Book</h1>
                 <h1>Hotel</h1>
             </div>
-            
+
             <div className={styles.links}>
-            <a href="/Login" className={styles.link}>Sign In</a>
-            <a href="/Register" className={styles.link}>Sign Up</a>
+            {token ? (
+              <a href="/" onClick={handleLogout} className={styles.link}>Log out</a>
+            ) : (
+              <>
+                <a href="/Login" className={styles.link}>Sign In</a>
+                <a href="/Register" className={styles.link}>Sign Up</a>
+              </>
+            )}
             </div>
         </div>
-
-
     </nav>
   )
 }

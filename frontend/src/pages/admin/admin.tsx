@@ -41,8 +41,11 @@ useEffect(() => {
           )}
         </div>
         <div>
-            <Link to="/hotels">
-            <h2 className={styles.hotels}>Add Hotels</h2></Link>
+            {adminProfile?.role === "Admin" && (
+              <Link to="/hotels">
+                <h2 className={styles.hotels}>Add Hotels</h2>
+              </Link>
+            )}
 
 {loading && <p>Loading hotels...</p>}
 {error && <p>{error}</p>}
