@@ -5,10 +5,10 @@ export const createRoom = async (
   appData: NewRoom,
   hotel_id: number
 ): Promise<Room> => {
-    const {description, ammenities, capacity, quantity, price } = appData;
+    const {description, ammenities, capacity, quantity, price, image_url } = appData;
     const { rows } = await query( 
-        "INSERT INTO rooms (hotel_id, description, ammenities, capacity, quantity, price ) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-    [hotel_id, description, ammenities, capacity, quantity, price],
+        "INSERT INTO rooms (hotel_id, description, ammenities, capacity, quantity, price ,image_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+    [hotel_id, description, ammenities, capacity, quantity, price, image_url],
     );
     return rows[0];
 };

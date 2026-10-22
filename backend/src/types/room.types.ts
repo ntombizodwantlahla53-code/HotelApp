@@ -6,6 +6,7 @@ export interface Room{
     capacity: number, 
     quantity: number,
     price: number,
+    image_url:string,
     created_at: Date,
     updated_at: Date
 
