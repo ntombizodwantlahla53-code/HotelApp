@@ -7,6 +7,7 @@ export interface Hotel{
     city: string,
     country: string,
     ammenities: string,
+    image_url:string,
     star_rating: number | null,
     created_at: Date,
     updated_at: Date
