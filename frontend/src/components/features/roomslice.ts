@@ -9,6 +9,7 @@ export interface room {
   capacity: number;
   quantity: number;
   price: number;
+  image_url:string
 }
 
 interface RoomState {
@@ -25,6 +26,7 @@ const emptyRoom: room = {
   capacity: 0,
   quantity: 0,
   price: 0,
+  image_url:""
 };
 
 const initialState: RoomState = {

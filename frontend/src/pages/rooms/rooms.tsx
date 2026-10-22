@@ -41,6 +41,7 @@ dispatch(
         capacity: info.capacity,
         quantity: info.quantity,
         price: info.price,
+        image_url: info.image_url
       }))
       .unwrap()
       .then(() => {
@@ -161,6 +162,22 @@ dispatch(
               />
             </div>
 
+            <div className={styles.title}>
+              <label>Images</label>
+              <input
+                className={styles.inputtitle}
+                value={info.image_url}
+                type="text"
+                onChange={(e) =>
+                  dispatch(updateRoom({ image_url: e.target.value }))
+                }
+                placeholder="Image"
+                required
+              />
+              {info.image_url && (
+                <img src={info.image_url} alt ="preview"/>
+              )}
+            </div>
             <button
               type="submit"
               className={styles.inputting}
