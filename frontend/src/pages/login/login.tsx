@@ -55,39 +55,38 @@ export const log = () => {
           <MdArrowBackIos />
         </div>
       </Link>
-      <div className={styles.Topic}>
+      <section className={styles.Topic}>
         <h1 className={styles.Mytitle}>Log in</h1>
         <p className={styles.Myp}>
           Enter your email and password to securely
           access your account.
         </p>
-      </div>
+      </section>
       <form onSubmit={handleSubmit}>
         <div className={styles.insideContainer}>
-          <div className={styles.linkss}>
             <div className={styles.title}>
-              <label>name</label>
+              <label>Name
               <input className={styles.inputtitle}
                 value={info.name}
                 type="text"
                 onChange={(e) =>dispatch(updateLogin({name: e.target.value,}))}
-                placeholder="Name"/>
+                placeholder="Name"/></label>
             </div>
             <div className={styles.title}>
-              <label>Email Address</label>
+              <label>Email Address
               <input className={styles.inputtitle}
                 value={info.email}
                 type="email"
                 onChange={(e) =>dispatch(updateLogin({email: e.target.value,}))}
-                placeholder="Email Address"/>
+                placeholder="Email Address"/></label>
             </div>
             <div className={styles.desc}>
-              <label>Password</label>
-              <input className={styles.inputdesc}
+              <label>Password
+              <input className={styles.inputtitle}
                 value={info.password}
                 onChange={(e) =>dispatch(updateLogin({password: e.target.value,}))}
                 type="password"
-                placeholder="Password"/>
+                placeholder="Password"/></label>
             </div>
 
             <p className={styles.password}>
@@ -107,7 +106,6 @@ export const log = () => {
               Sign Up
             </Link>
           </div>
-        </div>
       </form>
     </div>
   );
