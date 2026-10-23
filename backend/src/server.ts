@@ -4,6 +4,7 @@ import {textDbConnection} from "./config/database"
 import authRoutes from "./routes/authRoutes"
 import hotelRoutes from "./routes/hotelRoutes"
 import roomRoutes from "./routes/roomRoutes"
+import bookingRoutes from "./routes/bookingRoutes"
 import cors from "cors"
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api', hotelRoutes);
 app.use('/api', roomRoutes);
+app.use('/api', bookingRoutes);
 app.listen(PORT, () =>
 {
     console.log(`server is running at http://localhost:${PORT}`);
