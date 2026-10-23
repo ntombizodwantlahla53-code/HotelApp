@@ -24,10 +24,9 @@ useEffect(() => {
             <Navbar/>
             <h1 className={styles.texts}> Hotel Booking System</h1>
             <p className={styles.explore}>Lets start exploring the world</p>
-
         </div>
 
-        <div>
+        <div className={styles.hotelslist}>
             <h2 className={styles.hotels}>Available Hotels</h2>
             <p className={styles.hotels}>Explore</p>
 {loading && <p>Loading hotels...</p>}
@@ -37,21 +36,13 @@ useEffect(() => {
   <p>No hotels are available yet.</p>
 )}
         </div>
-        <div className={styles.flex}>
-
-    </div>
-
-<div className={styles.secrow}>
-            
-<div className={styles.fourthplace}>
-</div>
 <div className={styles.flex}>
   {hotels.map((hotel) => (
     <div className={styles.firstplace} key={hotel.hotel_id}>
       {hotel.image_url && (
-                  <img src= {hotel.image_url} alt ={hotel.name}/>
+                  <img src= {hotel.image_url} alt ={hotel.name} className={styles.image}/>
                 )}
-      <h2>{hotel.name}</h2>
+      <h2 >{hotel.name}</h2>
       <p>{hotel.description}</p>
       
       <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
@@ -65,11 +56,7 @@ useEffect(() => {
     </div>
   ))}
 </div>
-
 <div className={styles.lastplace}> 
-</div>
-
-   
 </div>
 
   </div>

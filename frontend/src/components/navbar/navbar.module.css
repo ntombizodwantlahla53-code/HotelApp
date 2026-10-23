@@ -2,6 +2,8 @@ nav{
     background-color: #13509C;
     color:white;
    padding: 10px;
+    font-weight: bolder;
+   
 
 }
 .navbar{
@@ -11,18 +13,27 @@ nav{
 }
 .links{
     display: flex;
-    gap:10px
+    gap:20px
 }
 .link{
-    cursor: zoom-in;
+    color: black;
+    cursor:pointer;
+    font-weight: bold;
 }
 .link:hover{
-    color: rgb(27, 24, 24)
+    color: white;
 }
 .logo{
     display: flex;
     gap:10px;
 }
+.white{
+    color: white;
+    font-weight: bolder;
+     font-style: oblique;
+}
 .blue{
     color:lightseagreen;
+    font-weight: bolder;
+     font-style: oblique;
 }
