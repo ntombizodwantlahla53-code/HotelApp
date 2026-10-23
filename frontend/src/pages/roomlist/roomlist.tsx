@@ -43,13 +43,13 @@ export const roomlist = () => {
   return (
     <div className={styles.linkContainer}>
       
-      <Link to={isAdminPage ? "/Admin" : "/"}>
+      <Link to={isAdminPage ?"/Admin":"/"}>
         <div className={styles.bc}>
           <MdArrowBackIos />
         </div>
       </Link>
       <div className={styles.Topic}>
-        <h1 className={styles.Mytitle}> Rooms for hotel {hotel_id}</h1>
+        <h1 className={styles.Mytitle}>Rooms for hotel {hotel_id}</h1>
         {loading && <p>Loading rooms...</p>}
         {error && <p>{error}</p>}
 
@@ -72,18 +72,17 @@ export const roomlist = () => {
                 <button
                   type="button"
                   className={styles.inputting}
-                  onClick={() => handleBook(room.room_id)}
-                >
+                  onClick={() => handleBook(room.room_id)}>
                   Book now
                 </button>
               )}
             </div>
           ))}
         </div>
-        {isAdminPage && (
+        {isAdminPage &&(
           <Link to={`/Rooms/${hotel_id}`}>
             <button type="button" className={styles.inputting}>
-              <IoIosAddCircle /> Add rooms
+              <IoIosAddCircle/>Add rooms
             </button>
           </Link>
         )}

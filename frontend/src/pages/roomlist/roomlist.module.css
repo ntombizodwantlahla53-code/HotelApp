@@ -1,0 +1,14 @@
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 5px;
+   
+}
+.firstplace{
+    border: 1px solid black;
+    width: 280px;
+    height: 100%;
+    border-radius: 18px;
+    padding: 10px;
+}
