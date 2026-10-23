@@ -80,47 +80,42 @@ export const reg = () => {
         <div className={styles.insideContainer}>
           <div className={styles.linkss}>
             <div className={styles.title}>
-
+              <label>Name
               <input className={styles.inputtitle}
                 placeholder="Name"
                 value={info.name}
                 onChange={(e) =>dispatch(updateRegister({name: e.target.value,})
-                  )}/>
-         
-              <label></label>
+                  )}/></label>
             </div>
             <div className={styles.descc}>
-
-            
-            
-              <label></label>
-              <input className={styles.inputdesc}
+              <label>Email Address
+              <input className={styles.inputtitle}
                 placeholder="Email Address"
                 type="email"
                 value={info.email}
                 onChange={(e) =>dispatch(updateRegister({email: e.target.value,})
                   )
-                }/>
+                }/></label>
             </div>
             <div className={styles.desc}>
-              <label></label>
-              <input className={styles.inputdesc}
+              <label>Password
+              <input className={styles.inputtitle}
                 placeholder="Password"
                 type="password"
                 value={info.password}
                 onChange={(e) =>dispatch(updateRegister({password: e.target.value,})
                   )
-                }/>
+                }/></label>
             </div>
             <div className={styles.desc}>
-              <label></label>
-              <input className={styles.inputdesc}
+              <label>Confirm Password
+              <input className={styles.inputtitle}
                 placeholder="Confirm Password"
                 type="password"
                 value={info.confirmPassword}
                 onChange={(e) =>dispatch(updateRegister({confirmPassword: e.target.value,})
                   )
-                }/>
+                }/></label>
             </div>
             <Buttons type="submit"
               label={loading ? "Creating..." : "Create Account"}
