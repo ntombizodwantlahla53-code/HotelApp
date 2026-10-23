@@ -175,7 +175,7 @@ dispatch(
                 required
               />
               {info.image_url && (
-                <img src={info.image_url} alt ="preview"/>
+                <img src={info.image_url} alt ="preview"  className={styles.image}/>
               )}
             </div>
             <button

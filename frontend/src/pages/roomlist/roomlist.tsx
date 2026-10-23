@@ -60,7 +60,7 @@ export const roomlist = () => {
           {hotelRooms.map((room) => (
             <div className={styles.firstplace} key={room.room_id}>
               {room.image_url && (
-                <img src={room.image_url} alt={`Room ${room.room_id}`} />
+                <img src={room.image_url} alt={`Room ${room.room_id}`}  className={styles.image}/>
               )}
               <h2>Room {room.room_id}</h2>
               <p>{room.description}</p>
