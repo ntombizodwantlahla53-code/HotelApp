@@ -24,8 +24,6 @@ useEffect(() => {
     <div>
         <div className={styles.landing}>
             <Navbar/>
-            <h1 className={styles.texts}> Hotel Booking System</h1>
-            <p className={styles.explore}>Lets start exploring the world</p>
 
         </div>
         <div>
@@ -54,19 +52,11 @@ useEffect(() => {
   <p>No hotels are available yet.</p>
 )}
         </div>
-        <div className={styles.flex}>
-
-    </div>
-
-<div className={styles.secrow}>
-            
-<div className={styles.fourthplace}>
-</div>
 <div className={styles.flex}>
   {hotels.map((hotel) => (
     <div className={styles.firstplace} key={hotel.hotel_id}>
       {hotel.image_url && (
-                  <img src= {hotel.image_url} alt ={hotel.name}/>
+                  <img src= {hotel.image_url} alt ={hotel.name} className={styles.image}/>
                 )}
       <h2>{hotel.name}</h2>
       <p>{hotel.description}</p>
@@ -82,7 +72,6 @@ useEffect(() => {
     </div>
   ))}
 </div>
-        </div>
   </div>
   )
 }
