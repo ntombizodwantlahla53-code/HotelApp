@@ -5,6 +5,7 @@ import authRoutes from "./routes/authRoutes"
 import hotelRoutes from "./routes/hotelRoutes"
 import roomRoutes from "./routes/roomRoutes"
 import bookingRoutes from "./routes/bookingRoutes"
+import favouriteRoutes from "./routes/favourateRoutes"
 import cors from "cors"
 
 dotenv.config();
@@ -23,6 +24,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api', hotelRoutes);
 app.use('/api', roomRoutes);
 app.use('/api', bookingRoutes);
+app.use('/api', favouriteRoutes);
+
+
 app.listen(PORT, () =>
 {
     console.log(`server is running at http://localhost:${PORT}`);
