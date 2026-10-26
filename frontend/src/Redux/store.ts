@@ -8,6 +8,7 @@ import bookingReducer from "../components/features/bookingslice"
 import favouriteReducer from "../components/features/favourateslice"
 import profileReducer from "../components/features/profileslice"
 import userReducer from "../components/features/userslice"
+import searchReducer from "../components/features/searchslice"
 
 
 
@@ -21,7 +22,9 @@ export const store = configureStore({
         booking: bookingReducer,
         favourites: favouriteReducer,
         profile: profileReducer,
-        users: userReducer
+        users: userReducer,
+        search: searchReducer
+        
 
     }
 })
