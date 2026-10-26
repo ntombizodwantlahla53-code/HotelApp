@@ -21,7 +21,6 @@ const results = useSelector((state: RootState) => state.search.results);
 const searched = useSelector((state: RootState) => state.search.searched);
 const searching = useSelector((state: RootState) => state.search.loading);
 const searchError = useSelector((state: RootState) => state.search.error);
-const today = new Date().toLocaleDateString("en-CA");
 const navigate = useNavigate();
 const token = localStorage.getItem("token");
 const saveUser = localStorage.getItem("user");
@@ -71,7 +70,7 @@ const handleSearch = (e: React.FormEvent) => {
             <h2 className={styles.hotels}>Available Hotels</h2>
             <p className={styles.hotels}>Explore</p>
 
-           <form onSubmit={handleSearch} style={{ display: "flex", gap: "10px", flexWrap: "wrap", margin: "10px 0" }}>
+           <form onSubmit={handleSearch}  >
             <label>Hotel name
               <input type="text"
       placeholder="hotelname"
