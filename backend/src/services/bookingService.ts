@@ -31,6 +31,14 @@ export const createBooking = async (booking: {
         throw new Error("INVALID_DATES");
     }
 
+    const { rows: taken } = await query(
+        `SELECT COUNT(*) FROM bookings
+        WHERE room_id = $1 AND check_in < $3::date AND check_out > $2::date`,
+        [booking.room_id, booking.check_in, booking.check_out]
+    );
+    if (Number(taken[0].count) >= Number(room.quantity)) {
+        throw new Error("ROOM_FULL");
+    }
 
     const total_price = Number(room.price) * nights;
     const { rows } = await query(

@@ -48,6 +48,9 @@ export const addBooking = async (req: Request, res: Response) => {
         if (message === "quest capacity") {
             return res.status(400).json({ message: "Number of guests exceeds this room's capacity"});
         }
+        if (message === "ROOM_FULL") {
+            return res.status(409).json({ message: "This room is fully booked for those dates"});
+        }
         if (message === "INVALID_DATES") {
             return res.status(400).json({ message: "Check-out must be after check-in"});
         }
