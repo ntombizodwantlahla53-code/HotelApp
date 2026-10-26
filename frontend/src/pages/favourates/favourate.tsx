@@ -21,7 +21,7 @@ export const favourite = () => {
   }, [dispatch, navigate]);
 
   return (
-    <div style={{ maxWidth: "650px", margin: "40px auto", padding: "20px" }}>
+    <div >
       <Link to="/">Back to hotels</Link>
       <h1>My favourites</h1>
 
@@ -34,7 +34,7 @@ export const favourite = () => {
       {favourites.map((hotel) => (
         <div key={hotel.hotel_id}>
           {hotel.image_url && (
-            <img src={hotel.image_url} alt={hotel.name} width="250" />
+            <img src={hotel.image_url} alt={hotel.name}   />
           )}
           <h2>{hotel.name}</h2>
           <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
