@@ -26,7 +26,7 @@ export const roomlist = () => {
       return;
     }
 
-    alert(`Booking room ${room_id} - booking page coming soon`);
+    navigate(`/bookings/${room_id}`);
   };
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import {room as Room} from "./pages/rooms/rooms"
 import {admin as Admin} from "./pages/admin/admin"
 import {roomlist as Roomlist} from "./pages/roomlist/roomlist"
 import RequireAdmin from "./components/requireadmin/requireadmin"
+import {booking as Bookings} from "./pages/bookings/bookings";
 // import heroImg from './assets/hero.png'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from './assets/vite.svg'
@@ -30,6 +31,7 @@ function App() {
       <Route path = "/hotels/:hotel_id/rooms" element={<Roomlist/>}/>
       <Route path = "/Admin/hotels/:hotel_id/rooms" element={<RequireAdmin><Roomlist/></RequireAdmin>}/>
       <Route path = "/Roomlist" element= {<Roomlist/>}/>
+      <Route path = "/booking/:room_id" element= {<Bookings/>}/>
       {/* <Route path = "/addhotels" element ={<Addhotels/>}/> */}
       </Routes>
       </Router>

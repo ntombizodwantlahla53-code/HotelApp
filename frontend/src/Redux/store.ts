@@ -4,6 +4,7 @@ import loginReducer from '../components/features/loginslice'
 import addhotelsReducer from "../components/features/hotelslice"
 import roomReducer from "../components/features/roomslice";
 import hotelReducer from "../components/features/hotelslice"
+import bookingReducer from "../components/features/bookingslice"
 
 
 
@@ -13,7 +14,8 @@ export const store = configureStore({
         login : loginReducer,
         addhotels: addhotelsReducer,
         rooms:roomReducer,
-        hotels: hotelReducer
+        hotels: hotelReducer,
+        booking: bookingReducer
         
 
     }
