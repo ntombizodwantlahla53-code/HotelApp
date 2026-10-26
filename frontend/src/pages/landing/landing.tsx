@@ -71,22 +71,38 @@ const handleSearch = (e: React.FormEvent) => {
             <h2 className={styles.hotels}>Available Hotels</h2>
             <p className={styles.hotels}>Explore</p>
 
-            <form onSubmit={handleSearch} style={{ display: "flex", gap: "10px", flexWrap: "wrap", margin: "10px 0" }}>
-              <label>
-                Check-in
-                <input
-                  type="date"
-                  min={today}
-                  value={info.check_in}
-                  onChange={(e) => dispatch(updateSearch({ check_in: e.target.value, check_out: "" }))}
-                />
-              </label>
-              <label> Check-out
-                <input type="date"
-                  min={info.check_in || today}
-                  value={info.check_out}
-                  onChange={(e) => dispatch(updateSearch({ check_out: e.target.value }))}/>
-              </label>
+           <form onSubmit={handleSearch} style={{ display: "flex", gap: "10px", flexWrap: "wrap", margin: "10px 0" }}>
+            <label>Hotel name
+              <input type="text"
+      placeholder="hotelname"
+      value={info.hotel_name}
+      onChange={(e) => dispatch(updateSearch({ hotel_name: e.target.value }))}
+      required
+    />
+  </label>
+
+  <label>
+    Check-in (YYYY-MM-DD)
+    <input
+      type="text"
+      placeholder="2026-11-01"
+      value={info.check_in}
+      onChange={(e) => dispatch(updateSearch({ check_in: e.target.value }))}
+      required
+    />
+  </label>
+
+  <label>
+    Check-out (YYYY-MM-DD)
+    <input
+      type="text"
+      placeholder="2026-11-05"
+      value={info.check_out}
+      onChange={(e) => dispatch(updateSearch({ check_out: e.target.value }))}
+      required
+    />
+  </label>
+
               <button type="submit" disabled={searching}>
                 {searching ? "Searching..." : "Search"}
               </button>

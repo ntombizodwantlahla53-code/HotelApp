@@ -5,6 +5,7 @@ import type { hotel } from "./hotelslice";
 export interface search {
   check_in: string;
   check_out: string;
+  hotel_name:string
 }
 
 interface SearchState {
@@ -19,6 +20,7 @@ const initialState: SearchState = {
   info: {
     check_in: "",
     check_out: "",
+    hotel_name:""
   },
   results: [],
   searched: false,
@@ -30,15 +32,13 @@ export const fetchAvailable = createAsyncThunk(
   "search/fetchAvailable",
   async (info: search, thunkAPI) => {
     try {
-      const response = await fetch(
-        `/api/hotels/available?check_in=${info.check_in}&check_out=${info.check_out}`
+      const response = await fetch(`/api/hotels/available?check_in=${info.check_in}&check_out=${info.check_out}&hotel_name=${encodeURIComponent(info.hotel_name)}`
       );
       const data = await response.json();
 
       if (!response.ok) {
         throw new Error(data.message || "Failed to search hotels");
       }
-
       return data as hotel[];
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -61,6 +61,7 @@ export const searchSlice = createSlice({
       state.info = {
         check_in: "",
         check_out: "",
+        hotel_name:""
       };
       state.results = [];
       state.searched = false;
