@@ -1,161 +1,106 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import styles from "./bookings.module.css"
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import type { AppDispatch, RootState } from "../../Redux/store"
-import {addbooking, fetchbookingroom} from "../../components/features/bookingslice"
+import type { RootState, AppDispatch } from "../../Redux/store";
+import {addBookings,fetchBookingRoom,updateBooking,clearBooking,} from "../../components/features/bookingslice";
 
 export const booking = () => {
-    const { room_id } = useParams();
-    const dispatch = useDispatch<AppDispatch>();
-    const navigate = useNavigate();
+  const info = useSelector((state: RootState) => state.booking.info);
+  const room = useSelector((state: RootState) => state.booking.room);
+  const loading = useSelector((state: RootState) => state.booking.loading);
+  const error = useSelector((state: RootState) => state.booking.error);
 
-    const { room, loading, error } = useSelector(
-        (state: RootState) => state.booking
-    );
+  const dispatch = useDispatch<AppDispatch>();
+  const { room_id } = useParams();
+  const navigate = useNavigate();
 
-    const [checkIn, setCheckIn] = useState("");
-    const [checkOut, setCheckOut] = useState("");
-    const [guests, setGuests] = useState(1);
-    const [message, setMessage] = useState("");
+  const today = new Date().toLocaleDateString("en-CA");
+  const nights = info.check_in && info.check_out && info.check_out > info.check_in ? Math.round((new Date(info.check_out).getTime() -new Date(info.check_in).getTime()) /86400000): 0;
+  const total = room ? Number(room.price) * nights : 0;
 
-    const today = new Date().toLocaleDateString("en-CA");
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/Login");
+      return;
+    }
+    if (room_id) {
+      dispatch(clearBooking());
+      dispatch(updateBooking({ room_id: Number(room_id) }));
+      dispatch(fetchBookingRoom(Number(room_id)));
+    }
+  }, [dispatch, room_id, navigate]);
 
-    const nights =
-        checkIn && checkOut && checkOut > checkIn
-            ? Math.round(
-                (new Date(checkOut).getTime() - new Date(checkIn).getTime()) / 86400000
-            ): 0;
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-    const total = room ? Number(room.price) * nights : 0;
-    useEffect(() => {
-        if (!localStorage.getItem("token")) {
-            navigate("/Login", {
-                state: { from: `/bookings/${room_id}` },
-                replace: true
-            });
-            return;
-        }
+    if (nights < 1) {
+      alert("Check-out must be after check-in.");
+      return;
+    }
 
-        if (room_id) {
-            dispatch(fetchbookingroom(Number(room_id)));
-        }
-    }, [dispatch, room_id, navigate]);
+    dispatch(
+      addBookings({
+        room_id: info.room_id,
+        check_in: info.check_in,
+        check_out: info.check_out,
+        guests: info.guests,
+      }))
+      .unwrap()
+      .then((data) => {
+        alert(`Booking successful! Total: R${Number(data.total_price).toFixed(2)}`);
+        dispatch(clearBooking());
+        navigate("/");
+      })
+      .catch(() => {});
+  };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setMessage("");
+  return (
+    <div className={styles.books}>
+      <Link to={room ? `/hotels/${room.hotel_id}/rooms` : "/"}>
+        Back to rooms</Link>
+      <h1>Book a room</h1>
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      {room && (
+        <>
+          <h2>Room {room.room_id}</h2>
+          <p>{room.description}</p>
+          <p>Price per night: R{Number(room.price).toFixed(2)}</p>
+          <p>Room capacity: {room.capacity} guest(s)</p>
+          <form onSubmit={handleSubmit}>
+            <p><label>Check-in date<br />
+                <input type="date"
+                  min={today}
+                  value={info.check_in}
+                  onChange={(e) => dispatch(updateBooking({ check_in: e.target.value, check_out: "" }))}/>
+              </label></p>
 
-        if (!room_id || nights < 1) {
-            setMessage("Choose a check-out date after check-in.");
-            return;
-        }
+            <p><label>Check-out date<br />
+                <input type="date"
+                  min={info.check_in || today}
+                  value={info.check_out}
+                  onChange={(e) => dispatch(updateBooking({ check_out: e.target.value }))}/>
+              </label></p>
 
-        dispatch(addbooking({
-            room_id: Number(room_id),
-            check_in: checkIn,
-            check_out: checkOut,
-            guests
-        }))
-            .unwrap()
-            .then((booking) => {
-                setMessage(
-                    `Booking successful! Total: R${Number(
-                        booking.total_price
-                    ).toFixed(2)}`
-                );
-            })
-            .catch(() => {});
-    };
-
-    return (
-        <div style={{ maxWidth: "650px", margin: "40px auto", padding: "20px" }}>
-            <Link to={room ? `/hotels/${room.hotel_id}/rooms` : "/"}>Back to rooms
-            </Link>
-            <h1>Book a room</h1>
-            {loading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
-            {room && (
-                <>
-                    <h2>Room {room.room_id}</h2>
-                    <p>{room.description}</p>
-                    <p>
-                        Price per night: R{Number(room.price).toFixed(2)}
-                    </p>
-                    <p>Room capacity: {room.capacity} guest(s)</p>
-
-                    <form onSubmit={handleSubmit}>
-                        <p>
-                            <label>
-                                Check-in date
-                                <br />
-                                <input
-                                    type="date"
-                                    min={today}
-                                    value={checkIn}
-                                    onChange={(e) => {
-                                        setCheckIn(e.target.value);
-
-                                        if (
-                                            checkOut &&
-                                            e.target.value >= checkOut
-                                        ) {
-                                            setCheckOut("");
-                                        }
-                                    }}
-                                    required
-                                />
-                            </label>
-                        </p>
-
-                        <p>
-                            <label>
-                                Check-out date
-                                <br />
-                                <input
-                                    type="date"
-                                    min={checkIn || today}
-                                    value={checkOut}
-                                    onChange={(e) =>
-                                        setCheckOut(e.target.value)
-                                    }
-                                    required
-                                />
-                            </label>
-                        </p>
-
-                        <p>
-                            <label>
-                                Number of guests
-                                <br />
-                                <input
-                                    type="number"
-                                    min="1"
-                                    max={room.capacity}
-                                    value={guests}
-                                    onChange={(e) =>
-                                        setGuests(Number(e.target.value))
-                                    }
-                                    required
-                                />
-                            </label>
-                        </p>
-
-                        <h3>Nights: {nights}</h3>
-                        <h3>Total price: R{total.toFixed(2)}</h3>
-
-                        <button
-                            type="submit"
-                            disabled={loading || nights < 1}
-                        >
-                            Confirm booking
-                        </button>
-                    </form>
-                </>
-            )}
-
-            {message && <p>{message}</p>}
-        </div>
-    );
+            <p><label>
+                Number of guests
+                <br />
+                <input type="number"
+                  min="1"
+                  max={room.capacity}
+                  value={info.guests}
+                  onChange={(e) =>dispatch(updateBooking({ guests: Number(e.target.value) }))}/>
+              </label></p>
+            <h3>Nights: {nights}</h3>
+            <h3>Total price: R{total.toFixed(2)}</h3>
+            <button type="submit" disabled={loading || nights < 1}>
+              {loading ? "Booking..." : "Confirm booking"}
+            </button>
+          </form>
+        </>
+      )}
+    </div>
+  );
 };
-
 export default booking;

@@ -1,111 +1,131 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type { room } from "./roomslice";
 
-export interface bookingroom {
-    room_id: number;
-    hotel_id: number;
-    description: string;
-    ammenities: string;
-    capacity: number;
-    quantity: number;
-    price: number;
+export interface booking {
+  booking_id?: number;
+  room_id: number;
+  check_in: string;
+  check_out: string;
+  guests: number;
+  nights?: number;
+  total_price?: number;
 }
 
-export interface bookinginfo {
-    room_id: number;
-    check_in: string;
-    check_out: string;
-    guests: number;
+interface BookingState {
+  info: booking;
+  room: room | null;
+  bookings: booking[];
+  loading: boolean;
+  error: string | null;
 }
 
-interface bookingState {
-    room: bookingroom | null;
-    loading: boolean;
-    error: string | null;
-}
-
-const initialState: bookingState = {
-    room: null,
-    loading: false,
-    error: null
+const initialState: BookingState = {
+  info: {
+    room_id: 0,
+    check_in: "",
+    check_out: "",
+    guests: 1,
+  },
+  room: null,
+  bookings: [],
+  loading: false,
+  error: null,
 };
 
-export const fetchbookingroom = createAsyncThunk(
-    "bookings/fetchRoom",
-    async (room_id: number, thunkAPI) => {
-        try {
-            const response = await fetch(`/api/rooms/${room_id}`);
-            const data = await response.json();
+export const fetchBookingRoom = createAsyncThunk(
+  "bookings/fetchBookingRoom",
+  async (room_id: number, thunkAPI) => {
+    try {
+      const response = await fetch(`/api/rooms/${room_id}`);
+      const data = await response.json();
 
-            if (!response.ok) {
-                throw new Error(data.message || "Could not get room");
-            }
-            return data as bookingroom;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error instanceof Error
-                    ? error.message: "Something went wrong"
-            );
-        }
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to get room");
+      }
+      return data as room;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error ? error.message : "Something went wrong"
+      );
     }
+  }
 );
 
-export const addbooking = createAsyncThunk(
-    "booking/addbooking",
-    async (booking: bookinginfo, thunkAPI) => {
-        try {
-            const response = await fetch("/api/bookings", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
-                },
-                body: JSON.stringify(booking)
-            });
+export const addBookings = createAsyncThunk(
+  "bookings/addBookings",
+  async (newBooking: booking, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(newBooking),
+      });
+      const data = await response.json();
 
-            const data = await response.json();
-            if (!response.ok) {
-                throw new Error(data.message || "Could not make booking");
-            }
-            return data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error instanceof Error
-                    ? error.message: "Something went wrong"
-            );
-        }
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to make booking");
+      }
+      return data as booking;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error ? error.message : "Something went wrong"
+      );
     }
+  }
 );
 
-const bookingSlice = createSlice({
-    name: "booking",
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchbookingroom.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(fetchbookingroom.fulfilled, (state, action) => {
-                state.loading = false;
-                state.room = action.payload;
-            })
-            .addCase(fetchbookingroom.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload as string;
-            })
-            .addCase(addbooking.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(addbooking.fulfilled, (state) => {
-                state.loading = false;
-            })
-            .addCase(addbooking.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload as string;
-            });
-    }
+export const bookingSlice = createSlice({
+  name: "bookings",
+  initialState,
+
+  reducers: {
+    updateBooking: (state, action: PayloadAction<Partial<booking>>) => {
+      state.info = { ...state.info, ...action.payload };
+    },
+    clearBooking: (state) => {
+      state.info = {
+        room_id: 0,
+        check_in: "",
+        check_out: "",
+        guests: 1,
+      };
+      state.error = null;
+    },
+  },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(addBookings.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addBookings.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bookings.push(action.payload);
+      })
+      .addCase(addBookings.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(fetchBookingRoom.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.room = null;
+      })
+      .addCase(fetchBookingRoom.fulfilled, (state, action) => {
+        state.loading = false;
+        state.room = action.payload;
+      })
+      .addCase(fetchBookingRoom.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
+  },
 });
-
+export const {updateBooking,clearBooking,} = bookingSlice.actions;
 export default bookingSlice.reducer;
