@@ -4,18 +4,37 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../Redux/store";
 import { fetchHotel} from "../../components/features/hotelslice";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HiEye } from "react-icons/hi";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { fetchFavourites, addFavourites, deleteFavourites } from "../../components/features/favourateslice"
 
 export const landing = () => {
   const dispatch = useDispatch<AppDispatch>();
 const hotels = useSelector((state: RootState) => state.hotels.hotels);
 const loading = useSelector((state: RootState) => state.hotels.loading);
 const error = useSelector((state: RootState) => state.hotels.error);
+const favourites = useSelector((state: RootState) => state.favourites.favourites);
+const navigate = useNavigate();
+const token = localStorage.getItem("token");
 
 useEffect(() => {
   dispatch(fetchHotel());
-}, [dispatch]);
+  if (token) dispatch(fetchFavourites());
+}, [dispatch, token]);
+
+const handleFavourite = (hotel_id?: number, isFav?: boolean) => {
+  if (!hotel_id) return;
+  if (!token) {
+    navigate("/Login");
+    return;
+  }
+  if (isFav) {
+    dispatch(deleteFavourites(hotel_id));
+  } else {
+    dispatch(addFavourites(hotel_id));
+  }
+};
 
 
   return (
@@ -37,7 +56,9 @@ useEffect(() => {
 )}
         </div>
 <div className={styles.flex}>
-  {hotels.map((hotel) => (
+  {hotels.map((hotel) => {
+    const isFav = favourites.some((f) => f.hotel_id === hotel.hotel_id);
+    return (
     <div className={styles.firstplace} key={hotel.hotel_id}>
       {hotel.image_url && (
                   <img src= {hotel.image_url} alt ={hotel.name} className={styles.image}/>
@@ -53,8 +74,12 @@ useEffect(() => {
                       <button className={styles.viewb}><HiEye/></button>
                     </div>
                   </Link>
+      <button type="button" onClick={() => handleFavourite(hotel.hotel_id, isFav)}>
+        {isFav ? <FaHeart /> : <FaRegHeart />}
+      </button>
     </div>
-  ))}
+    );
+  })}
 </div>
 <div className={styles.lastplace}> 
 </div>
@@ -63,4 +88,3 @@ useEffect(() => {
   )
 }
 export default landing
-

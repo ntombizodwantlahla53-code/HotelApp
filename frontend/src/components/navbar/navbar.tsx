@@ -19,7 +19,10 @@ export const navbar = () => {
 
             <div className={styles.links}>
             {token ? (
-              <a href="/" onClick={handleLogout} className={styles.link}>Log out</a>
+              <>
+                <a href="/Favourites" className={styles.link}>Favourites</a>
+                <a href="/" onClick={handleLogout} className={styles.link}>Log out</a>
+              </>
             ) : (
               <>
                 <a href="/Login" className={styles.link}>Sign In</a>
