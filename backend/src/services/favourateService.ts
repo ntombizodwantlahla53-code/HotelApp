@@ -7,7 +7,7 @@ export const findMyFavourates = async (user_id: number): Promise<Hotel[]> => {
         `SELECT h.* FROM favourates f
         JOIN hotels h ON f.hotel_id = h.hotel_id
         WHERE f.user_id = $1
-        ORDER BY f.favourite_id DESC`,
+        ORDER BY h.hotel_id DESC`,
         [user_id]
     );
     return rows;
@@ -22,8 +22,11 @@ export const createfavourate = async (favourate: Newfavourate): Promise<Hotel | 
         return null;
     }
     await query(
-        `INSERT INTO favourates (user_id, hotel_id) VALUES ($1, $2)
-        ON CONFLICT (user_id, hotel_id) DO NOTHING`,
+        `INSERT INTO favourates (user_id, hotel_id)
+        SELECT $1::int, $2::int
+        WHERE NOT EXISTS (
+            SELECT 1 FROM favourates WHERE user_id = $1::int AND hotel_id = $2::int
+        )`,
         [favourate.user_id, favourate.hotel_id]
     );
     return rows[0];

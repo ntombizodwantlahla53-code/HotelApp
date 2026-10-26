@@ -8,7 +8,8 @@ export const getMyFavourites = async (req: Request, res: Response) => {
     try {
         const favourites = await favouriteService.findMyFavourates(req.user.id);
         return res.status(200).json(favourites);
-    } catch {
+    } catch (error) {
+        console.error("favourite error:", error);
         return res.status(500).json({ message: "Error retrieving favourites" });
     }
 };
@@ -27,7 +28,8 @@ export const addFavourite = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "Hotel not found" });
         }
         return res.status(201).json(hotel);
-    } catch {
+    } catch (error) {
+        console.error("favourite error:", error);
         return res.status(500).json({ message: "Error adding favourite" });
     }
 };
@@ -45,7 +47,8 @@ export const deleteFavouriteById = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "Favourite not found" });
         }
         return res.status(200).json({ message: "Favourite removed" });
-    } catch {
+    } catch (error) {
+        console.error("favourite error:", error);
         return res.status(500).json({ message: "Error removing favourite" });
     }
 };
