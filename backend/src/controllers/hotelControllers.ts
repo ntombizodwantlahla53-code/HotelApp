@@ -47,3 +47,21 @@ export const deleteHotelById = async (req: Request, res: Response) => {
     res.status(500).json({ message: "error deleting hotel" });
   }
 };
+
+export const getAvailableHotels = async (req: Request, res: Response) => {
+  const check_in = String(req.query.check_in || "");
+  const check_out = String(req.query.check_out || "");
+  const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+  if (!datePattern.test(check_in) || !datePattern.test(check_out) || check_out <= check_in) {
+    return res.status(400).json({ message: "Enter valid check-in and check-out dates" });
+  }
+
+  try {
+    const hotels = await hotelService.findAvailableHotels(check_in, check_out);
+    res.status(200).json(hotels);
+  } catch (error) {
+    console.error("getAvailableHotels error:", error);
+    res.status(500).json({ message: "Error searching hotels" });
+  }
+};
