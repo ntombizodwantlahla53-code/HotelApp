@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../Redux/store";
 import { fetchHotel} from "../../components/features/hotelslice";
+import { fetchUsers, deleteUsers } from "../../components/features/userslice";
 import { HiEye } from "react-icons/hi";
 
 
@@ -15,10 +16,20 @@ const loading = useSelector((state: RootState) => state.hotels.loading);
 const error = useSelector((state: RootState) => state.hotels.error);
 const saveUser = localStorage.getItem("user");
 const adminProfile = saveUser ? JSON.parse(saveUser) : null
+const users = useSelector((state: RootState) => state.users.users);
+const usersLoading = useSelector((state: RootState) => state.users.loading);
+const usersError = useSelector((state: RootState) => state.users.error);
 
 useEffect(() => {
   dispatch(fetchHotel());
+  dispatch(fetchUsers());
 }, [dispatch]);
+
+const handleDelete = (id: number, name: string) => {
+  if (window.confirm(`Delete user ${name}?`)) {
+    dispatch(deleteUsers(id));
+  }
+};
 
   return (
     <div>
@@ -37,6 +48,25 @@ useEffect(() => {
           ) : (
             <p>no profile</p>
           )}
+        </div>
+        <div>
+          <h2>Registered users</h2>
+          {usersLoading && <p>Loading users...</p>}
+          {usersError && <p>{usersError}</p>}
+          <div className={styles.flex}>
+            {users.map((user) => (
+              <div key={user.id} className={styles.ad}>
+                <h3>{user.name}</h3>
+                <p>{user.email}</p>
+                <p>Role: {user.role}</p>
+                {user.role === "Customer" && (
+                  <button type="button" onClick={() => handleDelete(user.id, user.name)}>
+                    Delete
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
         <div>
             {adminProfile?.role === "Admin" && (

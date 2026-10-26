@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../Redux/store";
 import { fetchHotel} from "../../components/features/hotelslice";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { HiEye } from "react-icons/hi";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { fetchFavourites, addFavourites, deleteFavourites } from "../../components/features/favourateslice"
@@ -17,11 +17,13 @@ const error = useSelector((state: RootState) => state.hotels.error);
 const favourites = useSelector((state: RootState) => state.favourites.favourites);
 const navigate = useNavigate();
 const token = localStorage.getItem("token");
+const saveUser = localStorage.getItem("user");
+const isAdmin = saveUser ? JSON.parse(saveUser).role === "Admin" : false;
 
 useEffect(() => {
   dispatch(fetchHotel());
-  if (token) dispatch(fetchFavourites());
-}, [dispatch, token]);
+  if (token && !isAdmin) dispatch(fetchFavourites());
+}, [dispatch, token, isAdmin]);
 
 const handleFavourite = (hotel_id?: number, isFav?: boolean) => {
   if (!hotel_id) return;
@@ -36,6 +38,9 @@ const handleFavourite = (hotel_id?: number, isFav?: boolean) => {
   }
 };
 
+  if (token && isAdmin) {
+    return <Navigate to="/Admin" replace />;
+  }
 
   return (
     <div>

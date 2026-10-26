@@ -6,6 +6,8 @@ import roomReducer from "../components/features/roomslice";
 import hotelReducer from "../components/features/hotelslice"
 import bookingReducer from "../components/features/bookingslice"
 import favouriteReducer from "../components/features/favourateslice"
+import profileReducer from "../components/features/profileslice"
+import userReducer from "../components/features/userslice"
 
 
 
@@ -17,8 +19,9 @@ export const store = configureStore({
         rooms:roomReducer,
         hotels: hotelReducer,
         booking: bookingReducer,
-        favourites: favouriteReducer
-        
+        favourites: favouriteReducer,
+        profile: profileReducer,
+        users: userReducer
 
     }
 })

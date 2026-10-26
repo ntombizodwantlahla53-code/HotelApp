@@ -9,6 +9,7 @@ import {roomlist as Roomlist} from "./pages/roomlist/roomlist"
 import RequireAdmin from "./components/requireadmin/requireadmin"
 import {booking as Bookings} from "./pages/bookings/bookings";
 import {favourite as Favourite} from "./pages/favourates/favourate"
+import {profile as Profile} from "./pages/profile/profile"
 // import heroImg from './assets/hero.png'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from './assets/vite.svg'
@@ -34,6 +35,7 @@ function App() {
       <Route path = "/Roomlist" element= {<Roomlist/>}/>
       <Route path = "/bookings/:room_id" element= {<Bookings/>}/>
       <Route path = "/Favourites" element= {<Favourite/>}/>
+      <Route path = "/Profile" element= {<Profile/>}/>
       {/* <Route path = "/addhotels" element ={<Addhotels/>}/> */}
       </Routes>
       </Router>

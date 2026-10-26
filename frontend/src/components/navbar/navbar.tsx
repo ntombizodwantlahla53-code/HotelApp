@@ -2,6 +2,8 @@ import styles from './navbar.module.css'
 
 export const navbar = () => {
   const token = localStorage.getItem("token");
+  const saveUser = localStorage.getItem("user");
+  const isAdmin = saveUser ? JSON.parse(saveUser).role === "Admin" : false;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -20,7 +22,10 @@ export const navbar = () => {
             <div className={styles.links}>
             {token ? (
               <>
-                <a href="/Favourites" className={styles.link}>Favourites</a>
+                <a href="/Profile" className={styles.link}>Profile</a>
+                {!isAdmin && (
+                  <a href="/Favourites" className={styles.link}>Favourites</a>
+                )}
                 <a href="/" onClick={handleLogout} className={styles.link}>Log out</a>
               </>
             ) : (
