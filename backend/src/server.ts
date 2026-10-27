@@ -6,6 +6,7 @@ import hotelRoutes from "./routes/hotelRoutes"
 import roomRoutes from "./routes/roomRoutes"
 import bookingRoutes from "./routes/bookingRoutes"
 import favouriteRoutes from "./routes/favourateRoutes"
+import paymentRoutes from "./routes/paymentRoutes"
 import cors from "cors"
 
 dotenv.config();
@@ -25,6 +26,7 @@ app.use('/api', hotelRoutes);
 app.use('/api', roomRoutes);
 app.use('/api', bookingRoutes);
 app.use('/api', favouriteRoutes);
+app.use('/api', paymentRoutes);
 
 
 app.listen(PORT, () =>
