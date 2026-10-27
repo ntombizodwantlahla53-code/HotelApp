@@ -60,15 +60,22 @@ const handleSearch = (e: React.FormEvent) => {
 
   return (
     <div>
+      
         <div className={styles.landing}>
             <Navbar/>
-            <h1 className={styles.texts}> Hotel Booking System</h1>
-            <p className={styles.explore}>Lets start exploring the world</p>
+            <div className={styles.heroContent}>
+                <p className={styles.eyebrow}>YOUR NEXT HAPPY PLACE</p>
+                <h1 className={styles.texts}>Find your little <span>escape.</span></h1>
+                <p className={styles.explore}>Beautiful stays, special moments, and little getaways to remember.</p>
+                <a href="#hotels" className={styles.exploreButton}>Explore stays ♡</a>
+            </div>
         </div>
 
-        <div className={styles.hotelslist}>
-            <h2 className={styles.hotels}>Available Hotels</h2>
-            <p className={styles.hotels}>Explore</p>
+
+        <div className={styles.hotelslist} id="hotels">
+            <p className={styles.sectionLabel}>A LITTLE GETAWAY</p>
+            <h2 className={styles.hotels}>Find your kind of stay</h2>
+            <p className={styles.sectionText}>Discover lovely places for your next trip.</p>
 
            <form onSubmit={handleSearch}  >
             <label>Hotel name
@@ -135,7 +142,7 @@ const handleSearch = (e: React.FormEvent) => {
       <p>Star rating:{hotel.star_rating ?? "Not rated"}</p>
                 <Link to={`/hotels/${hotel.hotel_id}/rooms`}>
                     <div className={styles.buttnV}>
-                      <button className={styles.viewb}><HiEye/></button>
+                      <button className={styles.viewb}><HiEye/> Explore rooms</button>
                     </div>
                   </Link>
       <button type="button" onClick={() => handleFavourite(hotel.hotel_id, isFav)}>

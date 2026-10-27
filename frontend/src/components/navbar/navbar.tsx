@@ -15,8 +15,8 @@ export const navbar = () => {
     <nav>
         <div className={styles.navbar}>
             <div className={styles.logo}>
-                <h1 className={styles.blue}>Book</h1>
-                <h1 className={styles.white}>Hotel</h1>
+                <h1 className={styles.bookname}>Book</h1>
+                <h1 className={styles.hotelname}>Hotel</h1>
             </div>
 
             <div className={styles.links}>

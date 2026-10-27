@@ -1,39 +1,73 @@
-nav{
-    background-color: #13509C;
-    color:white;
-   padding: 10px;
-    font-weight: bolder;
-   
 
+nav {
+    position: relative;
+    z-index: 10;
+    padding: 15px 6%;
+    background: rgba(255, 250, 246, 0.96);
+    color: #49342f;
+    box-shadow: 0 3px 15px rgba(70, 45, 38, 0.06);
 }
-.navbar{
+
+.navbar {
     display: flex;
-     align-items: center;
+    align-items: center;
     justify-content: space-between;
+    gap: 20px;
+    max-width: 1400px;
+    margin: auto;
 }
-.links{
+
+.logo {
     display: flex;
-    gap:20px
+    align-items: center;
+    gap: 6px;
 }
-.link{
-    color: black;
-    cursor:pointer;
+
+.logo h1 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 27px;
+    letter-spacing: -1px;
+}
+
+.hotelname {
+    color: #49342f;
     font-weight: bold;
 }
-.link:hover{
-    color: white;
+
+.bookname {
+    color: #b77980;
+    font-weight: bold;
+    font-style: italic;
 }
-.logo{
+
+.links {
     display: flex;
-    gap:10px;
+    align-items: center;
+    gap: 20px;
 }
-.white{
+
+.link {
+    padding: 10px 16px;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    color: #65463e;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+}
+
+.link:hover {
+    background: #f6e5e2;
+    color: #a45f6b;
+}
+
+.links .link:last-child {
+    background: #b77980;
     color: white;
-    font-weight: bolder;
-     font-style: oblique;
 }
-.blue{
-    color:lightseagreen;
-    font-weight: bolder;
-     font-style: oblique;
+
+.links .link:last-child:hover {
+    background: #965b64;
 }
