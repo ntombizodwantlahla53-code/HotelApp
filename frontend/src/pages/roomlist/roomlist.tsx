@@ -57,11 +57,13 @@ export const roomlist = () => {
           <p>No rooms are available yet.</p>
         )}
         <div className={styles.flex}>
-          {hotelRooms.map((room) => (
+          {hotelRooms.slice(0, 1).map((room) => (
             <div className={styles.firstplace} key={room.room_id}>
-              {room.image_url && (
-                <img src={room.image_url} alt={`Room ${room.room_id}`}  className={styles.image}/>
-              )}
+                    <div className={styles.gallery}>
+          {room.image_urls?.filter((url) => url.trim()).map((url, index) => (
+            <img key={index}  src={url} alt={`Room view ${index + 1}`}  className={styles.image}/>
+          ))}
+        </div>
               <h2>Room {room.room_id}</h2>
               <p>{room.description}</p>
               <p>Amenities: {room.ammenities}</p>

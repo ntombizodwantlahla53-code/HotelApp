@@ -1,19 +1,130 @@
-.flex{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin: 5px;
-   
+.linkContainer {
+    min-height: 100vh;
+    padding: 30px 5%;
+    background: #fff9f5;
+    color: #49342f;
 }
-.firstplace{
-    border: 1px solid black;
-    width: 280px;
-    height: 100%;
+
+.bc {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f6e5e2;
+    color: #80564b;
+    font-size: 20px;
+    transition: 0.2s;
+}
+
+.bc:hover {
+    background: #b77980;
+    color: white;
+}
+
+.Topic {
+    text-align: center;
+}
+
+.Mytitle {
+    margin: 20px 0 12px;
+    color: #49342f;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 36px;
+    font-weight: normal;
+}
+
+.Topic > p {
+    color: #89766f;
+    font-size: 15px;
+}
+
+.flex {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 35px 0;
+    text-align: left;
+}
+
+.firstplace {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #f0e4df;
     border-radius: 18px;
-    padding: 10px;
+    background: white;
+    box-shadow: 0 5px 18px rgba(100, 65, 55, 0.07);
+    transition: transform 0.25s, box-shadow 0.25s;
 }
-.image{
+
+.firstplace:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(100, 65, 55, 0.13);
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    padding: 8px;
+}
+
+.image {
+    display: block;
     width: 100%;
-    height: 180px;
+    height: 140px;
     object-fit: cover;
+    border-radius: 10px;
+    background: #f6e5e2;
+}
+
+.gallery .image:first-child {
+    grid-column: 1 / -1;
+    height: 240px;
+}
+
+.firstplace h2 {
+    margin: 18px 17px 10px;
+    color: #49342f;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 23px;
+    font-weight: normal;
+}
+
+.firstplace p {
+    margin: 10px 17px;
+    color: #89766f;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.inputting {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 12px 17px 18px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #b77980;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.inputting:hover {
+    background: #965b64;
+    transform: translateY(-2px);
+}
+
+.inputting:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }

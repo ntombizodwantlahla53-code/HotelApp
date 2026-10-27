@@ -41,7 +41,7 @@ dispatch(
         capacity: info.capacity,
         quantity: info.quantity,
         price: info.price,
-        image_url: info.image_url
+        image_urls: info.image_urls.filter((url) => url.trim())
       }))
       .unwrap()
       .then(() => {
@@ -163,20 +163,23 @@ dispatch(
             </div>
 
             <div className={styles.title}>
-              <label>Images</label>
-              <input
+              <label>Room pictures</label>
+              <p>Enter one image URL per line.</p>
+              <textarea
                 className={styles.inputtitle}
-                value={info.image_url}
-                type="text"
-                onChange={(e) =>
-                  dispatch(updateRoom({ image_url: e.target.value }))
-                }
-                placeholder="Image"
+                value={info.image_urls.join("\n")}
+                onChange={(e) => dispatch(updateRoom({
+                  image_urls: e.target.value.split("\n")
+                }))}
+                placeholder={"Bedroom image URL\nLounge image URL\nDining room image URL\nSea view image URL"}
+                rows={5}
                 required
               />
-              {info.image_url && (
-                <img src={info.image_url} alt ="preview"  className={styles.image}/>
-              )}
+              <div className={styles.preview}>
+                {info.image_urls.filter((url) => url.trim()).map((url, index) => (
+                  <img key={index} src={url} alt={`Room view ${index + 1}`} className={styles.image} />
+                ))}
+              </div>
             </div>
             <button
               type="submit"
