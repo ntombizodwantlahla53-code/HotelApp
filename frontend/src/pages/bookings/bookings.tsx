@@ -48,9 +48,8 @@ export const booking = () => {
       }))
       .unwrap()
       .then((data) => {
-        alert(`Booking successful! Total: R${Number(data.total_price).toFixed(2)}`);
         dispatch(clearBooking());
-        navigate("/");
+        navigate(`/Payment/${data.booking_id}`, { state: { total: data.total_price } });
       })
       .catch(() => {});
   };

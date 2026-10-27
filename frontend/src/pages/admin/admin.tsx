@@ -7,7 +7,7 @@ import type { RootState, AppDispatch } from "../../Redux/store";
 import { fetchHotel} from "../../components/features/hotelslice";
 import { fetchUsers, deleteUsers } from "../../components/features/userslice";
 import { HiEye } from "react-icons/hi";
-
+import {payments as Payments} from '../payments/payments'
 
 export const admin = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -68,7 +68,9 @@ const handleDelete = (id: number, name: string) => {
             ))}
           </div>
         </div>
+        <Payments/>
         <div>
+
             {adminProfile?.role === "Admin" && (
               <Link to="/hotels">
                 <h2 className={styles.hotels}>Add Hotels</h2>
