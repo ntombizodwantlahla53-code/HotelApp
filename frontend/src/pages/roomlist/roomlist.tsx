@@ -5,7 +5,7 @@ import type { RootState, AppDispatch } from "../../Redux/store"
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { fetchRoom } from "../../components/features/roomslice"
 import { MdArrowBackIos } from "react-icons/md";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const roomlist = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +19,7 @@ export const roomlist = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isAdminPage = isAdmin && location.pathname.toLowerCase().startsWith("/admin");
+  const [bigImage, setBigImage] = useState<string | null>(null);
 
   const handleBook = (room_id?: number) => {
     if (!localStorage.getItem("token")) {
@@ -35,6 +36,11 @@ export const roomlist = () => {
     }
   }, [dispatch, hotel_id]);
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setBigImage(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const hotelRooms = rooms.filter(
     (r) => Number(r.hotel_id) === Number(hotel_id)
@@ -42,8 +48,8 @@ export const roomlist = () => {
 
   return (
     <div className={styles.linkContainer}>
-      
-      <Link to={isAdminPage ?"/Admin":"/"}>
+
+      <Link to={isAdminPage ? "/Admin" : "/"}>
         <div className={styles.bc}>
           <MdArrowBackIos />
         </div>
@@ -59,36 +65,55 @@ export const roomlist = () => {
         <div className={styles.flex}>
           {hotelRooms.slice(0, 1).map((room) => (
             <div className={styles.firstplace} key={room.room_id}>
-                    <div className={styles.gallery}>
-          {room.image_urls?.filter((url) => url.trim()).map((url, index) => (
-            <img key={index}  src={url} alt={`Room view ${index + 1}`}  className={styles.image}/>
-          ))}
-        </div>
-              <h2>Room {room.room_id}</h2>
-              <p>{room.description}</p>
-              <p>Amenities: {room.ammenities}</p>
-              <p>Capacity: {room.capacity}</p>
-              <p>Quantity: {room.quantity}</p>
-              <p>Price: {room.price}</p>
-              {!isAdminPage && (
-                <button
-                  type="button"
-                  className={styles.inputting}
-                  onClick={() => handleBook(room.room_id)}>
-                  Book now
-                </button>
-              )}
+              <div className={styles.gallery}>
+                {room.image_urls?.filter((url) => url.trim()).map((url, index) => (
+                  <img
+                    key={index}
+                    src={url.trim()}
+                    alt={`Room view ${index + 1}`}
+                    className={styles.image}
+                    onClick={() => setBigImage(url.trim())}
+                  />
+                ))}
+              </div>
+
+              <div className={styles.details}>
+                <h2>Room {room.room_id}</h2>
+                <p>{room.description}</p>
+                <div className={styles.chips}>
+                  {room.ammenities?.split(",").map((a, i) => (
+                    <span key={i} className={styles.chip}>{a.trim()}</span>
+                  ))}
+                </div>
+                <p>Capacity: {room.capacity}</p>
+                <p>Quantity: {room.quantity}</p>
+                <p className={styles.price}>Price: {room.price}</p>
+                {!isAdminPage && (
+                  <button
+                    type="button"
+                    className={styles.inputting}
+                    onClick={() => handleBook(room.room_id)}>
+                    Book now
+                  </button>
+                )}
+              </div>
             </div>
           ))}
         </div>
-        {isAdminPage &&(
+        {isAdminPage && (
           <Link to={`/Rooms/${hotel_id}`}>
             <button type="button" className={styles.inputting}>
-              <IoIosAddCircle/>Add rooms
+              <IoIosAddCircle />Add rooms
             </button>
           </Link>
         )}
       </div>
+
+      {bigImage && (
+        <div className={styles.lightbox} onClick={() => setBigImage(null)}>
+          <img src={bigImage} alt="Room" className={styles.bigImage} />
+        </div>
+      )}
     </div>
   )
 };
