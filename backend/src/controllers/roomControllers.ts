@@ -35,6 +35,27 @@ export const getAllrooms = async (req: Request, res: Response) => {
   }
 };
 
+export const updateRoomById = async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ message: "Not authorized" });
+    }
+    if (req.user.role.toLowerCase() !== "admin") {
+      return res.status(403).json({ message: "Only admins can update rooms" });
+    }
+    const room_id = parseInt(req.params.room_id as string, 10);
+    const updatedRoom = await roomService.updateRoom(room_id, req.body);
+
+    if (!updatedRoom) {
+      return res.status(404).json({ message: "Room not found" });
+    }
+    res.status(200).json(updatedRoom);
+  } catch (error) {
+    console.error("updateRoom error:", error);
+    res.status(500).json({ message: "Error updating room" });
+  }
+};
+
 export const deleteRoomById = async (req: Request, res: Response) => {
   try {
     if (!req.user) {

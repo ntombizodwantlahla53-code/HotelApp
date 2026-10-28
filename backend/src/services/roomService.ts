@@ -23,6 +23,20 @@ export const findAllRooms = async (
   return rows;
 };
 
+export const updateRoom = async (
+  room_id: number,
+  appData: NewRoom
+): Promise<Room | null> => {
+  const { description, ammenities, capacity, quantity, price, image_urls } = appData;
+  const { rows } = await query(
+    `UPDATE rooms SET description = $1, ammenities = $2, capacity = $3, quantity = $4,
+     price = $5, image_urls = $6, updated_at = NOW()
+     WHERE room_id = $7 RETURNING *`,
+    [description, ammenities, capacity, quantity, price, image_urls, room_id],
+  );
+  return rows[0] || null;
+};
+
 export const deleteRoom = async (
   room_id: number,
 ): Promise<Room | null> => {
