@@ -3,10 +3,10 @@ import { IoIosAddCircle } from "react-icons/io";
 import {useSelector,useDispatch,} from "react-redux";
 import type {RootState,AppDispatch,} from "../../Redux/store"
 import {Link, useNavigate, useParams} from "react-router-dom";
-import {addRooms,updateRoom,clearRoom} from "../../components/features/roomslice"
 import { MdArrowBackIos } from "react-icons/md";
 import { useEffect } from "react";
 import { fetchHotel } from "../../components/features/hotelslice";
+import {addRooms,editRooms,fetchRoomById,updateRoom,clearRoom} from "../../components/features/roomslice"
 
 export const room = () => {
   const info = useSelector((state: RootState) => state.rooms.info);
@@ -15,16 +15,22 @@ export const room = () => {
   const hotels = useSelector((state: RootState) => state.hotels.hotels);
 
   const dispatch = useDispatch<AppDispatch>();
-  const {hotel_id} =useParams();
+  const {hotel_id, room_id} = useParams();
   const navigate = useNavigate();
 
-  useEffect(()=> {
+    useEffect(()=> {
     dispatch(fetchHotel())
 
-  if(hotel_id){
-    dispatch(updateRoom({hotel_id:Number(hotel_id)}))
+    if(room_id){
+      dispatch(fetchRoomById(Number(room_id)))
+    } else {
+      dispatch(clearRoom())
+      if(hotel_id){
+        dispatch(updateRoom({hotel_id:Number(hotel_id)}))
+      }
     }
-  },[dispatch, hotel_id]);
+  },[dispatch, hotel_id, room_id]);
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -33,25 +39,33 @@ export const room = () => {
       return;
     }
 
-dispatch(
-     addRooms({
-      hotel_id:info.hotel_id,
-        description: info.description,
-        ammenities: info.ammenities,
-        capacity: info.capacity,
-        quantity: info.quantity,
-        price: info.price,
-        image_urls: info.image_urls.filter((url) => url.trim())
-      }))
-      .unwrap()
-      .then(() => {
-        const selectedHotelId = info.hotel_id;
-        dispatch(clearRoom());
-        navigate(`/Admin/hotels/${selectedHotelId}/rooms`);
-     
-      })
-      .catch(() => {});
-  };
+    const roomData = {
+      hotel_id: info.hotel_id,
+      description: info.description,
+      ammenities: info.ammenities,
+      capacity: info.capacity,
+      quantity: info.quantity,
+      price: info.price,
+      image_urls: info.image_urls.filter((url) => url.trim())
+    };
+
+    const handleDone = () => {
+      const selectedHotelId = info.hotel_id;
+      dispatch(clearRoom());
+      navigate(`/Admin/hotels/${selectedHotelId}/rooms`);
+    };
+
+    if (room_id) {
+      dispatch(editRooms({ ...roomData, room_id: Number(room_id) }))
+        .unwrap()
+        .then(handleDone)
+        .catch(() => {});
+    } else {
+      dispatch(addRooms(roomData))
+        .unwrap()
+        .then(handleDone)
+        .catch(() => {});
+    }}
 
   return (
     <div className={styles.linkContainer}>

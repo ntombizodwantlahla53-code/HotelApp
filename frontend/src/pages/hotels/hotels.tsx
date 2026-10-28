@@ -2,9 +2,11 @@ import styles from "./hotels.module.css"
 import { IoIosAddCircle } from "react-icons/io";
 import {useSelector,useDispatch,} from "react-redux";
 import type {RootState,AppDispatch,} from "../../Redux/store";
-import {Link} from "react-router-dom";
-import {fetchHotels,updateHotel,clearHotel,} from "../../components/features/hotelslice"
+import {Link, useNavigate, useParams} from "react-router-dom";
+import {fetchHotel,fetchHotels,editHotel,updateHotel,clearHotel,} from "../../components/features/hotelslice"
 import { MdArrowBackIos } from "react-icons/md";
+import { useEffect } from "react";
+
 
 export const hotel = () => {
   const info = useSelector((state: RootState) => state.hotels.info);
@@ -12,6 +14,20 @@ export const hotel = () => {
   const error = useSelector((state: RootState) => state.hotels.error);
 
   const dispatch = useDispatch<AppDispatch>();
+  const hotels = useSelector((state: RootState) => state.hotels.hotels);
+  const { hotel_id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchHotel());
+    if (!hotel_id) dispatch(clearHotel());
+  }, [dispatch, hotel_id]);
+
+  useEffect(() => {
+    const found = hotels.find((item) => item.hotel_id === Number(hotel_id));
+    if (found) dispatch(updateHotel(found));
+  }, [hotels, hotel_id]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
  
@@ -49,23 +65,33 @@ export const hotel = () => {
     alert("where's image");
       return;
     }
-    dispatch(
-      fetchHotels({
-        name: info.name,
-        description: info.description,
-        address: info.address,
-        city: info.city,
-        country: info.country,
-        ammenities: info.ammenities,
-        star_rating: info.star_rating,
-        image_url: info.image_url
-      }))
-      .unwrap()
-      .then(() => {
-        dispatch(clearHotel());
-     
-      })
-      .catch(() => {});
+        const hotelData = {
+      name: info.name,
+      description: info.description,
+      address: info.address,
+      city: info.city,
+      country: info.country,
+      ammenities: info.ammenities,
+      star_rating: info.star_rating,
+      image_url: info.image_url
+    };
+
+    if (hotel_id) {
+      dispatch(editHotel({ ...hotelData, hotel_id: Number(hotel_id) }))
+        .unwrap()
+        .then(() => {
+          dispatch(clearHotel());
+          navigate("/Admin");
+        })
+        .catch(() => {});
+    } else {
+      dispatch(fetchHotels(hotelData))
+        .unwrap()
+        .then(() => {
+          dispatch(clearHotel());
+        })
+        .catch(() => {});
+    }
   };
 
   return (

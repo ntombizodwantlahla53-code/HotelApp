@@ -47,8 +47,9 @@ const handleFavourite = (hotel_id?: number, isFav?: boolean) => {
 const handleSearch = (e: React.FormEvent) => {
   e.preventDefault();
 
-  if (info.check_out <= info.check_in) {
-    alert("Check-out must be after check-in.");
+  if ((info.check_in || info.check_out) &&
+     (!info.check_in || !info.check_out || info.check_out <= info.check_in)) {
+    alert("Enter both dates, and check-out must be after check-in.");
     return;
   }
   dispatch(fetchAvailable(info));
@@ -77,37 +78,36 @@ const handleSearch = (e: React.FormEvent) => {
             <h2 className={styles.hotels}>Find your kind of stay</h2>
             <p className={styles.sectionText}>Discover lovely places for your next trip.</p>
 
-           <form onSubmit={handleSearch}  >
-            <label>Hotel name
-              <input type="text"
-      placeholder="hotelname"
-      value={info.hotel_name}
-      onChange={(e) => dispatch(updateSearch({ hotel_name: e.target.value }))}
-      required
-    />
-  </label>
+                      <form onSubmit={handleSearch}>
+              <label>Hotel name
+                <input type="text" placeholder="Hotel name" value={info.hotel_name}
+                  onChange={(e) => dispatch(updateSearch({ hotel_name: e.target.value }))} />
+              </label>
 
-  <label>
-    Check-in (YYYY-MM-DD)
-    <input
-      type="text"
-      placeholder="2026-11-01"
-      value={info.check_in}
-      onChange={(e) => dispatch(updateSearch({ check_in: e.target.value }))}
-      required
-    />
-  </label>
+              <label>Location
+                <input type="text" placeholder="City, country or address" value={info.location}
+                  onChange={(e) => dispatch(updateSearch({ location: e.target.value }))} />
+              </label>
 
-  <label>
-    Check-out (YYYY-MM-DD)
-    <input
-      type="text"
-      placeholder="2026-11-05"
-      value={info.check_out}
-      onChange={(e) => dispatch(updateSearch({ check_out: e.target.value }))}
-      required
-    />
-  </label>
+              <label>Min price
+                <input type="number" min="0" placeholder="0" value={info.min_price}
+                  onChange={(e) => dispatch(updateSearch({ min_price: e.target.value }))} />
+              </label>
+
+              <label>Max price
+                <input type="number" min="0" placeholder="5000" value={info.max_price}
+                  onChange={(e) => dispatch(updateSearch({ max_price: e.target.value }))} />
+              </label>
+
+              <label>Check-in (YYYY-MM-DD)
+                <input type="text" placeholder="2026-11-01" value={info.check_in}
+                  onChange={(e) => dispatch(updateSearch({ check_in: e.target.value }))} />
+              </label>
+
+              <label>Check-out (YYYY-MM-DD)
+                <input type="text" placeholder="2026-11-05" value={info.check_out}
+                  onChange={(e) => dispatch(updateSearch({ check_out: e.target.value }))} />
+              </label>
 
               <button type="submit" disabled={searching}>
                 {searching ? "Searching..." : "Search"}

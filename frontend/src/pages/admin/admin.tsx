@@ -8,6 +8,7 @@ import { fetchHotel} from "../../components/features/hotelslice";
 import { fetchUsers, deleteUsers } from "../../components/features/userslice";
 import { HiEye } from "react-icons/hi";
 import {payments as Payments} from '../payments/payments'
+import {reservations as Reservations} from '../reservation/reservation'
 
 export const admin = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -69,6 +70,8 @@ const handleDelete = (id: number, name: string) => {
           </div>
         </div>
         <Payments/>
+        <Reservations/>
+        <Payments/>
         <div>
 
             {adminProfile?.role === "Admin" && (
@@ -101,6 +104,9 @@ const handleDelete = (id: number, name: string) => {
                       <button className={styles.viewb}><HiEye/></button>
                     </div>
                   </Link>
+            <Link to={`/Hotels/${hotel.hotel_id}`}>
+           <button type="button">Edit hotel</button>
+         </Link>
     </div>
   ))}
 </div>

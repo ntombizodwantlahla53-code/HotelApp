@@ -3,8 +3,9 @@ import { IoIosAddCircle } from "react-icons/io";
 import {useSelector,useDispatch,} from "react-redux";
 import type {RootState,AppDispatch,} from "../../Redux/store";
 import {Link, useNavigate} from "react-router-dom";
-import {fetchLogs,updateLogin,clearLogin,} from "../../components/features/loginslice"
+import {fetchLogs,updateLogin,clearLogin,googleLogin} from "../../components/features/loginslice"
 import { MdArrowBackIos } from "react-icons/md";
+import { GoogleLogin } from "@react-oauth/google";
 
 export const log = () => {
   const info = useSelector((state: RootState) => state.login.info);
@@ -48,6 +49,15 @@ export const log = () => {
       })
       .catch(() => {});
   };
+    const handleGoogle = (credential?: string) => {
+    if (!credential) return;
+    dispatch(googleLogin(credential))
+      .unwrap()
+      .then((data) => {
+        navigate(data.user.role === "Admin" ? "/admin" : "/");
+      })
+      .catch(() => {});
+  };
   return (
     <div className={styles.linkContainer}>
       <Link to="/">
@@ -88,15 +98,12 @@ export const log = () => {
                 type="password"
                 placeholder="Password"/></label>
             </div>
-
             <p className={styles.password}>
               Forgot Password
             </p>
-            
             <button type="submit" className={styles.inputting}>
               <IoIosAddCircle /> {loading ? "Logging in..." : "Log in"}
             </button>
-
             {error && (<p>{error}</p>
             )}
             <p className={styles.text}>
@@ -107,6 +114,10 @@ export const log = () => {
             </Link>
           </div>
       </form>
+            <GoogleLogin
+        onSuccess={(response) => handleGoogle(response.credential)}
+        onError={() => alert("Google sign in failed")}
+      />
     </div>
   );
 };

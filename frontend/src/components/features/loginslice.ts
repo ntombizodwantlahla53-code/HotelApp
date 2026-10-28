@@ -39,23 +39,45 @@ export const fetchLogs = createAsyncThunk(
       if(!response.ok){
         throw new Error(data.message || "failed to login")
       }
-if (data.token) {
-  localStorage.setItem("token", data.token);
-}
-if (data.user) {
-  localStorage.setItem("user", JSON.stringify(data.user));
-}
-return data;
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error instanceof Error
-          ? error.message
-          : "Something went wrong"
+          ? error.message: "Something went wrong"
       );
     }
   }
 );
 
+export const googleLogin = createAsyncThunk(
+  "logs/googleLogin",
+  async (credential: string, thunkAPI) => {
+    try {
+      const response = await fetch('/api/auth/google', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ credential }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Google login failed");
+      }
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error ? error.message : "Something went wrong"
+      );
+    }
+  }
+);
 export const loginSlice = createSlice({
   name: "login",
   initialState,
@@ -90,13 +112,20 @@ export const loginSlice = createSlice({
       .addCase(fetchLogs.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+      })
+            .addCase(googleLogin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(googleLogin.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(googleLogin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });
 
-export const {
-  updateLogin,
-  clearLogin,
-} = loginSlice.actions;
-
+export const {updateLogin,clearLogin,} = loginSlice.actions;
 export default loginSlice.reducer;

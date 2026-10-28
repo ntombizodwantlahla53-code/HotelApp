@@ -5,7 +5,10 @@ import type { hotel } from "./hotelslice";
 export interface search {
   check_in: string;
   check_out: string;
-  hotel_name:string
+  hotel_name: string;
+  location: string;
+  min_price: string;
+  max_price: string;
 }
 
 interface SearchState {
@@ -16,12 +19,17 @@ interface SearchState {
   error: string | null;
 }
 
+const emptySearch: search = {
+  check_in: "",
+  check_out: "",
+  hotel_name: "",
+  location: "",
+  min_price: "",
+  max_price: "",
+};
+
 const initialState: SearchState = {
-  info: {
-    check_in: "",
-    check_out: "",
-    hotel_name:""
-  },
+  info: { ...emptySearch },
   results: [],
   searched: false,
   loading: false,
@@ -32,8 +40,8 @@ export const fetchAvailable = createAsyncThunk(
   "search/fetchAvailable",
   async (info: search, thunkAPI) => {
     try {
-      const response = await fetch(`/api/hotels/available?check_in=${info.check_in}&check_out=${info.check_out}&hotel_name=${encodeURIComponent(info.hotel_name)}`
-      );
+      const params = new URLSearchParams({ ...info }).toString();
+      const response = await fetch(`/api/hotels/available?${params}`);
       const data = await response.json();
 
       if (!response.ok) {
@@ -58,11 +66,7 @@ export const searchSlice = createSlice({
     },
 
     clearSearch: (state) => {
-      state.info = {
-        check_in: "",
-        check_out: "",
-        hotel_name:""
-      };
+      state.info = { ...emptySearch };
       state.results = [];
       state.searched = false;
       state.error = null;
@@ -87,9 +91,5 @@ export const searchSlice = createSlice({
   },
 });
 
-export const {
-  updateSearch,
-  clearSearch,
-} = searchSlice.actions;
-
+export const {updateSearch,clearSearch,} = searchSlice.actions;
 export default searchSlice.reducer;

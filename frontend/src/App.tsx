@@ -40,6 +40,8 @@ function App() {
       <Route path = "/Profile" element= {<Profile/>}/>
       <Route path = "/Payment/:booking_id" element= {<Payment/>}/>
       <Route path = "/PaymentCallback" element= {<PaymentCallback/>}/>
+      <Route path = "/Hotels/:hotel_id" element={<RequireAdmin><Hotel/></RequireAdmin>}/>
+      <Route path = "/EditRoom/:room_id" element= {<RequireAdmin><Room/></RequireAdmin>}/>
       {/* <Route path = "/addhotels" element ={<Addhotels/>}/> */}
       </Routes>
       </Router>

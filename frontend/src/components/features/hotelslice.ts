@@ -87,6 +87,32 @@ export const fetchHotels = createAsyncThunk(
   }
 );
 
+export const editHotel = createAsyncThunk(
+  "hotels/editHotel",
+  async (updatedHotel: hotel, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/hotels/${updatedHotel.hotel_id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedHotel),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to update hotel");
+      }
+      return data as hotel;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error ? error.message : "Something went wrong"
+      );
+    }
+  }
+);
 
 export const hotelSlice = createSlice({
   name: "hotels",
@@ -141,6 +167,20 @@ export const hotelSlice = createSlice({
       })
 
       .addCase(fetchHotel.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+            .addCase(editHotel.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(editHotel.fulfilled, (state, action) => {
+        state.loading = false;
+        state.hotels = state.hotels.map((item) =>
+          item.hotel_id === action.payload.hotel_id ? action.payload : item
+        );
+      })
+      .addCase(editHotel.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })

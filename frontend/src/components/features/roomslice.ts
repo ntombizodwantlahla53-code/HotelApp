@@ -84,6 +84,51 @@ export const addRooms = createAsyncThunk(
   }
 );
 
+export const fetchRoomById = createAsyncThunk(
+  "rooms/fetchRoomById",
+  async (room_id: number, thunkAPI) => {
+    try {
+      const response = await fetch(`/api/rooms/${room_id}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to get room");
+      }
+      return data as room;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error ? error.message : "Something went wrong"
+      );
+    }
+  }
+);
+
+export const editRooms = createAsyncThunk(
+  "rooms/editRooms",
+  async (updatedRoom: room, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/rooms/${updatedRoom.room_id}`, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedRoom),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to update room");
+      }
+      return data as room;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error ? error.message : "Something went wrong"
+      );
+    }
+  }
+);
+
 export const roomSlice = createSlice({
   name: "rooms",
   initialState,
@@ -128,7 +173,28 @@ export const roomSlice = createSlice({
       .addCase(fetchRoom.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
-      });
+      })
+            .addCase(fetchRoomById.fulfilled, (state, action) => {
+        state.info = {
+          ...action.payload,
+          price: Number(action.payload.price),
+          image_urls: action.payload.image_urls || [],
+        };
+      })
+      .addCase(fetchRoomById.rejected, (state, action) => {
+        state.error = action.payload as string;
+      })
+      .addCase(editRooms.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(editRooms.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(editRooms.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
   },
 });
 

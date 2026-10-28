@@ -6,6 +6,7 @@ import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { fetchRoom } from "../../components/features/roomslice"
 import { MdArrowBackIos } from "react-icons/md";
 import { useEffect, useState } from "react";
+import { fetchHotel } from "../../components/features/hotelslice";
 
 export const roomlist = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -13,6 +14,8 @@ export const roomlist = () => {
   const rooms = useSelector((state: RootState) => state.rooms.rooms);
   const loading = useSelector((state: RootState) => state.rooms.loading);
   const error = useSelector((state: RootState) => state.rooms.error);
+    const hotels = useSelector((state: RootState) => state.hotels.hotels);
+  const hotel = hotels.find((item) => item.hotel_id === Number(hotel_id));
   const saveUser = localStorage.getItem("user");
   const profile = saveUser ? JSON.parse(saveUser) : null;
   const isAdmin = profile?.role === "Admin";
@@ -30,7 +33,8 @@ export const roomlist = () => {
     navigate(`/bookings/${room_id}`);
   };
 
-  useEffect(() => {
+    useEffect(() => {
+    dispatch(fetchHotel());
     if (hotel_id) {
       dispatch(fetchRoom(Number(hotel_id)));
     }
@@ -56,6 +60,15 @@ export const roomlist = () => {
       </Link>
       <div className={styles.Topic}>
         <h1 className={styles.Mytitle}>Rooms for hotel {hotel_id}</h1>
+           {hotel && (
+          <div>
+            <h2>{hotel.name}</h2>
+            <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
+            <iframe title="Hotel map"
+              loading="lazy"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(`${hotel.address}, ${hotel.city}, ${hotel.country}`)}&output=embed`}/>
+          </div>
+        )}
         {loading && <p>Loading rooms...</p>}
         {error && <p>{error}</p>}
 
@@ -63,7 +76,7 @@ export const roomlist = () => {
           <p>No rooms are available yet.</p>
         )}
         <div className={styles.flex}>
-          {hotelRooms.slice(0, 1).map((room) => (
+           {(isAdminPage ? hotelRooms : hotelRooms.slice(0, 1)).map((room) => (
             <div className={styles.firstplace} key={room.room_id}>
               <div className={styles.gallery}>
                 {room.image_urls?.filter((url) => url.trim()).map((url, index) => (
@@ -88,6 +101,11 @@ export const roomlist = () => {
                 <p>Capacity: {room.capacity}</p>
                 <p>Quantity: {room.quantity}</p>
                 <p className={styles.price}>Price: {room.price}</p>
+                  {isAdminPage && (
+                  <Link to={`/EditRoom/${room.room_id}`}>
+                    <button type="button" className={styles.inputting}>Edit room</button>
+                  </Link>
+                )}
                 {!isAdminPage && (
                   <button
                     type="button"

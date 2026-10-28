@@ -10,6 +10,7 @@ import profileReducer from "../components/features/profileslice"
 import userReducer from "../components/features/userslice"
 import searchReducer from "../components/features/searchslice"
 import paymentReducer from "../components/features/paymentslice"
+import reservationReducer from "../components/features/reservationslice"
 
 
 
@@ -25,7 +26,8 @@ export const store = configureStore({
         profile: profileReducer,
         users: userReducer,
         search: searchReducer,
-        payment: paymentReducer
+        payment: paymentReducer,
+        reservations: reservationReducer
         
 
     }
