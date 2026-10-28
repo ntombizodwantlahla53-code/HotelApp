@@ -1,5 +1,14 @@
 import { query } from "../config/database";
 
+export const findBookingToPay = async (booking_id: number, user_id: number) => {
+    const { rows } = await query(
+        `SELECT booking_id, total_price FROM bookings
+        WHERE booking_id = $1 AND user_id = $2 AND payment_status = 'Pending'`,
+        [booking_id, user_id]
+    );
+    return rows[0] || null;
+};
+
 export const markBookingAsPaid = async (booking_id: number, user_id: number) => {
     const { rows } = await query(
         `UPDATE bookings SET payment_status = 'Paid', paid_at = NOW()

@@ -1,25 +1,52 @@
 import { Request, Response } from "express";
 import * as paymentService from "../services/paymentService";
+import { createPaystackPayment, checkPaystackPayment } from "../services/paystackService";
 import { sendEmailToAdmin } from "../services/emailService";
 
-export const payBooking = async (req: Request, res: Response) => {
+export const startPayment = async (req: Request, res: Response) => {
     if (!req.user) {
         return res.status(401).json({ message: "Not authorized" });
     }
     try {
-        const booking = await paymentService.markBookingAsPaid(
+        const booking = await paymentService.findBookingToPay(
             Number(req.params.booking_id), req.user.id
         );
         if (!booking) {
             return res.status(404).json({ message: "Booking not found or already paid" });
         }
+        const payment = await createPaystackPayment(
+            req.user.email, booking.total_price, booking.booking_id
+        );
+        return res.status(200).json({ payment_url: payment.authorization_url });
+    } catch (error) {
+        console.log("Paystack error:", error);
+        return res.status(500).json({ message: "Error starting payment" });
+    }
+};
+
+export const verifyPayment = async (req: Request, res: Response) => {
+    if (!req.user) {
+        return res.status(401).json({ message: "Not authorized" });
+    }
+    try {
+        const payment = await checkPaystackPayment(String(req.params.reference));
+        if (payment.status !== "success") {
+            return res.status(400).json({ message: "Payment was not successful" });
+        }
+        const booking = await paymentService.markBookingAsPaid(
+            Number(payment.metadata.booking_id), req.user.id
+        );
+        if (!booking) {
+            return res.status(200).json({ message: "Payment already recorded" });
+        }
         sendEmailToAdmin(
             "New payment received",
             `${req.user.name} (${req.user.email}) paid R${booking.total_price} for booking number ${booking.booking_id}`
-        ).catch(() => console.log("Email failed to send"));
+        ).catch((error) => console.log("Email failed to send:", error.message));
         return res.status(200).json(booking);
-    } catch {
-        return res.status(500).json({ message: "Error making payment" });
+    } catch (error) {
+        console.log("Paystack error:", error);
+        return res.status(500).json({ message: "Error checking payment" });
     }
 };
 
