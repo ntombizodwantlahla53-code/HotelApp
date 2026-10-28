@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import type { RootState, AppDispatch } from "../../Redux/store";
-import { payBooking } from "../../components/features/paymentslice"
+import { startPayment } from "../../components/features/paymentslice";
 
 export const payment = () => {
   const loading = useSelector((state: RootState) => state.payment.loading);
@@ -14,24 +14,22 @@ export const payment = () => {
   const total = Number(location.state?.total || 0);
 
   const handlePay = () => {
-    dispatch(payBooking(Number(booking_id)))
+    dispatch(startPayment(Number(booking_id)))
       .unwrap()
-      .then(() => {
-        alert("Payment successful!");
-        navigate("/");
+      .then((payment_url) => {
+        window.location.href = payment_url;
       })
       .catch(() => {});
   };
 
   return (
     <div>
-      <h1>PayFast</h1>
-      <p>Test payment, no real money is taken</p>
+      <h1>Pay for your booking</h1>
       <h2>Booking number: {booking_id}</h2>
       <h2>Amount: R{total.toFixed(2)}</h2>
       {error && <p>{error}</p>}
       <button onClick={handlePay} disabled={loading}>
-        {loading ? "Processing..." : "Pay with PayFast"}
+        {loading ? "Please wait..." : "Pay with Paystack"}
       </button>
       <button onClick={() => navigate("/")}>Pay later</button>
     </div>

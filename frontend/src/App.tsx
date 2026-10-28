@@ -11,6 +11,7 @@ import {booking as Bookings} from "./pages/bookings/bookings";
 import {favourite as Favourite} from "./pages/favourates/favourate"
 import {profile as Profile} from "./pages/profile/profile"
 import {payment as Payment} from "./pages/payment/payment"
+import {paymentcallback as PaymentCallback} from "./pages/paymentcallback/paymentcallback"
 // import heroImg from './assets/hero.png'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from './assets/vite.svg'
@@ -38,6 +39,7 @@ function App() {
       <Route path = "/Favourites" element= {<Favourite/>}/>
       <Route path = "/Profile" element= {<Profile/>}/>
       <Route path = "/Payment/:booking_id" element= {<Payment/>}/>
+      <Route path = "/PaymentCallback" element= {<PaymentCallback/>}/>
       {/* <Route path = "/addhotels" element ={<Addhotels/>}/> */}
       </Routes>
       </Router>
