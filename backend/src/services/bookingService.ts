@@ -31,7 +31,8 @@ export const createBooking = async (
 
     const { rows: taken } = await query(
         `SELECT COUNT(*) FROM bookings
-        WHERE room_id = $1 AND check_in < $3::date AND check_out > $2::date`,
+        WHERE room_id = $1 AND booking_status <> 'Cancelled'
+        AND check_in < $3::date AND check_out > $2::date`,
         [booking.room_id, booking.check_in, booking.check_out]
     );
     if (Number(taken[0].count) >= Number(room.quantity)) {
