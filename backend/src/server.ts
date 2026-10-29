@@ -8,6 +8,7 @@ import bookingRoutes from "./routes/bookingRoutes"
 import favouriteRoutes from "./routes/favourateRoutes"
 import paymentRoutes from "./routes/paymentRoutes"
 import reservationRoutes from "./routes/reservationRoutes"
+import reviewRoutes from "./routes/reviewRoutes"
 import cors from "cors"
 
 dotenv.config();
@@ -29,7 +30,7 @@ app.use('/api', bookingRoutes);
 app.use('/api', favouriteRoutes);
 app.use('/api', paymentRoutes);
 app.use('/api', reservationRoutes);
-
+app.use('/api', reviewRoutes);
 
 app.listen(PORT, () =>
 {

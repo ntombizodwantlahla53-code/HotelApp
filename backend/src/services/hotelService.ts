@@ -65,7 +65,7 @@ export const findAvailableHotels = async (filters: SearchFilters): Promise<Hotel
        AND ($3::numeric IS NULL OR rooms.price >= $3::numeric)
        AND ($4::numeric IS NULL OR rooms.price <= $4::numeric)
        AND ($5::date IS NULL OR rooms.quantity > (
-         SELECT COUNT(*) FROM bookings
+         SELECT COALESCE(SUM(bookings.number_of_rooms), 0) FROM bookings
          WHERE bookings.room_id = rooms.room_id
          AND bookings.booking_status <> 'Cancelled'
          AND bookings.check_in < $6::date

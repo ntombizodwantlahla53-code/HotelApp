@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as paymentService from "../services/paymentService";
 import { createPaystackPayment, checkPaystackPayment } from "../services/paystackService";
-import { sendEmailToAdmin } from "../services/emailService";
+import { sendEmail, sendEmailToAdmin } from "../services/emailService";
 
 export const startPayment = async (req: Request, res: Response) => {
     if (!req.user) {
@@ -43,6 +43,9 @@ export const verifyPayment = async (req: Request, res: Response) => {
             "New payment received",
             `${req.user.name} (${req.user.email}) paid R${booking.total_price} for booking number ${booking.booking_id}`
         ).catch((error) => console.log("Email failed to send:", error.message));
+        sendEmail( req.user.email, "Payment received",
+         `Hi ${req.user.name}, we received your payment of R${booking.total_price} for booking number ${booking.booking_id}. Thank U..`
+        );
         return res.status(200).json(booking);
     } catch (error) {
         console.log("Paystack error:", error);

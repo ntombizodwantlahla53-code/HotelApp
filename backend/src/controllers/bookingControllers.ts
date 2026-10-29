@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as bookingService from "../services/bookingService";
+import { sendEmail } from "../services/emailService";
 
 export const getRoomById = async (req: Request, res: Response) => {
     try {
@@ -21,15 +22,18 @@ export const addBooking = async (req: Request, res: Response) => {
     if (req.user.role.toLowerCase() !== "customer") {
         return res.status(403).json({message: "Only customers can make bookings"});
     }
-    const { room_id, check_in, check_out, guests } = req.body;
+    const { room_id, check_in, check_out, guests, number_of_rooms = 1 } = req.body;
     if (!room_id || !check_in || !check_out || guests == null) {
         return res.status(400).json({message: "Room, dates and number of guests are required"});
     }
     if (!Number.isInteger(Number(guests)) || Number(guests) < 1) {
         return res.status(400).json({ message: "Enter a valid number of guests"});
     }
+    if (!Number.isInteger(Number(number_of_rooms)) || Number(number_of_rooms) < 1) {
+        return res.status(400).json({ message: "Enter a valid number of rooms"});
+    }
     if (!/^\d{4}-\d{2}-\d{2}$/.test(check_in) || !/^\d{4}-\d{2}-\d{2}$/.test(check_out) || check_out <= check_in) {
-        return res.status(400).json({ message: "Enter valid dates bcs Check-out must be after check-in."});
+        return res.status(400).json({ message: "Check-out must be after check-in."});
     }
     try {
         const booking = await bookingService.createBooking({
@@ -37,8 +41,14 @@ export const addBooking = async (req: Request, res: Response) => {
             room_id: Number(room_id),
             check_in,
             check_out,
-            guests: Number(guests)
+            guests: Number(guests),
+            number_of_rooms: Number(number_of_rooms)
         });
+        sendEmail(
+            req.user.email,
+            "We received your booking",
+            `Hi ${req.user.name},\n\nYour booking number ${booking.booking_id} is saved.\nCheck-in: ${check_in}\nCheck-out: ${check_out}\nRooms: ${booking.number_of_rooms}\nGuests: ${booking.guests}\nTotal: R${booking.total_price}\n\nPlease pay to confirm it. You can pay any time from your profile.`
+        );
         return res.status(201).json(booking);
     } catch (error) {
         const message = error instanceof Error ? error.message : "";
@@ -46,10 +56,10 @@ export const addBooking = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "Room not found"});
         }
         if (message === "quest capacity") {
-            return res.status(400).json({ message: "Number of guests exceeds this room's capacity"});
+            return res.status(400).json({ message: "Number of guests is too many for the rooms you chose"});
         }
         if (message === "ROOM_FULL") {
-            return res.status(409).json({ message: "This room is fully booked for those dates"});
+            return res.status(409).json({ message: "Not enough rooms are available for those dates"});
         }
         if (message === "INVALID_DATES") {
             return res.status(400).json({ message: "Check-out must be after check-in"});

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as reservationService from "../services/reservationService";
+import { sendEmail } from "../services/emailService";
 
 const checkAdmin = (req: Request, res: Response) => {
     if (!req.user) {
@@ -36,6 +37,12 @@ export const setReservationStatus = async (req: Request, res: Response) => {
         if (!reservation) {
             return res.status(404).json({ message: "Reservation not found" });
         }
+        const owner = await reservationService.findReservationOwner(reservation.booking_id);
+        if (owner) {
+            sendEmail( owner.email, `Your booking was ${booking_status.toLowerCase()}`,
+                `Hi ${owner.name}, your booking number ${reservation.booking_id} at ${owner.hotel_name} was ${booking_status.toLowerCase()}.`
+            );
+        }
         return res.status(200).json(reservation);
     } catch {
         return res.status(500).json({ message: "Error updating status" });
@@ -58,6 +65,12 @@ export const updateReservation = async (req: Request, res: Response) => {
         );
         if (!reservation) {
             return res.status(404).json({ message: "Reservation not found" });
+        }
+        const owner = await reservationService.findReservationOwner(reservation.booking_id);
+        if (owner) {
+            sendEmail( owner.email, "Your booking was changed",
+                `Hi ${owner.name}, your booking number ${reservation.booking_id} at ${owner.hotel_name} now runs from ${check_in} to ${check_out} for ${guests} guest(s). New total: R${reservation.total_price}.`
+            );
         }
         return res.status(200).json(reservation);
     } catch (error) {
