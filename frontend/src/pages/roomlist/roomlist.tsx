@@ -7,6 +7,7 @@ import { fetchRoom } from "../../components/features/roomslice"
 import { MdArrowBackIos } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { fetchHotel } from "../../components/features/hotelslice";
+import {sharebutton as Sharebutton} from '../../components/sharebutton/sharebutton'
 
 export const roomlist = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -64,6 +65,7 @@ export const roomlist = () => {
           <div>
             <h2>{hotel.name}</h2>
             <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
+             <Sharebutton hotel_id={hotel.hotel_id} name={hotel.name} />
             <iframe title="Hotel map"
               loading="lazy"
               src={`https://maps.google.com/maps?q=${encodeURIComponent(`${hotel.address}, ${hotel.city}, ${hotel.country}`)}&output=embed`}/>

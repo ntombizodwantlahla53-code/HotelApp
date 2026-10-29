@@ -9,6 +9,7 @@ import { HiEye } from "react-icons/hi";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { fetchFavourites, addFavourites, deleteFavourites } from "../../components/features/favourateslice"
 import { fetchAvailable, updateSearch, clearSearch } from "../../components/features/searchslice"
+import {sharebutton as Sharebutton} from '../../components/sharebutton/sharebutton'
 
 export const landing = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -148,6 +149,7 @@ const handleSearch = (e: React.FormEvent) => {
       <button type="button" onClick={() => handleFavourite(hotel.hotel_id, isFav)}>
         {isFav ? <FaHeart /> : <FaRegHeart />}
       </button>
+       <Sharebutton hotel_id={hotel.hotel_id} name={hotel.name} />
     </div>
     );
   })}
