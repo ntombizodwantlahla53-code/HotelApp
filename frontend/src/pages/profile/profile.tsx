@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import type { RootState, AppDispatch } from "../../Redux/store";
 import {fetchProfile,saveProfile,updateProfile,} from "../../components/features/profileslice";
+import { fetchMyBookings } from "../../components/features/bookingslice";
 
 export const profile = () => {
   const info = useSelector((state: RootState) => state.profile.info);
   const loading = useSelector((state: RootState) => state.profile.loading);
   const error = useSelector((state: RootState) => state.profile.error);
+  const bookings = useSelector((state: RootState) => state.booking.bookings);
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ export const profile = () => {
       return;
     }
     dispatch(fetchProfile());
+    dispatch(fetchMyBookings());
   }, [dispatch, navigate]);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -59,6 +62,22 @@ export const profile = () => {
           {loading ? "Saving..." : "Save changes"}
         </button>
       </form>
+            <h2>My bookings ({bookings.length})</h2>
+            {bookings.length === 0 && <p>You have no bookings yet.</p>}
+            {bookings.map((item) => (
+              <div key={item.booking_id}>
+                <h3>{item.hotel_name}</h3>
+                <p>{item.room_description}</p>
+                <p>Check-in: {item.check_in} | Check-out: {item.check_out} | Guests: {item.guests}</p>
+                <p> Total: R{Number(item.total_price).toFixed(2)} | Payment: {item.payment_status} | Status: {item.booking_status} </p>
+                {item.payment_status === "Pending" && item.booking_status !== "Cancelled" && (
+                  <Link to={`/Payment/${item.booking_id}`} state={{ total: item.total_price }}>Ready toPay now
+                  </Link>
+                )}
+              </div>
+            ))}
+
+      <p><Link to="/Favourites">My favourite hotels</Link></p>
     </div>
   );
 };

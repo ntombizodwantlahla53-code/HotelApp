@@ -10,6 +10,10 @@ export interface booking {
   guests: number;
   nights?: number;
   total_price?: number;
+  hotel_name?: string;
+  room_description?: string;
+  payment_status?: string;
+  booking_status?: string;
 }
 
 interface BookingState {
@@ -79,6 +83,28 @@ export const addBookings = createAsyncThunk(
   }
 );
 
+export const fetchMyBookings = createAsyncThunk(
+  "bookings/fetchMyBookings",
+  async (_, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("/api/bookings/my", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to get bookings");
+      }
+      return data as booking[];
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error ? error.message : "Something went wrong"
+      );
+    }
+  }
+);
+
 export const bookingSlice = createSlice({
   name: "bookings",
   initialState,
@@ -124,7 +150,19 @@ export const bookingSlice = createSlice({
       .addCase(fetchBookingRoom.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
-      });
+      })
+       .addCase(fetchMyBookings.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchMyBookings.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bookings = action.payload;
+      })
+      .addCase(fetchMyBookings.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
   },
 });
 export const {updateBooking,clearBooking,} = bookingSlice.actions;
