@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "../../Redux/store";
 import { fetchReviews, saveReview, removeReview } from "../features/reviewslice"
-import styles from "./reviews.module.css";
+import styles from "./review.module.css"
 
 interface ReviewProps {
   hotel_id: number;
