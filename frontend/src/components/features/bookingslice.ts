@@ -9,6 +9,7 @@ export interface booking {
   check_out: string;
   guests: number;
   nights?: number;
+  number_of_rooms?: number;
   total_price?: number;
   hotel_name?: string;
   room_description?: string;
@@ -30,6 +31,7 @@ const initialState: BookingState = {
     check_in: "",
     check_out: "",
     guests: 1,
+    number_of_rooms: 1
   },
   room: null,
   bookings: [],
@@ -119,6 +121,7 @@ export const bookingSlice = createSlice({
         check_in: "",
         check_out: "",
         guests: 1,
+        number_of_rooms: 1
       };
       state.error = null;
     },

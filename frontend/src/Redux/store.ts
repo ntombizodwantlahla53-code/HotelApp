@@ -11,6 +11,7 @@ import userReducer from "../components/features/userslice"
 import searchReducer from "../components/features/searchslice"
 import paymentReducer from "../components/features/paymentslice"
 import reservationReducer from "../components/features/reservationslice"
+import reviewReducer from "../components/features/reviewslice"
 
 
 
@@ -27,9 +28,8 @@ export const store = configureStore({
         users: userReducer,
         search: searchReducer,
         payment: paymentReducer,
-        reservations: reservationReducer
-        
-
+        reservations: reservationReducer,
+        reviews: reviewReducer
     }
 })
 

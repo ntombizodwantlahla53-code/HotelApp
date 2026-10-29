@@ -68,7 +68,7 @@ export const profile = () => {
               <div key={item.booking_id}>
                 <h3>{item.hotel_name}</h3>
                 <p>{item.room_description}</p>
-                <p>Check-in: {item.check_in} | Check-out: {item.check_out} | Guests: {item.guests}</p>
+                <p>Check-in: {item.check_in} | Check-out: {item.check_out} | Guests: {item.guests} | Rooms: {item.number_of_rooms}</p>
                 <p> Total: R{Number(item.total_price).toFixed(2)} | Payment: {item.payment_status} | Status: {item.booking_status} </p>
                 {item.payment_status === "Pending" && item.booking_status !== "Cancelled" && (
                   <Link to={`/Payment/${item.booking_id}`} state={{ total: item.total_price }}>Ready toPay now

@@ -51,7 +51,7 @@ export const reservations = () => {
           <h3>Booking {item.booking_id} - {item.hotel_name}</h3>
           <p>Guest: {item.user_name} ({item.user_email})</p>
           <p>Room: {item.room_description}</p>
-          <p>Check-in: {item.check_in} | Check-out: {item.check_out} | Guests: {item.guests}</p>
+          <p>Check-in: {item.check_in} | Check-out: {item.check_out} | Guests: {item.guests} | Rooms: {item.number_of_rooms}</p>
           <p>
             Total: R{Number(item.total_price).toFixed(2)} | Payment: {item.payment_status} | Status: {item.booking_status}
           </p>

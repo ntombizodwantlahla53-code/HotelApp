@@ -17,7 +17,8 @@ export const booking = () => {
 
   const today = new Date().toLocaleDateString("en-CA");
   const nights = info.check_in && info.check_out && info.check_out > info.check_in ? Math.round((new Date(info.check_out).getTime() -new Date(info.check_in).getTime()) /86400000): 0;
-  const total = room ? Number(room.price) * nights : 0;
+  const rooms = info.number_of_rooms || 1;
+  const total = room ? Number(room.price) * nights * rooms : 0;
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -45,6 +46,7 @@ export const booking = () => {
         check_in: info.check_in,
         check_out: info.check_out,
         guests: info.guests,
+        number_of_rooms: info.number_of_rooms,
       }))
       .unwrap()
       .then((data) => {
@@ -82,12 +84,18 @@ export const booking = () => {
                   onChange={(e) => dispatch(updateBooking({ check_out: e.target.value }))}/>
               </label></p>
 
-            <p><label>
-                Number of guests
-                <br />
+                 <p><label>Number of rooms (up to {room.quantity})<br />
                 <input type="number"
                   min="1"
-                  max={room.capacity}
+                  max={room.quantity}
+                  value={info.number_of_rooms}
+                  onChange={(e) => dispatch(updateBooking({ number_of_rooms: Number(e.target.value) }))}/>
+              </label></p>
+
+            <p><label> Number of guests<br />
+                <input type="number"
+                  min="1"
+                  max={room.capacity * rooms}
                   value={info.guests}
                   onChange={(e) =>dispatch(updateBooking({ guests: Number(e.target.value) }))}/>
               </label></p>

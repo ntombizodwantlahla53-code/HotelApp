@@ -8,6 +8,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { fetchHotel } from "../../components/features/hotelslice";
 import {sharebutton as Sharebutton} from '../../components/sharebutton/sharebutton'
+import {reviews as Reviews} from '../../components/review/review'
 
 export const roomlist = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -108,6 +109,7 @@ export const roomlist = () => {
                     <button type="button" className={styles.inputting}>Edit room</button>
                   </Link>
                 )}
+                {hotel_id && <Reviews hotel_id={Number(hotel_id)} />}
                 {!isAdminPage && (
                   <button
                     type="button"
@@ -116,6 +118,7 @@ export const roomlist = () => {
                     Book now
                   </button>
                 )}
+
               </div>
             </div>
           ))}

@@ -13,6 +13,7 @@ export interface reservation {
   user_email: string;
   room_description: string;
   hotel_name: string;
+  number_of_rooms: number;
 }
 
 interface ReservationState {
