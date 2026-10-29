@@ -49,8 +49,12 @@ export const createBooking = async (
 
 export const findMyBookings = async (user_id: number) => {
     const { rows } = await query(
-        `SELECT b.*, rooms.description AS room_description,
-        rooms.price AS price_per_night,
+        `SELECT bookings.booking_id,
+        to_char(bookings.check_in, 'YYYY-MM-DD') AS check_in,
+        to_char(bookings.check_out, 'YYYY-MM-DD') AS check_out,
+        bookings.guests, bookings.nights, bookings.total_price,
+        bookings.payment_status, bookings.booking_status,
+        rooms.description AS room_description,
         hotels.name AS hotel_name
         FROM bookings
         JOIN rooms ON bookings.room_id = rooms.room_id
