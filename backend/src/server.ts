@@ -1,3 +1,4 @@
+import "./types/express";
 import express from 'express';
 import dotenv from "dotenv";
 import { textDbConnection } from "./config/database";
