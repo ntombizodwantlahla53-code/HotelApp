@@ -89,67 +89,179 @@ cd HotelApp
 ### 3. Set up the database (Neon)
 1. Create a new project on Neon.
 2. Click Connect, and copy the connection string.
-3. Open the Neon **SQL Editor** and create the tables listed above.
+3. Open the Neon **SQL Editor** and create the tables listed:
+```sql 
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'Customer' CHECK (role IN ('Customer', 'Admin'))
+);
+
+CREATE TABLE hotels (
+    hotel_id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    name VARCHAR(150) NOT NULL,
+    description TEXT,
+    address VARCHAR(255),
+    city VARCHAR(100),
+    country VARCHAR(100),
+    ammenities TEXT,
+    star_rating INTEGER,
+    image_url TEXT,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE rooms (
+    room_id SERIAL PRIMARY KEY,
+    hotel_id INTEGER NOT NULL REFERENCES hotels(hotel_id) ON DELETE CASCADE,
+    description TEXT,
+    ammenities TEXT,
+    capacity INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    price NUMERIC(10,2) NOT NULL,
+    image_urls TEXT[],
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE bookings (
+    booking_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    room_id INTEGER NOT NULL REFERENCES rooms(room_id) ON DELETE CASCADE,
+    check_in DATE NOT NULL,
+    check_out DATE NOT NULL,
+    guests INTEGER NOT NULL,
+    nights INTEGER NOT NULL,
+    total_price NUMERIC(10,2) NOT NULL,
+    payment_status VARCHAR(20) DEFAULT 'Pending',
+    paid_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE favourites (
+    favourite_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    hotel_id INTEGER NOT NULL REFERENCES hotels(hotel_id) ON DELETE CASCADE,
+    UNIQUE (user_id, hotel_id)
+);
+
+CREATE TABLE reviews (
+    review_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    hotel_id INTEGER NOT NULL REFERENCES hotels(hotel_id) ON DELETE CASCADE,
+    rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT NOW(),
+    UNIQUE (user_id, hotel_id)
+);
+
+ALTER TABLE bookings ADD COLUMN number_of_rooms INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE bookings ADD COLUMN booking_status VARCHAR(20) DEFAULT 'Pending';
+```
+NB: run tables 1 by 1 not all in 1.
+tables:
 
 ### 4. Set up the backend
 ```bash
 cd backend
 npm install
+
 ```
 
-Create a file called `backend/.env` and fill it in:
-
+## Create a file called `backend/.env` and fill it in:
 ```env
-DATABASE_URL=your_neon_connection_string
-JWT_SECRET=any_long_random_text
-PAYSTACK_SECRET_KEY=your_paystack_secret_key
-GOOGLE_CLIENT_ID=your_google_client_id
-FRONTEND_URL=http://localhost:5173
+DATABASE_URL= your_neon_connection_string
+JWT_SECRET= this-key-is-very-secret
+PAYSTACK_SECRET_KEY= your_paystack_secret_key (you will get your paystack key
+ on your paystack go to paystack settings and 
+ look for API option you will get your api_key there ,copy and come paste it here)
+
+GOOGLE_CLIENT_ID=your_google_client_id (go to https://console.cloud.google.com/ and login or sign up with your email. 
+Add new project you can name it HotelApp, 
+then on options goi to API and services on your left side you'll see option ,go to OAuth consent screen)
+
+FRONTEND_URL=http://localhost:5173 (put this url but youll change it after you hoted your frontend and put e.g https://........vercel.app if you host using vercel)
 EMAIL_USER=your_gmail_address
 EMAIL_PASSWORD=your_gmail_app_password
 ADMIN_EMAIL=email_that_receives_payment_alerts
 PORT=3000
 ```
+## theN create config file on backend with database.ts inside it put:
+```json
+import { Pool } from "pg";
+import dotenv from "dotenv";
 
-Start it:
+dotenv.config();
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    
+});
+
+export const query = (text: string, params?: any[]) => pool.query(text, params);
+
+export const textDbConnection = async () => {
+    try {
+        const client = await pool.connect();
+        console.log("Database connection successful");
+        client.release();
+    } catch (error) {
+        console.log("Unable to connect to the database:", error);
+        process.exit(1);
+    }
+};
+
+>Also Update your package json scripts
+
+```
+
+Start it/run it:
 ```bash
 npm run dev
 ```
-You should see: `Database connection successful`.
+when you're connected then you should see:`Database connection successful` on your terminal after you run it using 'npm run dev'
 
 ### 5. Set up the frontend
-Open a **second** terminal:
+Open a second terminal:
 ```bash
-cd frontend
-npm install
+cd frontend (this means you work on frontend only and whatever you commit or push 
+here will commit only changes inside frontend only not both frontend and backend then cd backend means backend work only)
+npm install( or npm i)
 ```
 
-Create a file called `frontend/.env`:
-```env
-VITE_GOOGLE_CLIENT_ID=your_google_client_id
+Create a file called .env on frontend 
+```env inside it write this:
+
+VITE_GOOGLE_CLIENT_ID=your_google_client_id (go to https://console.cloud.google.com/ and login or sign up with your email. 
+Add new project you can name it HotelApp, 
+then on options go to API and services option on your left side, and choose OAuth consent screen inside it)
 ```
 
-Start it:
+Start it/run it:
 ```bash
 npm run dev
 ```
-Open **http://localhost:5173** in your browser.
 
-> In Google Cloud Console, add `http://localhost:5173` under **Authorized JavaScript origins** or Google sign-in will not work.
+
+## In Google Cloud Console, add `http://localhost:5173` under >Authorized JavaScript origins< you'll see where they wrote URL you include your frontend url
+and also after you hosted you'll go to edit this url and put hosted url link or Google sign-in will not work.
 
 ### 6. Make yourself an admin
-New accounts are `Customer` by default. To become an admin, run this in the Neon **SQL Editor**:
+New accounts are `Customer` by default. To become an admin, run this in the Neon project SQL editor: 
 ```sql
-UPDATE users SET role = 'Admin' WHERE email = 'your_email@example.com';
+UPDATE users 
+SET role = 'Admin' WHERE email = 'your_email@example.com';
 ```
-Log out and log in again.
+Log out and log in again then youll be redirected to admin page not landing page.
 
 
 ## Test the API with Postman
 
 You can test the backend without the website by using [Postman](https://www.postman.com/downloads/).
 
-**Base URL**
 - Live: `https://hotel-app-theta-jet.vercel.app/api`
 - Local: `http://localhost:3000/api`
 
@@ -166,6 +278,7 @@ You can test the backend without the website by using [Postman](https://www.post
 3. Choose **Bearer Token** and paste the token.
 4. Click **Send**.
 
+>BACKEND POSTMAN runs:
 ### 1. Register
 `POST /api/auth/register`
 ```json
@@ -174,9 +287,18 @@ You can test the backend without the website by using [Postman](https://www.post
   "email": "ntombi@example.com",
   "password": "ntombizodwa012"
 }
+
+if you wanna register as an admin the you'll write: 
+{
+  "name": "Ntombi",
+  "email": "ntombi@example.com",
+  "password": "ntombizodwa012",
+  "role": "Admin"
+}
+
 ```
 
-### 2. Login (gives you the token)
+### 2. Login (you'll be given token and you'll have to copy it)
 `POST /api/auth/login`
 ```json
 {
@@ -188,9 +310,9 @@ You can test the backend without the website by using [Postman](https://www.post
 ### 3. Get all hotels
 `GET /api/hotels`
 
-No body needed.
+you'll get all hotels no need to write anything on your body
 
-### 4. Add a hotel (admin token needed)
+### 4. Add a hotel (admin token needed so that login token should be on your authorization you'll select Berea token and put that login token before working on body here)
 `POST /api/hotels`
 ```json
 {
@@ -201,30 +323,32 @@ No body needed.
   "country": "South Africa",
   "ammenities": "WiFi, Pool, Breakfast",
   "star_rating": 4,
-  "image_url": "https://example.com/hotel.jpg"
+  "image_url": "https://example.com/hotel.jpg (you can get images url on pexels https://www.pexels.com/)"
 }
 ```
 
 ### 5. Get the rooms of a hotel
 `GET /api/hotels/1/rooms`
 
-No body needed. Replace `1` with the hotel id.
+that 1 number is hotel_id number, e.g. if you have hotel_id 1 
+and you wanna get room for it then put the number of your hotel_id.
+also here there's no need to write anything on your body
 
-### 6. Add a room (admin token needed)
+### 6. Add a room (admin token needed so that login token should be on your authorization you'll select Berea token and put that login token before working on body here)
 `POST /api/rooms`
 ```json
 {
   "hotel_id": 1,
   "description": "Double room with sea view",
-  "ammenities": "TV, Air conditioning",
+  "ammenities": "Free Wifi, TV, Air conditioning",
   "capacity": 2,
   "quantity": 5,
   "price": 1200,
-  "image_urls": ["https://example.com/room1.jpg", "https://example.com/room2.jpg"]
+  "image_urls": ["https://example.com/room1.jpg", "https://example.com/room2.jpg"] (also here you can get images url on pexels https://www.pexels.com/)")
 }
 ```
 
-### 7. Book a room (token needed)
+### 7. Book a room (also here the token is needed)
 `POST /api/bookings`
 ```json
 {
@@ -234,19 +358,21 @@ No body needed. Replace `1` with the hotel id.
   "guests": 2,
   "number_of_rooms": 1
 }
+NB: make sure check_in is before check_out
+
 ```
 
-### 8. See your bookings (token needed)
+### 8. See your bookings (also here the token is needed)
 `GET /api/bookings/my`
 
-No body needed.
+you'll get all bookings no need to write anything on your body
 
-### 9. Pay for a booking (token needed)
+### 9. Pay for a booking (also here the token is needed)
 `POST /api/bookings/1/pay`
+that 1 number is booking_id number, e.g. if you have booking_id 1 .if you have booking_id :2 then instead of that 1 you can put 2.
+also here there's no need to write anything on your body. The answer will contain a Paystack payment link.
 
-No body needed. Replace `1`with the booking id. The answer contains a Paystack payment link.
-
-### 10. Add a review (token needed)
+### 10. Add a review (also here the token is needed)
 `POST /api/hotels/1/reviews`
 ```json
 {
@@ -255,7 +381,7 @@ No body needed. Replace `1`with the booking id. The answer contains a Paystack p
 }
 ```
 
-### 11. Add a hotel to favourites (token needed)
+### 11. Add a hotel to favourites (also here the token is needed)
 `POST /api/favourites`
 ```json
 {
@@ -263,16 +389,16 @@ No body needed. Replace `1`with the booking id. The answer contains a Paystack p
 }
 ```
 
-### 12. Approve or cancel a reservation (admin token needed)
+### 12. Approve or cancel a reservation (admin token needed and admin token not customer token as their token are not the same)
 `PATCH /api/reservations/1/status`
 ```json
 {
   "booking_status": "Approved"
 }
 ```
-Use `"Cancelled"` to cancel.
+Use`"Cancelled"`to cancel.
 
-### 13. Delete things (token needed)
+### 13. Delete things (token is needed)
 - `DELETE /api/favourites/1` removes hotel 1 from your favourites
 - `DELETE /api/reviews/1` removes review 1
 - `DELETE /api/hotels/1` deletes hotel 1 (admin)
@@ -281,16 +407,44 @@ Use `"Cancelled"` to cancel.
 
 ## How It Is Hosted
 
-Both parts are hosted on **Vercel** for me, from the same GitHub repository, as two separate projects.
+Both parts are hosted on VERCEL for me, from the same GitHub repository, as two separate projects.
 
-**Backend project**
-- Root Directory: `backend`
-- Needs all the backend environment variables above, except `PORT`
-- `FRONTEND_URL` is the website's address
+>HOSTING BACKEND
+- Root Directory: `backend` (when you host make sure for root directory you choose backend).
+- Needs all the backend environment variables above, except `PORT` so you'll put these :
+on key name write **DATABASE_URL**
+then on value put  **..your neon connection string**
+then press add variables after putting the value on each:
 
-**Frontend project**
-- Root Directory: `frontend`
-- Needs `VITE_GOOGLE_CLIENT_ID`
+key **JWT_SECRET**
+value **this-key-is-very-secret**
+
+key **PAYSTACK_SECRET_KEY**
+**value** your_paystack_secret_key (you will get your paystack key
+ on your paystack go to paystack settings and 
+ look for API option you will get your api_key there ,copy and come paste it here)
+
+key **GOOGLE_CLIENT_ID**
+**value** your_google_client_id (go to https://console.cloud.google.com/ and login or sign up with your email. 
+Add new project you can name it HotelApp, 
+then on options goi to API and services on your left side you'll see option ,go to OAuth consent screen)
+
+key **FRONTEND_URL**=
+**value** http://localhost:5173 (put this url but youll change it after you hoted your frontend and put e.g https://........vercel.app if you host using vercel)
+
+key **EMAIL_USER**
+**value** your_gmail_address
+
+key **EMAIL_PASSWORD**
+**value** your_gmail_app_password
+
+key **ADMIN_EMAIL**=
+**value** email_that_receives_payment_alerts
+
+
+>HOSTING FRONTEND
+- Root Directory: `frontend` .(when you host make sure for root directory you choose frontend).
+- then under environment variables put `VITE_GOOGLE_CLIENT_ID` and on value you'll put your_google_client_id.then you can deploy.
 - `frontend/vercel.json` sends every `/api/...`request to the backend address
 
 After the frontend address is known, add it to:
