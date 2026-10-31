@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import style from "./favourates.module.css"
+import styles from "./favourate.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import type { RootState, AppDispatch } from "../../Redux/store";
@@ -22,9 +22,9 @@ export const favourite = () => {
   }, [dispatch, navigate]);
 
   return (
-    <div >
+    <div className={styles.favourites}>
       <Link to="/">Back to hotels</Link>
-      <h1 className={style.h1}>My favourites</h1>
+      <h1 >My favourites</h1>
 
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
@@ -32,23 +32,25 @@ export const favourite = () => {
         <p>You have no favourite hotels yet.</p>
       )}
 
-      {favourites.map((hotel) => (
+      <div className={styles.favouritesList}>
+    {favourites.map((hotel) => (
         <div key={hotel.hotel_id}>
-          {hotel.image_url && (
-            <img src={hotel.image_url} alt={hotel.name}   />
-          )}
-          <h2>{hotel.name}</h2>
-          <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
-          <Link to={`/hotels/${hotel.hotel_id}/rooms`}>View rooms</Link>
-          <br />
-          <button
-            type="button"
-            onClick={() => hotel.hotel_id && dispatch(deleteFavourites(hotel.hotel_id))}
-          >
-            Remove
-          </button>
+            {hotel.image_url && (
+                <img src={hotel.image_url} alt={hotel.name} />
+            )}
+            <h2>{hotel.name}</h2>
+            <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
+            <Link to={`/hotels/${hotel.hotel_id}/rooms`}>View rooms</Link>
+            <br />
+            <button
+                type="button"
+                onClick={() => hotel.hotel_id && dispatch(deleteFavourites(hotel.hotel_id))}
+            >
+                Remove
+            </button>
         </div>
-      ))}
+    ))}
+</div>
     </div>
   );
 };

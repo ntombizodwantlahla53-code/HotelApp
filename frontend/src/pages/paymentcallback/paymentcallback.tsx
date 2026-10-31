@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import styles from "./paymentcallback.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import type { RootState, AppDispatch } from "../../Redux/store";
@@ -21,7 +22,7 @@ export const paymentcallback = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.callback}>
       {loading && <h2>Checking your payment...</h2>}
       {error && <h2>{error}</h2>}
       {paid && <h2>Payment successful! Thank you.</h2>}

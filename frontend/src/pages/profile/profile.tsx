@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import styles from "./profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import type { RootState, AppDispatch } from "../../Redux/store";
@@ -35,9 +36,9 @@ export const profile = () => {
   };
 
   return (
-    <div >
+    <div className={styles.profile}>
       <Link to="/">Back to hotels</Link>
-      <h1>My profile</h1>
+      <h1 >My profile</h1>
       <p>Role: {info.role}</p>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}

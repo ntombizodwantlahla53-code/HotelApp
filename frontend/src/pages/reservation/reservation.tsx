@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "./reservation.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../Redux/store";
 import { fetchReservations, changeStatus, modifyReservation } from "../../components/features/reservationslice";
@@ -41,7 +42,7 @@ export const reservations = () => {
   };
 
   return (
-    <div>
+    <div className={styles.reservations}>
       <h2>Reservations ({allReservations.length})</h2>
       {loading && <p>Loading reservations...</p>}
       {error && <p>{error}</p>}

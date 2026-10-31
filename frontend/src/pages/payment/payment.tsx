@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import styles from "./payment.module.css";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import type { RootState, AppDispatch } from "../../Redux/store";
 import { startPayment } from "../../components/features/paymentslice";
@@ -23,7 +24,7 @@ export const payment = () => {
   };
 
   return (
-    <div>
+    <div className={styles.payment}>
       <h1>Pay for your booking</h1>
       <h2>Booking number: {booking_id}</h2>
       <h2>Amount: R{total.toFixed(2)}</h2>

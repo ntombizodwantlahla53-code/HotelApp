@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "./payments.module.css";
 
 interface payment {
   booking_id: number;
@@ -26,7 +27,7 @@ export const payments = () => {
   const pendingUsers = allPayments.filter((item) => item.payment_status === "Pending");
 
   return (
-    <div>
+    <div className={styles.payments}>
       {error && <p>{error}</p>}
 
       <h2>Users who paid ({paidUsers.length})</h2>
