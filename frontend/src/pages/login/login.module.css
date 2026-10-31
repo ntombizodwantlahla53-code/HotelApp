@@ -1,28 +1,77 @@
-.linkContainer{
-    border: 1px solid black;
-    width: 50vw;
-    height: 80vh;
-    margin: 0 auto;
-    margin-top: 70px;
-    background-color: azure;
-    border-radius: 18px;
-    padding: 10px;
+.linkContainer {
+    width: 90%;
+    max-width: 480px;
+    margin: 65px auto;
+    padding: 35px;
+    border: 1px solid #f0e1dc;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(73, 52, 47, 0.09);
 }
-.Topic{
+
+.Topic {
+    margin-bottom: 35px;
+    color: #49342f;
     text-align: center;
-    margin-bottom: 80px;
+    font-family: Georgia, serif;
+    font-size: 28px;
 }
-label{
+
+.Myp{
+    color: #89766f;
+    text-align: center;
+}
+.desc {
+    color: #89766f;
+    text-align: center;
+}
+
+.text {
     display: flex;
-    display: block;
-    font-size: 20px;
-    flex:1px;
-    
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 20px;
+    color: #65463e;
+    font-size: 14px;
+    font-weight: bold;
 }
+
 .inputtitle{
     width: 100%;
-    height: 30px;
+    min-height: 44px;
+    margin-top: 8px;
 }
+
 .password{
-    text-align: end;
+    margin: 12px 0;
+    text-align: right;
+    color: #b77980;
+}
+
+.inputting{
+    width: 100%;
+    margin-top: 15px;
+    padding: 13px;
+    border: none;
+    border-radius: 9px;
+    background: #b77980;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.inputting:hover {
+    background: #965b64;
+}
+
+.bc{
+    color: #80564b;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .linkContainer {
+        margin: 30px auto;
+        padding: 25px 20px;
+    }
 }

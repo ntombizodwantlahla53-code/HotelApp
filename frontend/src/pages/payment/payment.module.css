@@ -1,0 +1,31 @@
+.payment{
+    max-width: 500px;
+    margin: 70px auto;
+    padding: 35px;
+    border: 1px solid #f0e1dc;
+    border-radius: 18px;
+    background: white;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(73, 52, 47, 0.08);
+}
+
+.payment h1{
+    color: #49342f;
+    font-family: Georgia, serif;
+}
+
+.payment h2{
+    color: #89766f;
+    font-size: 18px;
+}
+
+.payment button{
+    margin: 10px;
+}
+
+@media (max-width: 600px){
+    .payment{
+        margin: 35px 15px;
+        padding: 25px 18px;
+    }
+}

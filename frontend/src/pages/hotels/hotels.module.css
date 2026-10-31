@@ -1,0 +1,102 @@
+.linkContainer{
+    min-height: 100vh;
+    padding: 30px 5%;
+    background: #fff9f5;
+    color: #49342f;
+}
+
+.bc{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #f6e5e2;
+    color: #80564b;
+}
+
+.Topic{
+    margin: 20px 0 30px;
+    text-align: center;
+}
+
+.Mytitle{
+    color: #49342f;
+    font-family: Georgia, serif;
+    font-size: 34px;
+}
+
+.Myp{
+    color: #89766f;
+}
+
+.linkContainer form{
+    max-width: 750px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #f0e1dc;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 8px 25px rgba(73, 52, 47, 0.08);
+}
+
+.insideContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.linkss{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.title{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #65463e;
+    font-weight: bold;
+}
+
+.inputtitle{
+    width: 100%;
+    min-height: 44px;
+}
+
+.title img{
+    width: 100%;
+    max-height: 220px;
+    margin-top: 10px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.inputting{
+    align-self: flex-start;
+    padding: 13px 25px;
+    background: #b77980;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.inputting:hover{
+    background: #965b64;
+}
+
+@media (max-width: 600px) {
+    .linkContainer{
+        padding: 20px 15px;
+    }
+
+    .linkContainer form{
+        padding: 20px;
+    }
+
+    .Mytitle{
+        font-size: 26px;
+    }
+}

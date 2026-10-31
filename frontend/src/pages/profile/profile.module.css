@@ -1,0 +1,49 @@
+.profile{
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.profile h1{
+    color: #49342f;
+    font-family: Georgia, serif;
+}
+.profile h2{
+    color: #49342f;
+    font-family: Georgia, serif;
+}
+
+.profile form{
+    margin: 20px 0;
+    padding: 25px;
+    border: 1px solid #f0e1dc;
+    border-radius: 15px;
+    background: white;
+}
+.profile > div{
+    margin: 20px 0;
+    padding: 25px;
+    border: 1px solid #f0e1dc;
+    border-radius: 15px;
+    background: white;
+}
+
+.profile label{
+    display: block;
+    color: #65463e;
+    font-weight: bold;
+}
+
+.profile input{
+    width: 100%;
+    margin-top: 8px;
+}
+
+.profile a{
+    color: #b77980;
+    text-decoration: none;
+}
+
+.profile button{
+    margin-top: 10px;
+}

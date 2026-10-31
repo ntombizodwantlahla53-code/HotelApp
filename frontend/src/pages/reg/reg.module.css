@@ -1,31 +1,79 @@
 .linkContainer{
-    border: 1px solid black;
-    width: 50vw;
-    height: 80vh;
-    margin: 0 auto;
-    margin-top: 70px;
-    background-color: azure;
-    border-radius: 18px;
-    padding: 10px;
+    width: 90%;
+    max-width: 520px;
+    margin: 45px auto;
+    padding: 35px;
+    border: 1px solid #f0e1dc;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(73, 52, 47, 0.09);
 }
+
 .Topic{
+    margin-bottom: 30px;
+    color: #49342f;
     text-align: center;
-    margin-bottom: 80px;
+    font-family: Georgia, serif;
+    font-size: 28px;
 }
-label{
-    display: flex;
-    display: block;
-    font-size: 20px;
-    flex:1px;
-    
-}
-.inputtitle{
-    width: 100%;
-    height: 30px;
-}
-.password{
-    text-align: end;
+
+.Myp{
+    color: #89766f;
+    text-align: center;
 }
 .desc{
-    margin-bottom: 10px;
+    color: #89766f;
+    text-align: center;
+}
+.descc {
+    color: #89766f;
+    text-align: center;
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 18px;
+    color: #65463e;
+    font-size: 14px;
+    font-weight: bold;
+}
+.title {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 18px;
+    color: #65463e;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.inputtitle{
+    width: 100%;
+    min-height: 44px;
+    margin-top: 8px;
+}
+
+.inputting{
+    width: 100%;
+    margin-top: 15px;
+}
+
+.bc{
+    color: #80564b;
+    text-decoration: none;
+}
+
+.linkss{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+@media (max-width: 600px) {
+    .linkContainer{
+        margin: 25px auto;
+        padding: 25px 20px;
+    }
 }

@@ -1,12 +1,74 @@
+.landing{
+    background: #fff9f5;
+}
+
 .flex{
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    margin: 5px;
-
+    gap: 22px;
+    margin: 20px 0;
 }
+
+.ad{
+    flex: 1 1 260px;
+    max-width: 350px;
+    padding: 20px;
+    border: 1px solid #f0e1dc;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 6px 20px rgba(73, 52, 47, 0.07);
+}
+
+.firstplace{
+    flex: 1 1 260px;
+    max-width: 350px;
+    padding: 20px;
+    border: 1px solid #f0e1dc;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 6px 20px rgba(73, 52, 47, 0.07);
+}
+
+.ad h3{
+    color: #49342f;
+}
+.firstplace h2 {
+    color: #49342f;
+}
+
+.ad p{
+    color: #89766f;
+    line-height: 1.6;
+}
+.firstplace p{
+    color: #89766f;
+    line-height: 1.6;
+}
+
 .image{
     width: 100%;
-    height: 180px;
+    height: 190px;
+    border-radius: 12px;
     object-fit: cover;
+}
+
+.hotels{
+    display: inline-block;
+    margin: 25px 0 10px;
+    color: #b77980;
+}
+
+.buttnV{
+    margin: 12px 0;
+}
+
+.viewb{
+    padding: 10px 15px;
+    background: #f6e5e2;
+    color: #65463e;
+}
+
+.viewb:hover{
+    background: #b77980;
+    color: white;
 }

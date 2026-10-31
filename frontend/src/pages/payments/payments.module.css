@@ -1,0 +1,26 @@
+.payments{
+    min-height: 100vh;
+    padding: 35px 5%;
+    color: #49342f;
+}
+
+.payments h2{
+    margin: 25px 0 15px;
+    font-family: Georgia, serif;
+}
+
+.payments p{
+    margin: 10px 0;
+    padding: 16px;
+    border: 1px solid #f0e1dc;
+    border-radius: 12px;
+    background: white;
+    color: #65463e;
+    line-height: 1.6;
+}
+
+@media (max-width: 600px){
+    .payments{
+        padding: 25px 15px;
+    }
+}

@@ -248,3 +248,64 @@
     min-height: 25px;
     background: #fff9f5;
 }
+@media (max-width: 768px) {
+    .heroContent {
+        padding: 65px 6%;
+    }
+
+    .texts {
+        font-size: 42px;
+    }
+
+    .explore {
+        font-size: 15px;
+    }
+
+    .hotelslist {
+        padding: 35px 5% 20px;
+    }
+
+    .hotels {
+        font-size: 29px;
+    }
+
+    .hotelslist form {
+        align-items: stretch;
+        padding: 18px;
+    }
+
+    .hotelslist label {
+        flex-basis: 100%;
+    }
+
+    .hotelslist form button {
+        width: 100%;
+    }
+
+    .flex {
+        grid-template-columns: 1fr;
+        padding: 15px 5% 35px;
+    }
+}
+
+@media (max-width: 480px){
+    .landing{
+        min-height: 430px;
+    }
+
+    .heroContent{
+        padding: 55px 20px;
+    }
+
+    .texts{
+        font-size: 36px;
+    }
+
+    .sectionText{
+        font-size: 14px;
+    }
+
+    .image{
+        height: 190px;
+    }
+}

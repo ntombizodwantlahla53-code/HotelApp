@@ -1,0 +1,25 @@
+.callback{
+    max-width: 550px;
+    margin: 90px auto;
+    padding: 40px 25px;
+    border: 1px solid #f0e1dc;
+    border-radius: 18px;
+    background: white;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(73, 52, 47, 0.08);
+}
+
+.callback h2{
+    color: #49342f;
+    font-family: Georgia, serif;
+}
+
+.callback button{
+    margin-top: 20px;
+}
+
+@media (max-width: 600px){
+    .callback{
+        margin: 40px 15px;
+    }
+}
