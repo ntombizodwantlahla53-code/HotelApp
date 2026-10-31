@@ -39,18 +39,6 @@ const handleDelete = (id: number, name: string) => {
 
         </div>
         <div>
-          <h2>profile</h2>
-          {adminProfile ? (
-            <div>
-              <p>Name: {adminProfile.name}</p>
-              <p>Email: {adminProfile.email}</p>
-              <p>Role: {adminProfile.role}</p>
-            </div>
-          ) : (
-            <p>no profile</p>
-          )}
-        </div>
-        <div>
           <h2>Registered users</h2>
           {usersLoading && <p>Loading users...</p>}
           {usersError && <p>{usersError}</p>}
@@ -71,7 +59,7 @@ const handleDelete = (id: number, name: string) => {
         </div>
         <Payments/>
         <Reservations/>
-        <Payments/>
+        
         <div>
 
             {adminProfile?.role === "Admin" && (
