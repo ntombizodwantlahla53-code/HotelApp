@@ -24,7 +24,7 @@ export const favourite = () => {
   return (
     <div >
       <Link to="/">Back to hotels</Link>
-      <h1>My favourites</h1>
+      <h1 className={style.h1}>My favourites</h1>
 
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
