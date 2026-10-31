@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import styles from "./favourate.module.css";
+import styles from "./favourates.module.css"
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import type { RootState, AppDispatch } from "../../Redux/store";
