@@ -54,32 +54,31 @@ export const roomlist = () => {
 
   return (
     <div className={styles.linkContainer}>
-
-      <Link to={isAdminPage ? "/Admin" : "/"}>
-        <div className={styles.bc}>
-          <MdArrowBackIos />
-        </div>
+      <Link to={isAdminPage ? "/Admin" : "/"} className={styles.bc}>
+        <MdArrowBackIos />
       </Link>
+
       <div className={styles.Topic}>
         <h1 className={styles.Mytitle}>Rooms for hotel {hotel_id}</h1>
-           {hotel && (
-          <div>
-            <h2>{hotel.name}</h2>
-            <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
-             <Sharebutton hotel_id={hotel.hotel_id} name={hotel.name} />
+        {hotel && (
+          <div className={styles.hotel}>
+            <h2 className={styles.name}>{hotel.name}</h2>
+            <p className={styles.where}>{hotel.address}, {hotel.city}, {hotel.country}</p>
+            <Sharebutton hotel_id={hotel.hotel_id} name={hotel.name} />
             <iframe title="Hotel map"
+              className={styles.map}
               loading="lazy"
               src={`https://maps.google.com/maps?q=${encodeURIComponent(`${hotel.address}, ${hotel.city}, ${hotel.country}`)}&output=embed`}/>
           </div>
         )}
-        {loading && <p>Loading rooms...</p>}
-        {error && <p>{error}</p>}
+        {loading && <p className={styles.note}>Loading rooms...</p>}
+        {error && <p className={styles.error}>{error}</p>}
 
         {!loading && !error && hotelRooms.length === 0 && (
-          <p>No rooms are available yet.</p>
+          <p className={styles.note}>No rooms are available yet.</p>
         )}
         <div className={styles.flex}>
-           {(isAdminPage ? hotelRooms : hotelRooms.slice(0, 1)).map((room) => (
+          {(isAdminPage ? hotelRooms : hotelRooms.slice(0, 1)).map((room) => (
             <div className={styles.firstplace} key={room.room_id}>
               <div className={styles.gallery}>
                 {room.image_urls?.filter((url) => url.trim()).map((url, index) => (
@@ -94,31 +93,32 @@ export const roomlist = () => {
               </div>
 
               <div className={styles.details}>
-                <h2>Room {room.room_id}</h2>
-                <p>{room.description}</p>
+                <h2 className={styles.title}>Room {room.room_id}</h2>
+                <p className={styles.text}>{room.description}</p>
                 <div className={styles.chips}>
                   {room.ammenities?.split(",").map((a, i) => (
                     <span key={i} className={styles.chip}>{a.trim()}</span>
                   ))}
                 </div>
-                <p>Capacity: {room.capacity}</p>
-                <p>Quantity: {room.quantity}</p>
+                <p className={styles.fact}>Capacity: {room.capacity}</p>
+                <p className={styles.fact}>Quantity: {room.quantity}</p>
                 <p className={styles.price}>Price: {room.price}</p>
+                <div>
                   {isAdminPage && (
-                  <Link to={`/EditRoom/${room.room_id}`}>
-                    <button type="button" className={styles.inputting}>Edit room</button>
-                  </Link>
-                )}
+                    <Link to={`/EditRoom/${room.room_id}`}>
+                      <button type="button" className={styles.inputting}>Edit room</button>
+                    </Link>
+                  )}
+                  {!isAdminPage && (
+                    <button
+                      type="button"
+                      className={styles.inputting}
+                      onClick={() => handleBook(room.room_id)}>
+                      Book now
+                    </button>
+                  )}
+                </div>
                 {hotel_id && <Reviews hotel_id={Number(hotel_id)} />}
-                {!isAdminPage && (
-                  <button
-                    type="button"
-                    className={styles.inputting}
-                    onClick={() => handleBook(room.room_id)}>
-                    Book now
-                  </button>
-                )}
-
               </div>
             </div>
           ))}

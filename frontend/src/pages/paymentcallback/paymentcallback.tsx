@@ -23,10 +23,12 @@ export const paymentcallback = () => {
 
   return (
     <div className={styles.callback}>
-      {loading && <h2>Checking your payment...</h2>}
-      {error && <h2>{error}</h2>}
-      {paid && <h2>Payment successful! Thank you.</h2>}
-      <button onClick={() => navigate("/")}>Back to home</button>
+      <div className={styles.box}>
+        {loading && <h2 className={styles.note}>Checking your payment...</h2>}
+        {error && <h2 className={styles.error}>{error}</h2>}
+        {paid && <h2 className={styles.heading}>Payment successful! Thank you ♡</h2>}
+        <button className={styles.button} onClick={() => navigate("/")}>Back to home</button>
+      </div>
     </div>
   );
 };

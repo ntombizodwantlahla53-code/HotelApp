@@ -1,4 +1,5 @@
 import { FaShareAlt } from "react-icons/fa";
+import styles from "./sharebutton.module.css";
 
 interface ShareProps {
   hotel_id?: number;
@@ -22,7 +23,7 @@ export const sharebutton = ({ hotel_id, name }: ShareProps) => {
   };
 
   return (
-    <button type="button" onClick={handleShare}>
+    <button type="button" className={styles.share} onClick={handleShare}>
       <FaShareAlt /> Share
     </button>
   );

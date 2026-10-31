@@ -1,42 +1,220 @@
-.reservations{
-    padding: 35px 5%;
-    color: #49342f;
+.reservations {
+    box-sizing: border-box;
+    max-width: 1250px;
+    margin: 30px auto 0;
+    padding: 0 5%;
 }
 
-.reservations h2{
-    margin-bottom: 25px;
-    font-family: Georgia, serif;
-    font-size: 30px;
+.heading {
+    margin: 0 0 14px;
+    color: #8a4a5a;
+    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 30px;
 }
 
-.reservations > div{
-    margin-bottom: 20px;
+.note {
+    margin: 0 0 10px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: #f3ecff;
+    color: #7b61b3;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.error {
+    margin: 0 0 10px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: #ffe3e6;
+    color: #b83a55;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.card {
+    margin-bottom: 16px;
     padding: 22px;
-    border: 1px solid #f0e1dc;
-    border-radius: 15px;
     background: white;
-    box-shadow: 0 5px 18px rgba(73, 52, 47, 0.06);
+    border: 2px solid #ffe8e4;
+    border-radius: 28px;
+    box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
 }
 
-.reservations h3{
-    color: #65463e;
+.title {
+    margin: 0 0 8px;
+    color: #8a4a5a;
+    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    font-size: 23px;
+    font-weight: 600;
+    font-size: 20px;
 }
 
-.reservations p{
-    color: #89766f;
+.text {
+    margin: 0 0 6px;
+    color: #8c6f73;
+    font-size: 14px;
     line-height: 1.6;
 }
 
-.reservations input{
-    margin: 5px;
+.meta {
+    margin: 0 0 14px;
+    color: #7b61b3;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.6;
 }
 
-.reservations button{
-    margin: 8px 8px 0 0;
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-@media (max-width: 600px){
-    .reservations{
-        padding: 25px 15px;
-    }
+.editor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 13px 16px;
+    border: 2px solid #ffe0e5;
+    border-radius: 16px;
+    background: #fffafa;
+    color: #5a3b3f;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: auto;
+    flex: 1 1 140px;
+}
+
+.input:focus {
+    border-color: #f4a6b5;
+    box-shadow: 0 0 0 4px rgba(244, 166, 181, 0.25);
+}
+
+.approve {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border: 2px solid #bfe8d2;
+    border-radius: 999px;
+    background: #e9f9f0;
+    color: #2f8f62;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.approve:hover {
+    background: #d3f3e2;
+    transform: translateY(-2px);
+}
+
+.modify {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border: 2px solid #dccdf5;
+    border-radius: 999px;
+    background: #f5eeff;
+    color: #7b61b3;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.modify:hover {
+    background: #eadcff;
+    transform: translateY(-2px);
+}
+
+.cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border: 2px solid #ffc9c9;
+    border-radius: 999px;
+    background: #fff0f0;
+    color: #d04b4b;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.cancel:hover {
+    background: #ffdede;
+    transform: translateY(-2px);
+}
+
+.save {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border: 2px solid #bfe8d2;
+    border-radius: 999px;
+    background: #e9f9f0;
+    color: #2f8f62;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.save:hover {
+    background: #d3f3e2;
+    transform: translateY(-2px);
+}
+
+.close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border: 2px solid #ffd0d8;
+    border-radius: 999px;
+    background: white;
+    color: #c4566f;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.close:hover {
+    background: #ffeef1;
+    transform: translateY(-2px);
 }

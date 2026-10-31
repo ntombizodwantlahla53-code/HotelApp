@@ -58,50 +58,56 @@ export const booking = () => {
 
   return (
     <div className={styles.books}>
-      <Link to={room ? `/hotels/${room.hotel_id}/rooms` : "/"}>
-        Back to rooms</Link>
-      <h1>Book a room</h1>
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      <Link to={room ? `/hotels/${room.hotel_id}/rooms` : "/"} className={styles.back}>
+        ← Back to rooms
+      </Link>
+      <h1 className={styles.heading}>Book a room</h1>
+      {loading && <p className={styles.note}>Loading...</p>}
+      {error && <p className={styles.error}>{error}</p>}
       {room && (
         <>
-          <h2>Room {room.room_id}</h2>
-          <p>{room.description}</p>
-          <p>Price per night: R{Number(room.price).toFixed(2)}</p>
-          <p>Room capacity: {room.capacity} guest(s)</p>
-          <form onSubmit={handleSubmit}>
-            <p><label>Check-in date<br />
-                <input type="date"
-                  min={today}
-                  value={info.check_in}
-                  onChange={(e) => dispatch(updateBooking({ check_in: e.target.value, check_out: "" }))}/>
-              </label></p>
+          <div className={styles.card}>
+            <h2 className={styles.title}>Room {room.room_id}</h2>
+            <p className={styles.text}>{room.description}</p>
+            <p className={styles.text}>Room capacity: {room.capacity} guest(s)</p>
+            <p className={styles.price}>R{Number(room.price).toFixed(2)} per night</p>
+          </div>
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <label className={styles.field}>Check-in date
+              <input className={styles.input} type="date"
+                min={today}
+                value={info.check_in}
+                onChange={(e) => dispatch(updateBooking({ check_in: e.target.value, check_out: "" }))}/>
+            </label>
 
-            <p><label>Check-out date<br />
-                <input type="date"
-                  min={info.check_in || today}
-                  value={info.check_out}
-                  onChange={(e) => dispatch(updateBooking({ check_out: e.target.value }))}/>
-              </label></p>
+            <label className={styles.field}>Check-out date
+              <input className={styles.input} type="date"
+                min={info.check_in || today}
+                value={info.check_out}
+                onChange={(e) => dispatch(updateBooking({ check_out: e.target.value }))}/>
+            </label>
 
-                 <p><label>Number of rooms (up to {room.quantity})<br />
-                <input type="number"
-                  min="1"
-                  max={room.quantity}
-                  value={info.number_of_rooms}
-                  onChange={(e) => dispatch(updateBooking({ number_of_rooms: Number(e.target.value) }))}/>
-              </label></p>
+            <label className={styles.field}>Number of rooms (up to {room.quantity})
+              <input className={styles.input} type="number"
+                min="1"
+                max={room.quantity}
+                value={info.number_of_rooms}
+                onChange={(e) => dispatch(updateBooking({ number_of_rooms: Number(e.target.value) }))}/>
+            </label>
 
-            <p><label> Number of guests<br />
-                <input type="number"
-                  min="1"
-                  max={room.capacity * rooms}
-                  value={info.guests}
-                  onChange={(e) =>dispatch(updateBooking({ guests: Number(e.target.value) }))}/>
-              </label></p>
-            <h3>Nights: {nights}</h3>
-            <h3>Total price: R{total.toFixed(2)}</h3>
-            <button type="submit" disabled={loading || nights < 1}>
+            <label className={styles.field}>Number of guests
+              <input className={styles.input} type="number"
+                min="1"
+                max={room.capacity * rooms}
+                value={info.guests}
+                onChange={(e) => dispatch(updateBooking({ guests: Number(e.target.value) }))}/>
+            </label>
+
+            <div className={styles.summary}>
+              <p className={styles.nights}>Nights: {nights}</p>
+              <p className={styles.total}>Total price: R{total.toFixed(2)}</p>
+            </div>
+            <button type="submit" className={styles.button} disabled={loading || nights < 1}>
               {loading ? "Booking..." : "Confirm booking"}
             </button>
           </form>

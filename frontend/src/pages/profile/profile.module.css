@@ -1,49 +1,249 @@
-.profile{
-    max-width: 850px;
+.profile {
+    position: relative;
+    box-sizing: border-box;
+    min-height: 100vh;
+    max-width: 760px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 40px 20px 70px;
+    color: #5a3b3f;
+    font-family: 'Nunito', 'Quicksand', 'Segoe UI', system-ui, sans-serif;
 }
 
-.h1{
-    color: #49342f;
-    font-family: Georgia, serif;
-}
-.profile h2{
-    color: #49342f;
-    font-family: Georgia, serif;
-}
-
-.profile form{
-    margin: 20px 0;
-    padding: 25px;
-    border: 1px solid #f0e1dc;
-    border-radius: 15px;
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-sizing: border-box;
+    padding: 10px 18px;
+    border: 2px solid #ffd6dc;
+    border-radius: 999px;
     background: white;
-}
-.profile > div{
-    margin: 20px 0;
-    padding: 25px;
-    border: 1px solid #f0e1dc;
-    border-radius: 15px;
-    background: white;
-}
-
-.profile label{
-    display: block;
-    color: #65463e;
-    font-weight: bold;
-}
-
-.profile input{
-    width: 100%;
-    margin-top: 8px;
-}
-
-.profile a{
-    color: #b77980;
+    color: #c4566f;
+    font-size: 14px;
+    font-weight: 800;
     text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
 }
 
-.profile button{
-    margin-top: 10px;
+.back:hover {
+    background: #ffeef1;
+    transform: translateX(-3px);
+}
+
+.heading {
+    margin: 0 0 8px;
+    color: #8a4a5a;
+    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-top: 22px;
+}
+
+.role {
+    display: inline-block;
+    margin: 0 0 18px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #f5eeff;
+    color: #7b61b3;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.note {
+    margin: 0 0 10px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: #f3ecff;
+    color: #7b61b3;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.error {
+    margin: 0 0 10px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: #ffe3e6;
+    color: #b83a55;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 28px;
+    background: white;
+    border: 2px solid #ffe8e4;
+    border-radius: 28px;
+    box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #8a4a5a;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 13px 16px;
+    border: 2px solid #ffe0e5;
+    border-radius: 16px;
+    background: #fffafa;
+    color: #5a3b3f;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+    border-color: #f4a6b5;
+    box-shadow: 0 0 0 4px rgba(244, 166, 181, 0.25);
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f7b2c0, #e0788f);
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(224, 120, 143, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 14px 24px;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(224, 120, 143, 0.45);
+}
+
+.button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.title {
+    margin: 0 0 14px;
+    color: #8a4a5a;
+    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 36px;
+}
+
+.empty {
+    margin: 0 0 10px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: #f3ecff;
+    color: #7b61b3;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.booking {
+    margin-bottom: 16px;
+    padding: 22px;
+    background: white;
+    border: 2px solid #ffe8e4;
+    border-radius: 28px;
+    box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
+}
+
+.name {
+    margin: 0 0 8px;
+    color: #8a4a5a;
+    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    font-size: 23px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.text {
+    margin: 0 0 6px;
+    color: #8c6f73;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.meta {
+    margin: 0 0 12px;
+    color: #7b61b3;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.pay {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f7b2c0, #e0788f);
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(224, 120, 143, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 10px 22px;
+    font-size: 14px;
+}
+
+.pay:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(224, 120, 143, 0.45);
+}
+
+.favlink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border: 2px solid #dccdf5;
+    border-radius: 999px;
+    background: #f5eeff;
+    color: #7b61b3;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 22px;
+}
+
+.favlink:hover {
+    background: #eadcff;
+    transform: translateY(-2px);
 }

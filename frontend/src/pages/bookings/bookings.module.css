@@ -1,68 +1,193 @@
-.books{
+.books {
+    position: relative;
+    box-sizing: border-box;
     min-height: 100vh;
-    max-width: 850px;
+    max-width: 760px;
     margin: 0 auto;
-    padding: 45px 25px;
-    color: #49342f;
+    padding: 40px 20px 70px;
+    color: #5a3b3f;
+    font-family: 'Nunito', 'Quicksand', 'Segoe UI', system-ui, sans-serif;
 }
 
-.books > a{
-    color: #b77980;
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-sizing: border-box;
+    padding: 10px 18px;
+    border: 2px solid #ffd6dc;
+    border-radius: 999px;
+    background: white;
+    color: #c4566f;
+    font-size: 14px;
+    font-weight: 800;
     text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
 }
 
-.books h1{
-    margin: 25px 0;
-    font-family: Georgia, serif;
+.back:hover {
+    background: #ffeef1;
+    transform: translateX(-3px);
+}
+
+.heading {
+    margin: 0 0 8px;
+    color: #8a4a5a;
+    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
     font-size: 36px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-top: 22px;
 }
 
-.books h2{
-    margin-top: 25px;
-    color: #65463e;
+.note {
+    margin: 0 0 10px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: #f3ecff;
+    color: #7b61b3;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
 }
 
-.books form{
+.error {
+    margin: 0 0 10px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: #ffe3e6;
+    color: #b83a55;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.card {
+    margin-bottom: 20px;
+    padding: 24px;
+    background: white;
+    border: 2px solid #ffe8e4;
+    border-radius: 28px;
+    box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
+}
+
+.title {
+    margin: 0 0 8px;
+    color: #8a4a5a;
+    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.text {
+    margin: 0 0 8px;
+    color: #8c6f73;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.price {
+    display: inline-block;
+    margin: 4px 0 0;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #fff3d6;
+    color: #c98a14;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.form {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-top: 25px;
-    padding: 30px;
-    border: 1px solid #f0e1dc;
-    border-radius: 18px;
+    gap: 18px;
+    padding: 28px;
     background: white;
-    box-shadow: 0 8px 25px rgba(73, 52, 47, 0.08);
+    border: 2px solid #ffe8e4;
+    border-radius: 28px;
+    box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
 }
 
-.books form p{
-    margin: 8px 0;
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #8a4a5a;
+    font-size: 14px;
+    font-weight: 800;
 }
 
-.books label{
-    display: block;
-    color: #65463e;
-    font-weight: bold;
-}
-
-.books input{
+.input {
+    box-sizing: border-box;
     width: 100%;
-    margin-top: 8px;
+    padding: 13px 16px;
+    border: 2px solid #ffe0e5;
+    border-radius: 16px;
+    background: #fffafa;
+    color: #5a3b3f;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.books button{
-    margin-top: 12px;
+.input:focus {
+    border-color: #f4a6b5;
+    box-shadow: 0 0 0 4px rgba(244, 166, 181, 0.25);
 }
 
-@media (max-width: 600px) {
-    .books{
-        padding: 25px 15px;
-    }
+.summary {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 18px 20px;
+    border-radius: 20px;
+    background: #fff0f3;
+    border: 2px dashed #ffc9d4;
+}
 
-    .books h1{
-        font-size: 29px;
-    }
+.nights {
+    margin: 0;
+    color: #8a4a5a;
+    font-size: 15px;
+    font-weight: 700;
+}
 
-    .books form{
-        padding: 20px;
-    }
+.total {
+    margin: 0;
+    color: #e0486e;
+    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f7b2c0, #e0788f);
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(224, 120, 143, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 14px 24px;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(224, 120, 143, 0.45);
+}
+
+.button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
 }

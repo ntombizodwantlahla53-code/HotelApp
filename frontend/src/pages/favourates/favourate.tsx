@@ -23,34 +23,42 @@ export const favourite = () => {
 
   return (
     <div className={styles.favourites}>
-      <Link to="/">Back to hotels</Link>
-      <h1 >My favourites</h1>
+      <div className={styles.top}>
+        <Link to="/" className={styles.back}>Back to hotels</Link>
+        <h1 className={styles.heading}>My favourites ♡</h1>
+      </div>
 
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {loading && <p className={styles.note}>Loading...</p>}
+      {error && <p className={styles.error}>{error}</p>}
       {!loading && !error && favourites.length === 0 && (
-        <p>You have no favourite hotels yet.</p>
+        <p className={styles.note}>You have no favourite hotels yet.</p>
       )}
 
       <div className={styles.favouritesList}>
-    {favourites.map((hotel) => (
-        <div key={hotel.hotel_id}>
+        {favourites.map((hotel) => (
+          <div key={hotel.hotel_id} className={styles.card}>
             {hotel.image_url && (
-                <img src={hotel.image_url} alt={hotel.name} />
+              <img src={hotel.image_url} alt={hotel.name} className={styles.image} />
             )}
-            <h2>{hotel.name}</h2>
-            <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
-            <Link to={`/hotels/${hotel.hotel_id}/rooms`}>View rooms</Link>
-            <br />
-            <button
-                type="button"
-                onClick={() => hotel.hotel_id && dispatch(deleteFavourites(hotel.hotel_id))}
-            >
-                Remove
-            </button>
-        </div>
-    ))}
-</div>
+            <div className={styles.body}>
+              <h2 className={styles.title}>{hotel.name}</h2>
+              <p className={styles.where}>{hotel.address}, {hotel.city}, {hotel.country}</p>
+              <div className={styles.actions}>
+                <Link to={`/hotels/${hotel.hotel_id}/rooms`}>
+                  <button type="button" className={styles.view}>View rooms</button>
+                </Link>
+                <button
+                  type="button"
+                  className={styles.remove}
+                  onClick={() => hotel.hotel_id && dispatch(deleteFavourites(hotel.hotel_id))}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,25 +1,48 @@
-.payments{
-    padding: 35px 5%;
-    color: #49342f;
+.payments {
+    box-sizing: border-box;
+    max-width: 1250px;
+    margin: 30px auto 0;
+    padding: 0 5%;
+    padding-top: 10px;
 }
 
-.payments h2{
-    margin: 25px 0 15px;
-    font-family: Georgia, serif;
+.heading {
+    margin: 0 0 14px;
+    color: #8a4a5a;
+    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 30px;
 }
 
-.payments p{
-    margin: 10px 0;
-    padding: 16px;
-    border: 1px solid #f0e1dc;
-    border-radius: 12px;
-    background: white;
-    color: #65463e;
+.error {
+    margin: 0 0 10px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: #ffe3e6;
+    color: #b83a55;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.paid {
+    margin: 0 0 10px;
+    padding: 14px 18px;
+    border-radius: 18px;
+    border: 2px solid #bfe8d2;
+    background: #e9f9f0;
+    color: #2f6f52;
+    font-size: 14px;
     line-height: 1.6;
 }
 
-@media (max-width: 600px){
-    .payments{
-        padding: 25px 15px;
-    }
+.waiting {
+    margin: 0 0 10px;
+    padding: 14px 18px;
+    border-radius: 18px;
+    border: 2px solid #ffe3a8;
+    background: #fff6df;
+    color: #8f6a12;
+    font-size: 14px;
+    line-height: 1.6;
 }

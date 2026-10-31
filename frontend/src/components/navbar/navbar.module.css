@@ -1,11 +1,11 @@
-
-nav {
+.bar {
     position: relative;
-    z-index: 10;
-    padding: 15px 6%;
-    background: rgba(255, 250, 246, 0.96);
-    color: #49342f;
-    box-shadow: 0 3px 15px rgba(70, 45, 38, 0.06);
+    z-index: 20;
+    box-sizing: border-box;
+    padding: 14px 6%;
+    background: rgba(255, 247, 243, 0.92);
+    border-bottom: 2px dashed #ffd6dc;
+    font-family: 'Nunito', 'Quicksand', 'Segoe UI', system-ui, sans-serif;
 }
 
 .navbar {
@@ -14,60 +14,67 @@ nav {
     justify-content: space-between;
     gap: 20px;
     max-width: 1400px;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .logo {
     display: flex;
     align-items: center;
     gap: 6px;
+    text-decoration: none;
 }
 
-.logo h1 {
-    margin: 0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 27px;
-    letter-spacing: -1px;
-}
-
-.hotelname {
-    color: #49342f;
-    font-weight: bold;
+.heart {
+    color: #f4a6b5;
+    font-size: 24px;
 }
 
 .bookname {
-    color: #b77980;
-    font-weight: bold;
-    font-style: italic;
+    color: #e0788f;
+    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.hotelname {
+    color: #8a4a5a;
+    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
 }
 
 .links {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 8px;
 }
 
 .link {
-    padding: 10px 16px;
-    border: 1px solid transparent;
-    border-radius: 25px;
-    color: #65463e;
-    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    color: #8a4a5a;
     font-size: 14px;
-    font-weight: 600;
-    transition: background 0.2s, color 0.2s;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background 0.2s;
 }
 
 .link:hover {
-    background: #f6e5e2;
-    color: #a45f6b;
+    background: #ffe8ec;
 }
 
-.links .link:last-child {
-    background: #b77980;
+.solid {
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f7b2c0, #e0788f);
     color: white;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 5px 12px rgba(224, 120, 143, 0.35);
+    transition: transform 0.2s;
 }
 
-.links .link:last-child:hover {
-    background: #965b64;
+.solid:hover {
+    transform: translateY(-2px);
 }

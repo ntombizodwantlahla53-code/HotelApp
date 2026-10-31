@@ -37,48 +37,50 @@ export const profile = () => {
 
   return (
     <div className={styles.profile}>
-      <Link to="/">Back to hotels</Link>
-      <h1 >My profile</h1>
-      <p>Role: {info.role}</p>
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      <Link to="/" className={styles.back}>Back to hotels</Link>
+      <h1 className={styles.heading}>My profile</h1>
+      <p className={styles.role}>Role: {info.role}</p>
+      {loading && <p className={styles.note}>Loading...</p>}
+      {error && <p className={styles.error}>{error}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <p><label>Name<br />
-            <input type="text"
-              value={info.name}
-              onChange={(e) => dispatch(updateProfile({ name: e.target.value }))}/>
-          </label></p>
-        <p><label>Email<br />
-            <input type="email"
-              value={info.email}
-              onChange={(e) => dispatch(updateProfile({ email: e.target.value }))}/>
-          </label></p>
-        <p><label>New password (leave empty to keep the old one)<br />
-        <input type="password"
-              value={info.password}
-              onChange={(e) => dispatch(updateProfile({ password: e.target.value }))}/>
-          </label></p>
-        <button type="submit" disabled={loading}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <label className={styles.field}>Name
+          <input className={styles.input} type="text"
+            value={info.name}
+            onChange={(e) => dispatch(updateProfile({ name: e.target.value }))}/>
+        </label>
+        <label className={styles.field}>Email
+          <input className={styles.input} type="email"
+            value={info.email}
+            onChange={(e) => dispatch(updateProfile({ email: e.target.value }))}/>
+        </label>
+        <label className={styles.field}>New password (leave empty to keep the old one)
+          <input className={styles.input} type="password"
+            value={info.password}
+            onChange={(e) => dispatch(updateProfile({ password: e.target.value }))}/>
+        </label>
+        <button type="submit" className={styles.button} disabled={loading}>
           {loading ? "Saving..." : "Save changes"}
         </button>
       </form>
-            <h2>My bookings ({bookings.length})</h2>
-            {bookings.length === 0 && <p>You have no bookings yet.</p>}
-            {bookings.map((item) => (
-              <div key={item.booking_id}>
-                <h3>{item.hotel_name}</h3>
-                <p>{item.room_description}</p>
-                <p>Check-in: {item.check_in} | Check-out: {item.check_out} | Guests: {item.guests} | Rooms: {item.number_of_rooms}</p>
-                <p> Total: R{Number(item.total_price).toFixed(2)} | Payment: {item.payment_status} | Status: {item.booking_status} </p>
-                {item.payment_status === "Pending" && item.booking_status !== "Cancelled" && (
-                  <Link to={`/Payment/${item.booking_id}`} state={{ total: item.total_price }}>Ready toPay now
-                  </Link>
-                )}
-              </div>
-            ))}
 
-      <p><Link to="/Favourites">My favourite hotels</Link></p>
+      <h2 className={styles.title}>My bookings ({bookings.length})</h2>
+      {bookings.length === 0 && <p className={styles.empty}>You have no bookings yet.</p>}
+      {bookings.map((item) => (
+        <div key={item.booking_id} className={styles.booking}>
+          <h3 className={styles.name}>{item.hotel_name}</h3>
+          <p className={styles.text}>{item.room_description}</p>
+          <p className={styles.text}>Check-in: {item.check_in} | Check-out: {item.check_out} | Guests: {item.guests} | Rooms: {item.number_of_rooms}</p>
+          <p className={styles.meta}>Total: R{Number(item.total_price).toFixed(2)} | Payment: {item.payment_status} | Status: {item.booking_status}</p>
+          {item.payment_status === "Pending" && item.booking_status !== "Cancelled" && (
+            <Link to={`/Payment/${item.booking_id}`} state={{ total: item.total_price }} className={styles.pay}>
+              Ready to pay now
+            </Link>
+          )}
+        </div>
+      ))}
+
+      <Link to="/Favourites" className={styles.favlink}>♡ My favourite hotels</Link>
     </div>
   );
 };

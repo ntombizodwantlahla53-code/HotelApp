@@ -96,102 +96,90 @@ export const hotel = () => {
 
   return (
     <div className={styles.linkContainer}>
-      <Link to="/">
-        <div className={styles.bc}>
-          <MdArrowBackIos />
-        </div>
+      <Link to="/" className={styles.bc}>
+        <MdArrowBackIos />
       </Link>
       <div className={styles.Topic}>
-        <h1 className={styles.Mytitle}>PAGE TO ADD HOTELs</h1>
-        <p className={styles.Myp}>
-        ADD HOTELS
-        </p>
+        <h1 className={styles.Mytitle}>{hotel_id ? "Edit hotel" : "Add a hotel"}</h1>
+        <p className={styles.Myp}>Fill in the details for a lovely new stay</p>
       </div>
       <form onSubmit={handleSubmit}>
         <div className={styles.insideContainer}>
-          <div className={styles.linkss}>
-            <div className={styles.title}>
-              <label>name</label>
-              <input className={styles.inputtitle}
-                value={info.name}
-                type="text"
-                onChange={(e) => dispatch(updateHotel({ name: e.target.value }))}
-                placeholder="Name"/>
-            </div>
-            <div className={styles.title}>
-              <label>description</label>
-              <input className={styles.inputtitle}
-                value={info.description}
-                type="text"
-                onChange={(e) => dispatch(updateHotel({ description: e.target.value }))}
-                placeholder="Description"/>
-            </div>
-            <div className={styles.title}>
-              <label>address</label>
-              <input className={styles.inputtitle}
-                value={info.address}
-                type="text"
-                onChange={(e) => dispatch(updateHotel({ address: e.target.value }))}
-                placeholder="Address"/>
-            </div>
-            <div className={styles.title}>
-              <label>city</label>
-              <input className={styles.inputtitle}
-                value={info.city}
-                type="text"
-                onChange={(e) => dispatch(updateHotel({ city: e.target.value }))}
-                placeholder="City"/>
-            </div>
-            <div className={styles.title}>
-              <label>country</label>
-              <input className={styles.inputtitle}
-                value={info.country}
-                type="text"
-                onChange={(e) => dispatch(updateHotel({ country: e.target.value }))}
-                placeholder="Country"/>
-            </div>
-            <div className={styles.title}>
-              <label>ammenities</label>
-              <input className={styles.inputtitle}
-                value={info.ammenities}
-                type="text"
-                onChange={(e) => dispatch(updateHotel({ ammenities: e.target.value }))}
-                placeholder="Ammenities"/>
-            </div>
-            <div className={styles.title}>
-              <label>satr_rating</label>
-              <input className={styles.inputtitle}
-                value={info.star_rating ?? ""}
-                type="text"
-                onChange={(e) => dispatch(updateHotel({ star_rating: Number(e.target.value) }))}
-                placeholder="Star rating"/>
-            </div>
+        <div className={styles.linkss}>
+        <div className={styles.title}>
+          <label className={styles.label}>Name</label>
+          <input className={styles.inputtitle}
+            value={info.name}
+            type="text"
+            onChange={(e) => dispatch(updateHotel({ name: e.target.value }))}
+            placeholder="Name"/>
+        </div>
+        <div className={styles.title}>
+          <label className={styles.label}>Description</label>
+          <input className={styles.inputtitle}
+            value={info.description}
+            type="text"
+            onChange={(e) => dispatch(updateHotel({ description: e.target.value }))}
+            placeholder="Description"/>
+        </div>
+        <div className={styles.title}>
+          <label className={styles.label}>Address</label>
+          <input className={styles.inputtitle}
+            value={info.address}
+            type="text"
+            onChange={(e) => dispatch(updateHotel({ address: e.target.value }))}
+            placeholder="Address"/>
+        </div>
+        <div className={styles.title}>
+          <label className={styles.label}>City</label>
+          <input className={styles.inputtitle}
+            value={info.city}
+            type="text"
+            onChange={(e) => dispatch(updateHotel({ city: e.target.value }))}
+            placeholder="City"/>
+        </div>
+        <div className={styles.title}>
+          <label className={styles.label}>Country</label>
+          <input className={styles.inputtitle}
+            value={info.country}
+            type="text"
+            onChange={(e) => dispatch(updateHotel({ country: e.target.value }))}
+            placeholder="Country"/>
+        </div>
+        <div className={styles.title}>
+          <label className={styles.label}>Amenities</label>
+          <input className={styles.inputtitle}
+            value={info.ammenities}
+            type="text"
+            onChange={(e) => dispatch(updateHotel({ ammenities: e.target.value }))}
+            placeholder="Amenities"/>
+        </div>
+        <div className={styles.title}>
+          <label className={styles.label}>Star rating</label>
+          <input className={styles.inputtitle}
+            value={info.star_rating ?? ""}
+            type="text"
+            onChange={(e) => dispatch(updateHotel({ star_rating: Number(e.target.value) }))}
+            placeholder="Star rating"/>
+        </div>
+        <div className={styles.title}>
+          <label className={styles.label}>Image</label>
+          <input className={styles.inputtitle}
+            value={info.image_url}
+            type="text"
+            onChange={(e) => dispatch(updateHotel({ image_url: e.target.value }))}
+            placeholder="Image"/>
+          {info.image_url && (
+            <img src={info.image_url} alt="preview" className={styles.preview}/>
+          )}
+        </div>
 
-             <div className={styles.title}>
-              <label>image</label>
-              <input className={styles.inputtitle}
-                value={info.image_url}
-                type="text"
-                onChange={(e) => dispatch(updateHotel({ image_url:(e.target.value) }))}
-                placeholder="Image"/>
-                {info.image_url && (
-                  <img src= {info.image_url} alt ="preview"/>
-                )}
-            </div>
-            
-            <button type="submit" className={styles.inputting}>
-              <IoIosAddCircle /> {loading ? "Hotels..." : "addhotels"}
-            </button>
+        <button type="submit" className={styles.inputting}>
+          <IoIosAddCircle /> {loading ? "Saving..." : hotel_id ? "Save hotel" : "Add hotel"}
+        </button>
 
-            {error && (<p>{error}</p>
-            )}
-            {/* <p className={styles.text}>
-              Don't have an account?
-            </p> */}
-            {/* <Link to="/register">
-              Sign Up
-            </Link> */}
-          </div>
+        {error && <p className={styles.error}>{error}</p>}
+      </div>
         </div>
       </form>
     </div>

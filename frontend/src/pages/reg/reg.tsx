@@ -6,20 +6,6 @@ import { fetchRegs, updateRegister, clearRegister } from "../../components/featu
 import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 
-type ButtonProps = {
-  type?: "button" | "submit" | "reset";
-  label: string;
-  icon?: React.ReactNode;
-  variant?: string;
-};
-
-const Buttons = ({ type = "button", label, icon, variant }: ButtonProps) => (
-  <button type={type} data-variant={variant}>
-    {icon}
-    {label}
-  </button>
-);
-
 export const reg = () => {
   const info = useSelector((state: RootState) => state.register.info);
   const loading = useSelector((state: RootState) => state.register.loading);
@@ -63,14 +49,10 @@ export const reg = () => {
   return (
     <div className={styles.linkContainer}>
       <div className={styles.Topic}>
-        
-        <Link to="/">
-        <div className={styles.bc}>
-         <FaHome/>
-        </div>
-      </Link>
+        <Link to="/" className={styles.bc}>
+          <FaHome/>
+        </Link>
         <h1 className={styles.Mytitle}>Create Account</h1>
-
         <p className={styles.Myp}>
           Create a new account to get started and enjoy seamless
           access to our features.
@@ -78,57 +60,42 @@ export const reg = () => {
       </div>
       <form onSubmit={handleSubmit}>
         <div className={styles.insideContainer}>
-          <div className={styles.linkss}>
-            <div className={styles.title}>
-              <label>Name
-              <input className={styles.inputtitle}
-                placeholder="Name"
-                value={info.name}
-                onChange={(e) =>dispatch(updateRegister({name: e.target.value,})
-                  )}/></label>
-            </div>
-            <div className={styles.descc}>
-              <label>Email Address
-              <input className={styles.inputtitle}
-                placeholder="Email Address"
-                type="email"
-                value={info.email}
-                onChange={(e) =>dispatch(updateRegister({email: e.target.value,})
-                  )
-                }/></label>
-            </div>
-            <div className={styles.desc}>
-              <label>Password
-              <input className={styles.inputtitle}
-                placeholder="Password"
-                type="password"
-                value={info.password}
-                onChange={(e) =>dispatch(updateRegister({password: e.target.value,})
-                  )
-                }/></label>
-            </div>
-            <div className={styles.desc}>
-              <label>Confirm Password
-              <input className={styles.inputtitle}
-                placeholder="Confirm Password"
-                type="password"
-                value={info.confirmPassword}
-                onChange={(e) =>dispatch(updateRegister({confirmPassword: e.target.value,})
-                  )
-                }/></label>
-            </div>
-            <Buttons type="submit"
-              label={loading ? "Creating..." : "Create Account"}
-              icon={<IoIosAddCircle />}
-              variant="inputting"/>
-            {error && <p>{error}</p>}
-            <p className={styles.text}>
-              Already have an account?
-            <Link to="/Login">
-              Sign In
-            </Link></p>
-         
-          </div>
+        <div className={styles.linkss}>
+        <label className={styles.title}>Name
+          <input className={styles.inputtitle}
+            placeholder="Name"
+            value={info.name}
+            onChange={(e) => dispatch(updateRegister({ name: e.target.value }))}/>
+        </label>
+        <label className={styles.descc}>Email Address
+          <input className={styles.inputtitle}
+            placeholder="Email Address"
+            type="email"
+            value={info.email}
+            onChange={(e) => dispatch(updateRegister({ email: e.target.value }))}/>
+        </label>
+        <label className={styles.desc}>Password
+          <input className={styles.inputtitle}
+            placeholder="Password"
+            type="password"
+            value={info.password}
+            onChange={(e) => dispatch(updateRegister({ password: e.target.value }))}/>
+        </label>
+        <label className={styles.desc}>Confirm Password
+          <input className={styles.inputtitle}
+            placeholder="Confirm Password"
+            type="password"
+            value={info.confirmPassword}
+            onChange={(e) => dispatch(updateRegister({ confirmPassword: e.target.value }))}/>
+        </label>
+        <button type="submit" className={styles.inputting}>
+          <IoIosAddCircle /> {loading ? "Creating..." : "Create Account"}
+        </button>
+        {error && <p className={styles.error}>{error}</p>}
+        <p className={styles.text}>
+          Already have an account? <Link to="/Login" className={styles.link}>Sign In</Link>
+        </p>
+      </div>
         </div>
       </form>
     </div>

@@ -25,14 +25,16 @@ export const payment = () => {
 
   return (
     <div className={styles.payment}>
-      <h1>Pay for your booking</h1>
-      <h2>Booking number: {booking_id}</h2>
-      <h2>Amount: R{total.toFixed(2)}</h2>
-      {error && <p>{error}</p>}
-      <button onClick={handlePay} disabled={loading}>
-        {loading ? "Please wait..." : "Pay with Paystack"}
-      </button>
-      <button onClick={() => navigate("/")}>Pay later</button>
+      <div className={styles.box}>
+        <h1 className={styles.heading}>Pay for your booking</h1>
+        <p className={styles.text}>Booking number: {booking_id}</p>
+        <p className={styles.amount}>R{total.toFixed(2)}</p>
+        {error && <p className={styles.error}>{error}</p>}
+        <button className={styles.button} onClick={handlePay} disabled={loading}>
+          {loading ? "Please wait..." : "Pay with Paystack"}
+        </button>
+        <button className={styles.ghost} onClick={() => navigate("/")}>Pay later</button>
+      </div>
     </div>
   );
 };

@@ -53,7 +53,7 @@ export const reviews = ({ hotel_id }: ReviewProps) => {
 
   return (
     <div className={styles.box}>
-      <h2>Guest reviews</h2>
+      <h2 className={styles.heading}>Guest reviews</h2>
 
       {allReviews.length > 0 && (
         <p className={styles.average}>
@@ -61,12 +61,12 @@ export const reviews = ({ hotel_id }: ReviewProps) => {
           {average.toFixed(1)} out of 5 ({allReviews.length} reviews)
         </p>
       )}
-      {allReviews.length === 0 && !loading && <p>No reviews yet. Be the first!</p>}
+      {allReviews.length === 0 && !loading && <p className={styles.empty}>No reviews yet. Be the first!</p>}
 
       {isCustomer && (
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label>Your rating
-            <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
+          <label className={styles.label}>Your rating
+            <select className={styles.select} value={rating} onChange={(e) => setRating(Number(e.target.value))}>
               <option value={5}>★★★★★ (5)</option>
               <option value={4}>★★★★☆ (4)</option>
               <option value={3}>★★★☆☆ (3)</option>
@@ -75,24 +75,25 @@ export const reviews = ({ hotel_id }: ReviewProps) => {
             </select>
           </label>
           <textarea
+            className={styles.area}
             placeholder="Tell others about your stay..."
             value={comment}
             maxLength={500}
             onChange={(e) => setComment(e.target.value)}
           />
-          <button type="submit">Post review</button>
+          <button type="submit" className={styles.button}>Post review</button>
         </form>
       )}
 
-      {error && <p>{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
 
       {allReviews.map((item) => (
         <div key={item.review_id} className={styles.review}>
           <p className={styles.stars}>{showStars(item.rating)}</p>
-          <p>{item.comment}</p>
+          <p className={styles.text}>{item.comment}</p>
           <p className={styles.who}>{item.user_name} - {new Date(item.created_at).toLocaleDateString()}</p>
           {item.user_id === currentUser?.id && (
-            <button type="button" onClick={() => handleDelete(item.review_id)}>Delete my review</button>
+            <button type="button" className={styles.delete} onClick={() => handleDelete(item.review_id)}>Delete my review</button>
           )}
         </div>
       ))}

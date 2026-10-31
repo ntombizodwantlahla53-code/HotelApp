@@ -33,72 +33,75 @@ const handleDelete = (id: number, name: string) => {
 };
 
   return (
-    <div>
-        <div className={styles.landing}>
-            <Navbar/>
+    <div className={styles.page}>
+      <div className={styles.landing}>
+        <Navbar/>
+      </div>
 
-        </div>
-        <div>
-          <h2>Registered users</h2>
-          {usersLoading && <p>Loading users...</p>}
-          {usersError && <p>{usersError}</p>}
-          <div className={styles.flex}>
-            {users.map((user) => (
-              <div key={user.id} className={styles.ad}>
-                <h3>{user.name}</h3>
-                <p>{user.email}</p>
-                <p>Role: {user.role}</p>
-                {user.role === "Customer" && (
-                  <button type="button" onClick={() => handleDelete(user.id, user.name)}>
+      <div className={styles.section}>
+        <h2 className={styles.heading}>Registered users</h2>
+        {usersLoading && <p className={styles.note}>Loading users...</p>}
+        {usersError && <p className={styles.error}>{usersError}</p>}
+        <div className={styles.flex}>
+          {users.map((user) => (
+            <div key={user.id} className={styles.ad}>
+              <h3 className={styles.name}>{user.name}</h3>
+              <p className={styles.email}>{user.email}</p>
+              <p className={styles.role}>Role: {user.role}</p>
+              {user.role === "Customer" && (
+                <div>
+                  <button type="button" className={styles.danger} onClick={() => handleDelete(user.id, user.name)}>
                     Delete
                   </button>
-                )}
-              </div>
-            ))}
-          </div>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
-        <Payments/>
-        <Reservations/>
-        
-        <div>
+      </div>
 
-            {adminProfile?.role === "Admin" && (
-              <Link to="/hotels">
-                <h2 className={styles.hotels}>Add Hotels</h2>
-              </Link>
+      <Payments/>
+      <Reservations/>
+
+      <div className={styles.section}>
+        {adminProfile?.role === "Admin" && (
+          <Link to="/hotels" className={styles.hotels}>+ Add Hotels</Link>
+        )}
+
+        {loading && <p className={styles.note}>Loading hotels...</p>}
+        {error && <p className={styles.error}>{error}</p>}
+        {!loading && !error && hotels.length === 0 && (
+          <p className={styles.note}>No hotels are available yet.</p>
+        )}
+      </div>
+
+      <div className={styles.flex}>
+        {hotels.map((hotel) => (
+          <div className={styles.firstplace} key={hotel.hotel_id}>
+            {hotel.image_url && (
+              <img src={hotel.image_url} alt={hotel.name} className={styles.image}/>
             )}
-
-{loading && <p>Loading hotels...</p>}
-{error && <p>{error}</p>}
-
-            {!loading && !error && hotels.length === 0 && (
-  <p>No hotels are available yet.</p>
-)}
-        </div>
-<div className={styles.flex}>
-  {hotels.map((hotel) => (
-    <div className={styles.firstplace} key={hotel.hotel_id}>
-      {hotel.image_url && (
-                  <img src= {hotel.image_url} alt ={hotel.name} className={styles.image}/>
-                )}
-      <h2>{hotel.name}</h2>
-      <p>{hotel.description}</p>
-      
-      <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
-      <p>Amenities: {hotel.ammenities}</p>
-      <p>Star rating:{hotel.star_rating ?? "Not rated"}</p>
-         <Link to={`/Admin/hotels/${hotel.hotel_id}/rooms`}>
-                    <div className={styles.buttnV}>
-                      <button className={styles.viewb}><HiEye/></button>
-                    </div>
-                  </Link>
-            <Link to={`/Hotels/${hotel.hotel_id}`}>
-           <button type="button">Edit hotel</button>
-         </Link>
+            <div className={styles.body}>
+              <h2 className={styles.title}>{hotel.name}</h2>
+              <p className={styles.stars}>{hotel.star_rating ? `★ ${hotel.star_rating}` : "Not rated"}</p>
+              <p className={styles.text}>{hotel.description}</p>
+              <p className={styles.where}>{hotel.address}, {hotel.city}, {hotel.country}</p>
+              <p className={styles.where}>Amenities: {hotel.ammenities}</p>
+              <div className={styles.actions}>
+                <Link to={`/Admin/hotels/${hotel.hotel_id}/rooms`}>
+                  <div className={styles.buttnV}>
+                    <button className={styles.viewb}><HiEye/> Rooms</button>
+                  </div>
+                </Link>
+                <Link to={`/Hotels/${hotel.hotel_id}`}>
+                  <button type="button" className={styles.edit}>Edit hotel</button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
-  ))}
-</div>
-  </div>
   )
 }
 

@@ -28,18 +28,18 @@ export const payments = () => {
 
   return (
     <div className={styles.payments}>
-      {error && <p>{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
 
-      <h2>Users who paid ({paidUsers.length})</h2>
+      <h2 className={styles.heading}>Users who paid ({paidUsers.length})</h2>
       {paidUsers.map((item) => (
-        <p key={item.booking_id}>
+        <p key={item.booking_id} className={styles.paid}>
           {item.user_name} ({item.user_email}) - {item.hotel_name} - R{Number(item.total_price).toFixed(2)} - paid {new Date(item.paid_at!).toLocaleString()}
         </p>
       ))}
 
-      <h2>Users pending payment ({pendingUsers.length})</h2>
+      <h2 className={styles.heading}>Users pending payment ({pendingUsers.length})</h2>
       {pendingUsers.map((item) => (
-        <p key={item.booking_id}>
+        <p key={item.booking_id} className={styles.waiting}>
           {item.user_name} ({item.user_email}) - {item.hotel_name} - R{Number(item.total_price).toFixed(2)}
         </p>
       ))}

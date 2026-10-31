@@ -60,64 +60,56 @@ export const log = () => {
   };
   return (
     <div className={styles.linkContainer}>
-      <Link to="/">
-        <div className={styles.bc}>
-          <MdArrowBackIos />
-        </div>
+      <Link to="/" className={styles.bc}>
+        <MdArrowBackIos />
       </Link>
-      <section className={styles.Topic}>
+      <div className={styles.Topic}>
         <h1 className={styles.Mytitle}>Log in</h1>
         <p className={styles.Myp}>
           Enter your email and password to securely
           access your account.
         </p>
-      </section>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className={styles.insideContainer}>
-            <div className={styles.title}>
-              <label>Name
-              <input className={styles.inputtitle}
-                value={info.name}
-                type="text"
-                onChange={(e) =>dispatch(updateLogin({name: e.target.value,}))}
-                placeholder="Name"/></label>
-            </div>
-            <div className={styles.title}>
-              <label>Email Address
-              <input className={styles.inputtitle}
-                value={info.email}
-                type="email"
-                onChange={(e) =>dispatch(updateLogin({email: e.target.value,}))}
-                placeholder="Email Address"/></label>
-            </div>
-            <div className={styles.desc}>
-              <label>Password
-              <input className={styles.inputtitle}
-                value={info.password}
-                onChange={(e) =>dispatch(updateLogin({password: e.target.value,}))}
-                type="password"
-                placeholder="Password"/></label>
-            </div>
-            <p className={styles.password}>
-              Forgot Password
-            </p>
-            <button type="submit" className={styles.inputting}>
-              <IoIosAddCircle /> {loading ? "Logging in..." : "Log in"}
-            </button>
-            {error && (<p>{error}</p>
-            )}
-            <p className={styles.text}>
-              Don't have an account?
-            </p>
-            <Link to="/register">
-              Sign Up
-            </Link>
-          </div>
+        <label className={styles.title}>Name
+          <input className={styles.inputtitle}
+            value={info.name}
+            type="text"
+            onChange={(e) => dispatch(updateLogin({ name: e.target.value }))}
+            placeholder="Name"/>
+        </label>
+        <label className={styles.title}>Email Address
+          <input className={styles.inputtitle}
+            value={info.email}
+            type="email"
+            onChange={(e) => dispatch(updateLogin({ email: e.target.value }))}
+            placeholder="Email Address"/>
+        </label>
+        <label className={styles.desc}>Password
+          <input className={styles.inputtitle}
+            value={info.password}
+            onChange={(e) => dispatch(updateLogin({ password: e.target.value }))}
+            type="password"
+            placeholder="Password"/>
+        </label>
+        <p className={styles.password}>Forgot Password</p>
+        <button type="submit" className={styles.inputting}>
+          <IoIosAddCircle /> {loading ? "Logging in..." : "Log in"}
+        </button>
+        {error && <p className={styles.error}>{error}</p>}
+        <p className={styles.divider}>or</p>
+        <div className={styles.google}>
+          <GoogleLogin
+            onSuccess={(response) => handleGoogle(response.credential)}
+            onError={() => alert("Google sign in failed")}
+          />
+        </div>
+        <p className={styles.text}>
+          Don't have an account? <Link to="/register" className={styles.link}>Sign Up</Link>
+        </p>
+      </div>
       </form>
-            <GoogleLogin
-        onSuccess={(response) => handleGoogle(response.credential)}
-        onError={() => alert("Google sign in failed")}
-      />
     </div>
   );
 };

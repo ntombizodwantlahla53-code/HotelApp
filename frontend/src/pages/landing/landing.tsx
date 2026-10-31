@@ -61,103 +61,107 @@ const handleSearch = (e: React.FormEvent) => {
   }
 
   return (
-    <div>
-      
-        <div className={styles.landing}>
-            <Navbar/>
-            <div className={styles.heroContent}>
-                <p className={styles.eyebrow}>YOUR NEXT HAPPY PLACE</p>
-                <h1 className={styles.texts}>Find your little <span>escape.</span></h1>
-                <p className={styles.explore}>Beautiful stays, special moments, and little getaways to remember.</p>
-                <a href="#hotels" className={styles.exploreButton}>Explore stays ♡</a>
-            </div>
+    <div className={styles.page}>
+      <div className={styles.landing}>
+        <Navbar/>
+        <div className={styles.heroContent}>
+          <p className={styles.eyebrow}>YOUR NEXT HAPPY PLACE</p>
+          <h1 className={styles.texts}>Find your little <span className={styles.accent}>escape.</span></h1>
+          <p className={styles.explore}>Beautiful stays, special moments, and little getaways to remember.</p>
+          <a href="#hotels" className={styles.exploreButton}>Explore stays ♡</a>
         </div>
+      </div>
 
+      <div className={styles.hotelslist} id="hotels">
+        <p className={styles.sectionLabel}>A LITTLE GETAWAY</p>
+        <h2 className={styles.hotels}>Find your kind of stay</h2>
+        <p className={styles.sectionText}>Discover lovely places for your next trip.</p>
 
-        <div className={styles.hotelslist} id="hotels">
-            <p className={styles.sectionLabel}>A LITTLE GETAWAY</p>
-            <h2 className={styles.hotels}>Find your kind of stay</h2>
-            <p className={styles.sectionText}>Discover lovely places for your next trip.</p>
+        <form className={styles.search} onSubmit={handleSearch}>
+          <label className={styles.field}>Hotel name
+            <input className={styles.input} type="text" placeholder="Hotel name" value={info.hotel_name}
+              onChange={(e) => dispatch(updateSearch({ hotel_name: e.target.value }))} />
+          </label>
 
-                      <form onSubmit={handleSearch}>
-              <label>Hotel name
-                <input type="text" placeholder="Hotel name" value={info.hotel_name}
-                  onChange={(e) => dispatch(updateSearch({ hotel_name: e.target.value }))} />
-              </label>
+          <label className={styles.field}>Location
+            <input className={styles.input} type="text" placeholder="City, country or address" value={info.location}
+              onChange={(e) => dispatch(updateSearch({ location: e.target.value }))} />
+          </label>
 
-              <label>Location
-                <input type="text" placeholder="City, country or address" value={info.location}
-                  onChange={(e) => dispatch(updateSearch({ location: e.target.value }))} />
-              </label>
+          <label className={styles.field}>Min price
+            <input className={styles.input} type="number" min="0" placeholder="0" value={info.min_price}
+              onChange={(e) => dispatch(updateSearch({ min_price: e.target.value }))} />
+          </label>
 
-              <label>Min price
-                <input type="number" min="0" placeholder="0" value={info.min_price}
-                  onChange={(e) => dispatch(updateSearch({ min_price: e.target.value }))} />
-              </label>
+          <label className={styles.field}>Max price
+            <input className={styles.input} type="number" min="0" placeholder="5000" value={info.max_price}
+              onChange={(e) => dispatch(updateSearch({ max_price: e.target.value }))} />
+          </label>
 
-              <label>Max price
-                <input type="number" min="0" placeholder="5000" value={info.max_price}
-                  onChange={(e) => dispatch(updateSearch({ max_price: e.target.value }))} />
-              </label>
+          <label className={styles.field}>Check-in (YYYY-MM-DD)
+            <input className={styles.input} type="text" placeholder="2026-11-01" value={info.check_in}
+              onChange={(e) => dispatch(updateSearch({ check_in: e.target.value }))} />
+          </label>
 
-              <label>Check-in (YYYY-MM-DD)
-                <input type="text" placeholder="2026-11-01" value={info.check_in}
-                  onChange={(e) => dispatch(updateSearch({ check_in: e.target.value }))} />
-              </label>
+          <label className={styles.field}>Check-out (YYYY-MM-DD)
+            <input className={styles.input} type="text" placeholder="2026-11-05" value={info.check_out}
+              onChange={(e) => dispatch(updateSearch({ check_out: e.target.value }))} />
+          </label>
 
-              <label>Check-out (YYYY-MM-DD)
-                <input type="text" placeholder="2026-11-05" value={info.check_out}
-                  onChange={(e) => dispatch(updateSearch({ check_out: e.target.value }))} />
-              </label>
+          <button type="submit" className={styles.button} disabled={searching}>
+            {searching ? "Searching..." : "Search"}
+          </button>
+          {searched && (
+            <button type="button" className={styles.ghost} onClick={() => dispatch(clearSearch())}>Show all hotels</button>
+          )}
+        </form>
 
-              <button type="submit" disabled={searching}>
-                {searching ? "Searching..." : "Search"}
-              </button>
-              {searched && (
-                <button type="button" onClick={() => dispatch(clearSearch())}>Show all hotels</button>)}
-            </form>
-{loading && <p>Loading hotels...</p>}
-{error && <p>{error}</p>}
+        {loading && <p className={styles.notice}>Loading hotels...</p>}
+        {error && <p className={styles.error}>{error}</p>}
+        {!searched && !loading && !error && hotels.length === 0 && (
+          <p className={styles.notice}>No hotels are available yet.</p>
+        )}
+        {searchError && <p className={styles.error}>{searchError}</p>}
+        {searched && !searching && results.length === 0 && (
+          <p className={styles.notice}>No hotel is available for those dates.</p>
+        )}
+      </div>
 
-            {!searched && !loading && !error && hotels.length === 0 && (
-  <p>No hotels are available yet.</p>
-)}
-            {searchError && <p>{searchError}</p>}
-            {searched && !searching && results.length === 0 && (
-              <p>No hotel is available for those dates.</p>
-            )}
-        </div>
-<div className={styles.flex}>
-  {(searched ? results : hotels).map((hotel) => {
-    const isFav = favourites.some((f) => f.hotel_id === hotel.hotel_id);
-    return (
-    <div className={styles.firstplace} key={hotel.hotel_id}>
-      {hotel.image_url && (
-                  <img src= {hotel.image_url} alt ={hotel.name} className={styles.image}/>
-                )}
-      <h2 >{hotel.name}</h2>
-      <p>{hotel.description}</p>
-      
-      <p>{hotel.address}, {hotel.city}, {hotel.country}</p>
-      <p>Amenities: {hotel.ammenities}</p>
-      <p>Star rating:{hotel.star_rating ?? "Not rated"}</p>
-                <Link to={`/hotels/${hotel.hotel_id}/rooms`}>
+      <div className={styles.flex}>
+        {(searched ? results : hotels).map((hotel) => {
+          const isFav = favourites.some((f) => f.hotel_id === hotel.hotel_id);
+          return (
+            <div className={styles.firstplace} key={hotel.hotel_id}>
+              {hotel.image_url && (
+                <img src={hotel.image_url} alt={hotel.name} className={styles.image}/>
+              )}
+              <div className={styles.body}>
+                <h2 className={styles.name}>{hotel.name}</h2>
+                <p className={styles.stars}>{hotel.star_rating ? `★ ${hotel.star_rating}` : "Not rated"}</p>
+                <p className={styles.desc}>{hotel.description}</p>
+                <p className={styles.where}>{hotel.address}, {hotel.city}, {hotel.country}</p>
+                <p className={styles.perks}>{hotel.ammenities}</p>
+                <div className={styles.actions}>
+                  <Link to={`/hotels/${hotel.hotel_id}/rooms`} className={styles.link}>
                     <div className={styles.buttnV}>
                       <button className={styles.viewb}><HiEye/> Explore rooms</button>
                     </div>
                   </Link>
-      <button type="button" onClick={() => handleFavourite(hotel.hotel_id, isFav)}>
-        {isFav ? <FaHeart /> : <FaRegHeart />}
-      </button>
-       <Sharebutton hotel_id={hotel.hotel_id} name={hotel.name} />
+                  <button
+                    type="button"
+                    className={isFav ? styles.liked : styles.heart}
+                    onClick={() => handleFavourite(hotel.hotel_id, isFav)}>
+                    {isFav ? <FaHeart /> : <FaRegHeart />}
+                  </button>
+                  <Sharebutton hotel_id={hotel.hotel_id} name={hotel.name} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className={styles.lastplace}></div>
     </div>
-    );
-  })}
-</div>
-<div className={styles.lastplace}> 
-</div>
-
-  </div>
   )
 }
 export default landing
