@@ -8,12 +8,10 @@
 Think of it as a small version of Booking.com:customers book and pay, admins run the hotels.
 
 **Live demo**
-
 - Website (frontend): https://hotel-app-m1wm.vercel.app
 - Server (backend API): https://hotel-app-theta-jet.vercel.app/api/hotels
 
 ## Features
-
 ### For customers
 - Create an account with an email and password, or sign in with **Google**
 - Browse hotels and see the rooms in each hotel
