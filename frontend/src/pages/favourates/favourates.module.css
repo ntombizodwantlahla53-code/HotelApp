@@ -8,8 +8,7 @@
     font-family: 'Nunito', 'Quicksand', 'Segoe UI', system-ui, sans-serif;
     padding: 40px 0 70px;
 }
-
-.top {
+.top{
     box-sizing: border-box;
     max-width: 1250px;
     margin: 0 auto 10px;
@@ -32,12 +31,12 @@
     transition: transform 0.2s, background 0.2s;
 }
 
-.back:hover {
+.back:hover{
     background: #eef1ed;
     transform: translateX(-3px);
 }
 
-.heading {
+.heading{
     margin: 0 0 8px;
     color: #344b40;
     font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
@@ -47,7 +46,7 @@
     margin-top: 22px;
 }
 
-.note {
+.note{
     margin: 0 0 10px;
     padding: 12px 16px;
     border-radius: 16px;
@@ -59,8 +58,7 @@
     max-width: 600px;
     margin: 0 auto 14px;
 }
-
-.error {
+.error{
     margin: 0 0 10px;
     padding: 12px 16px;
     border-radius: 16px;
@@ -69,10 +67,10 @@
     font-size: 14px;
     font-weight: 700;
     max-width: 600px;
-    margin: 0 auto 14px;
+    margin:0 auto 14px;
 }
 
-.favouritesList {
+.favouritesList{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
     gap: 26px;
@@ -81,7 +79,7 @@
     padding: 10px 5% 20px;
 }
 
-.card {
+.card{
     overflow: hidden;
     background: white;
     border: 2px solid #dfe4de;
@@ -90,12 +88,12 @@
     transition: transform 0.25s, box-shadow 0.25s;
 }
 
-.card:hover {
+.card:hover{
     transform: translateY(-6px);
     box-shadow: 0 18px 38px rgba(224, 120, 143, 0.26);
 }
 
-.image {
+.image{
     display: block;
     width: 100%;
     height: 210px;
@@ -115,13 +113,13 @@
 }
 
 .where {
-    margin: 0 0 16px;
+    margin:0 0 16px;
     color: #727c75;
-    font-size: 14px;
-    line-height: 1.6;
+    font-size:14px;
+    line-height:1.6;
 }
 
-.actions {
+.actions{
     display: flex;
     align-items: center;
     gap: 10px;
@@ -149,13 +147,12 @@
     padding: 11px 18px;
     font-size: 14px;
 }
-
 .view:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(224, 120, 143, 0.45);
 }
 
-.remove {
+.remove{
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -172,8 +169,7 @@
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
-
-.remove:hover {
+.remove:hover{
     background: #ffdede;
     transform: translateY(-2px);
 }
