@@ -8,7 +8,7 @@
 
 .heading {
     margin: 0 0 14px;
-    color: #8a4a5a;
+    color: #344b40;
     font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
     font-size: 24px;
     font-weight: 600;
@@ -19,8 +19,8 @@
     margin: 0 0 10px;
     padding: 12px 16px;
     border-radius: 16px;
-    background: #ffe3e6;
-    color: #b83a55;
+    background: #f3e7e4;
+    color: #a34f49;
     font-size: 14px;
     font-weight: 700;
 }
