@@ -8,15 +8,13 @@
     color: #26332f;
     font-family: 'Nunito', 'Quicksand', 'Segoe UI', system-ui, sans-serif;
 }
-
-.back {
+.back{
     display: inline-flex;
     align-items: center;
     gap: 6px;
     box-sizing: border-box;
     padding: 10px 18px;
     border: 2px solid #d8dfd7;
-    border-radius: 999px;
     background: white;
     color: #344b40;
     font-size: 14px;
@@ -25,13 +23,13 @@
     transition: transform 0.2s, background 0.2s;
 }
 
-.back:hover {
+.back:hover{
     background: #eef1ed;
     transform: translateX(-3px);
 }
 
-.heading {
-    margin: 0 0 8px;
+.heading{
+    margin:0 0 8px;
     color: #344b40;
     font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
     font-size: 36px;
@@ -40,7 +38,7 @@
     margin-top: 22px;
 }
 
-.note {
+.note{
     margin: 0 0 10px;
     padding: 12px 16px;
     border-radius: 16px;
@@ -50,8 +48,7 @@
     font-weight: 700;
     text-align: center;
 }
-
-.error {
+.error{
     margin: 0 0 10px;
     padding: 12px 16px;
     border-radius: 16px;
@@ -61,7 +58,7 @@
     font-weight: 700;
 }
 
-.card {
+.card{
     margin-bottom: 20px;
     padding: 24px;
     background: white;
@@ -70,7 +67,7 @@
     box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
 }
 
-.title {
+.title{
     margin: 0 0 8px;
     color: #344b40;
     font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
@@ -78,18 +75,17 @@
     font-weight: 600;
 }
 
-.text {
+.text{
     margin: 0 0 8px;
     color: #66736b;
     font-size: 15px;
     line-height: 1.7;
 }
 
-.price {
+.price{
     display: inline-block;
     margin: 4px 0 0;
     padding: 6px 16px;
-    border-radius: 999px;
     background: #f0eee5;
     color: #8b7954;
     font-size: 14px;
@@ -181,13 +177,12 @@
     padding: 14px 24px;
 }
 
-.button:hover {
+.button:hover{
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(224, 120, 143, 0.45);
 }
 
-.button:disabled {
-    opacity: 0.55;
+.button:disabled{
     cursor: not-allowed;
     transform: none;
 }
