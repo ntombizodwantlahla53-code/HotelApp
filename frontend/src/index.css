@@ -4,9 +4,9 @@
 
 body {
     margin: 0;
-    background: #fff9f5;
-    color: #49342f;
-    font-family: Arial, sans-serif;
+    background: #f5f5f2;
+    color: #26332f;
+    font-family: Inter, 'Segoe UI', Arial, sans-serif;
 }
 
 button{
@@ -39,21 +39,21 @@ input{
     border: 1px solid #eadbd5;
     border-radius: 9px;
     background: #fffaf8;
-    color: #49342f;
+    color: #26332f;
 }
 select{
     padding: 12px;
     border: 1px solid #eadbd5;
     border-radius: 9px;
     background: #fffaf8;
-    color: #49342f;
+    color: #26332f;
 }
 textarea{
     padding: 12px;
     border: 1px solid #eadbd5;
     border-radius: 9px;
     background: #fffaf8;
-    color: #49342f;
+    color: #26332f;
 }
 
 input:focus{
@@ -83,5 +83,5 @@ button {
 }
 
 button:hover {
-    background: #965b64;
+    background: #263b30;
 }
