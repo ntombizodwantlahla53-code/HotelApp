@@ -1,3 +1,14 @@
+.bar {
+    position: relative;
+    z-index: 20;
+    box-sizing: border-box;
+    padding: 14px 6%;
+    background: #ffffff;
+    border-bottom: 1px solid #dbe6ea;
+    box-shadow: 0 4px 14px rgba(15, 92, 99, 0.08);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
 .navbar{
     display: flex;
     align-items: center;
@@ -6,43 +17,34 @@
     max-width: 1400px;
     margin: 0 auto;
 }
-.bar{
-    position: relative;
-    z-index: 20;
-    box-sizing: border-box;
-    padding: 14px 6%;
-    background: rgba(255, 247, 243, 0.92);
-    border-bottom: 2px dashed #d8dfd7;
-    font-family: 'Nunito', 'Quicksand', 'Segoe UI', system-ui, sans-serif;
-}
 
-.logo {
+.logo{
     display: flex;
     align-items: center;
     gap: 6px;
     text-decoration: none;
 }
 
-.heart {
-    color: #708777;
-    font-size: 24px;
+.heart{
+    color: #0e7c86;
+    font-size: 22px;
 }
 
-.bookname {
-    color: #506b5b;
-    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
-    font-size: 28px;
-    font-weight: 600;
+.bookname{
+    color: #0e7c86;
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    font-size: 26px;
+    font-weight: 700;
 }
 
 .hotelname {
-    color: #344b40;
-    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
-    font-size: 28px;
-    font-weight: 600;
+    color: #0f5c63;
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    font-size: 26px;
+    font-weight: 500;
 }
 
-.links {
+.links{
     display: flex;
     align-items: center;
     gap: 8px;
@@ -51,29 +53,29 @@
 .link {
     padding: 10px 18px;
     border-radius: 999px;
-    color: #344b40;
-    font-size: 14px;
-    font-weight: 800;
+    color: #334155;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.link:hover {
+    background: #e6f4f5;
+    color: #0b646c;
+}
+
+.solid {
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: #0e7c86;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
     text-decoration: none;
     transition: background 0.2s;
 }
 
-.link:hover {
-    background: #ffe8ec;
-}
-
-.solid {
-    padding: 10px 20px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #607969, #506b5b);
-    color: white;
-    font-size: 14px;
-    font-weight: 800;
-    text-decoration: none;
-    box-shadow: 0 5px 12px rgba(224, 120, 143, 0.35);
-    transition: transform 0.2s;
-}
-
 .solid:hover {
-    transform: translateY(-2px);
+    background: #0b646c;
 }
