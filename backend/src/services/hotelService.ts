@@ -16,7 +16,7 @@ export const createHotel = async (
 ): Promise<Hotel> => {
   const {name, address,city,country,star_rating, image_url} = appData;
   const { rows } = await query(
-    "INSERT INTO hotels (user_id, name, description, address, city, country, ammenities, star_rating, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+    "INSERT INTO hotels (user_id, name ,address, city, country, star_rating, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
     [user_id, name, address, city, country, star_rating, image_url],
   );
   return rows[0];
