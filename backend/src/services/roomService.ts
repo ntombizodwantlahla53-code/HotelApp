@@ -5,10 +5,10 @@ export const createRoom = async (
   appData: NewRoom,
   hotel_id: number
 ): Promise<Room> => {
-    const { description, ammenities, capacity, quantity, price, image_urls } = appData;
+    const { name,description, ammenities, capacity, quantity, price, image_urls } = appData;
     const { rows } = await query(
-        "INSERT INTO rooms (hotel_id, description, ammenities, capacity, quantity, price, image_urls) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-        [hotel_id, description, ammenities, capacity, quantity, price, image_urls],
+        "INSERT INTO rooms (hotel_id, name, description, ammenities, capacity, quantity, price, image_urls) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+        [hotel_id, name, description, ammenities, capacity, quantity, price, image_urls],
     );
     return rows[0];
 };
@@ -27,12 +27,12 @@ export const updateRoom = async (
   room_id: number,
   appData: NewRoom
 ): Promise<Room | null> => {
-  const { description, ammenities, capacity, quantity, price, image_urls } = appData;
+  const { name, description, ammenities, capacity, quantity, price, image_urls } = appData;
   const { rows } = await query(
-    `UPDATE rooms SET description = $1, ammenities = $2, capacity = $3, quantity = $4,
-     price = $5, image_urls = $6, updated_at = NOW()
-     WHERE room_id = $7 RETURNING *`,
-    [description, ammenities, capacity, quantity, price, image_urls, room_id],
+    `UPDATE rooms SET name = $1, description = $2, ammenities = $3, capacity = $4, quantity = $5,
+     price = $6, image_urls = $7, updated_at = NOW()
+     WHERE room_id = $8 RETURNING *`,
+    [name ,description, ammenities, capacity, quantity, price, image_urls, room_id],
   );
   return rows[0] || null;
 };

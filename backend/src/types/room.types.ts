@@ -1,6 +1,7 @@
 export interface Room{
     room_id: number,
     hotel_id: number,
+    name: string,
     description: string,
     ammenities: string,
     capacity: number, 
