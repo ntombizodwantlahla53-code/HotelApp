@@ -4,6 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 export interface room {
   room_id?: number;
   hotel_id: number;
+  name:string;
   description: string;
   ammenities: string;
   capacity: number;
@@ -21,6 +22,7 @@ interface RoomState {
 
 const emptyRoom: room = {
   hotel_id: 0,
+  name:"",
   description: "",
   ammenities: "",
   capacity: 0,

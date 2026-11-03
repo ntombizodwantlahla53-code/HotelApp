@@ -93,7 +93,8 @@ export const roomlist = () => {
               </div>
 
               <div className={styles.details}>
-                <h2 className={styles.title}>Room {room.room_id}</h2>
+                <p className={styles.title}>Room {room.room_id}</p>
+                 <h2 className={styles.text}>{room.name}</h2>
                 <p className={styles.text}>{room.description}</p>
                 <div className={styles.chips}>
                   {room.ammenities?.split(",").map((a, i) => (

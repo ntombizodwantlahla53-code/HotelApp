@@ -41,6 +41,7 @@ export const room = () => {
 
     const roomData = {
       hotel_id: info.hotel_id,
+      name:info.name,
       description: info.description,
       ammenities: info.ammenities,
       capacity: info.capacity,
@@ -98,6 +99,19 @@ export const room = () => {
               </option>
             ))}
           </select>
+        </div>
+        <div className={styles.title}>
+          <label className={styles.label}>Name</label>
+          <input
+            className={styles.inputtitle}
+            value={info.name}
+            type="text"
+            onChange={(e) =>
+              dispatch(updateRoom({ name: e.target.value }))
+            }
+            placeholder="Name"
+            required
+          />
         </div>
         <div className={styles.title}>
           <label className={styles.label}>Description</label>
