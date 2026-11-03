@@ -35,11 +35,6 @@ export const hotel = () => {
       alert("Name cannot be empty. Please enter a name.");
       return;
     }
-    
-    if (!info.description) {
-      alert("Description cannot be empty. Please enter an description.");
-      return;
-    }
 
     if (!info.address) {
       alert("Email cannot be empty. Please enter an email address.");
@@ -53,10 +48,6 @@ export const hotel = () => {
     alert("Country cannot be empty. Please enter a country.");
       return;
     }
-    if (!info.ammenities) {
-    alert("Ammenities cannot be empty. Please enter a ammenities.");
-      return;
-    }
     if (!info.star_rating) {
     alert("Please write ur rating.");
       return;
@@ -67,11 +58,9 @@ export const hotel = () => {
     }
         const hotelData = {
       name: info.name,
-      description: info.description,
       address: info.address,
       city: info.city,
       country: info.country,
-      ammenities: info.ammenities,
       star_rating: info.star_rating,
       image_url: info.image_url
     };
@@ -115,14 +104,6 @@ export const hotel = () => {
             placeholder="Name"/>
         </div>
         <div className={styles.title}>
-          <label className={styles.label}>Description</label>
-          <input className={styles.inputtitle}
-            value={info.description}
-            type="text"
-            onChange={(e) => dispatch(updateHotel({ description: e.target.value }))}
-            placeholder="Description"/>
-        </div>
-        <div className={styles.title}>
           <label className={styles.label}>Address</label>
           <input className={styles.inputtitle}
             value={info.address}
@@ -145,14 +126,6 @@ export const hotel = () => {
             type="text"
             onChange={(e) => dispatch(updateHotel({ country: e.target.value }))}
             placeholder="Country"/>
-        </div>
-        <div className={styles.title}>
-          <label className={styles.label}>Amenities</label>
-          <input className={styles.inputtitle}
-            value={info.ammenities}
-            type="text"
-            onChange={(e) => dispatch(updateHotel({ ammenities: e.target.value }))}
-            placeholder="Amenities"/>
         </div>
         <div className={styles.title}>
           <label className={styles.label}>Star rating</label>

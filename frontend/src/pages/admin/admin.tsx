@@ -84,9 +84,8 @@ const handleDelete = (id: number, name: string) => {
             <div className={styles.body}>
               <h2 className={styles.title}>{hotel.name}</h2>
               <p className={styles.stars}>{hotel.star_rating ? `★ ${hotel.star_rating}` : "Not rated"}</p>
-              <p className={styles.text}>{hotel.description}</p>
-              <p className={styles.where}>{hotel.address}, {hotel.city}, {hotel.country}</p>
-              <p className={styles.where}>Amenities: {hotel.ammenities}</p>
+              <p className={styles.where}>{hotel.address}</p>
+                <p className={styles.where}>{hotel.city}, {hotel.country}</p>
               <div className={styles.actions}>
                 <Link to={`/Admin/hotels/${hotel.hotel_id}/rooms`}>
                   <div className={styles.buttnV}>

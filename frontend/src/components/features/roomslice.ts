@@ -199,5 +199,4 @@ export const roomSlice = createSlice({
 });
 
 export const { updateRoom, clearRoom, clearRoomError } = roomSlice.actions;
-
 export default roomSlice.reducer;

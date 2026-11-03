@@ -5,11 +5,9 @@ export interface hotel {
     hotel_id?: number,
     user_id?: number,
     name: string,
-    description: string,
     address: string,
     city: string,
     country: string,
-    ammenities: string,
     star_rating: number | null,
     image_url: string
 
@@ -25,11 +23,9 @@ interface LoginState {
 const initialState: LoginState = {
   info: {
     name: "",
-    description: "",
     address: "",
     city: "",
     country: "",
-    ammenities: "",
     star_rating:null,
     image_url:""
 
@@ -128,11 +124,9 @@ export const hotelSlice = createSlice({
     clearHotel: (state) => {
       state.info = {
       name: "",
-    description: "",
     address: "",
     city: "",
     country: "",
-    ammenities: "",
     star_rating:null,
     image_url:""
       };
@@ -187,9 +181,5 @@ export const hotelSlice = createSlice({
   },
 });
 
-export const {
-  updateHotel,
-  clearHotel,
-} = hotelSlice.actions;
-
+export const {updateHotel,clearHotel,} = hotelSlice.actions;
 export default hotelSlice.reducer;

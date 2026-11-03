@@ -138,9 +138,8 @@ const handleSearch = (e: React.FormEvent) => {
               <div className={styles.body}>
                 <h2 className={styles.name}>{hotel.name}</h2>
                 <p className={styles.stars}>{hotel.star_rating ? `★ ${hotel.star_rating}` : "Not rated"}</p>
-                <p className={styles.desc}>{hotel.description}</p>
-                <p className={styles.where}>{hotel.address}, {hotel.city}, {hotel.country}</p>
-                <p className={styles.perks}>{hotel.ammenities}</p>
+                <p className={styles.where}>{hotel.address}</p>
+                <p className={styles.where}>{hotel.city}, {hotel.country}</p>
                 <div className={styles.actions}>
                   <Link to={`/hotels/${hotel.hotel_id}/rooms`} className={styles.link}>
                     <div className={styles.buttnV}>
