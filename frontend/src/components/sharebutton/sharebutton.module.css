@@ -5,19 +5,18 @@
     gap: 8px;
     box-sizing: border-box;
     padding: 10px 20px;
-    border: 2px solid #dccdf5;
+    border: 1px solid #b9d9dc;
     border-radius: 999px;
-    background: #eceee9;
-    color: #607969;
+    background: #f6fafb;
+    color: #0b646c;
     font-family: inherit;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 600;
     text-decoration: none;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
-
 .share:hover {
-    background: #eadcff;
+    background: #d3ecee;
     transform: translateY(-2px);
 }
