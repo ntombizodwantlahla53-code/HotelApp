@@ -14,10 +14,10 @@ export const createHotel = async (
   appData: NewHotel,
   user_id: number
 ): Promise<Hotel> => {
-  const {name, description, address,city,country,ammenities,star_rating, image_url} = appData;
+  const {name, address,city,country,star_rating, image_url} = appData;
   const { rows } = await query(
     "INSERT INTO hotels (user_id, name, description, address, city, country, ammenities, star_rating, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
-    [user_id, name, description, address, city, country, ammenities, star_rating, image_url],
+    [user_id, name, address, city, country, star_rating, image_url],
   );
   return rows[0];
 };
@@ -32,12 +32,12 @@ export const updateHotel = async (
   hotel_id: number,
   appData: NewHotel
 ): Promise<Hotel | null> => {
-  const {name, description, address, city, country, ammenities, star_rating, image_url} = appData;
+  const {name, address, city, country, star_rating, image_url} = appData;
   const { rows } = await query(
-    `UPDATE hotels SET name = $1, description = $2, address = $3, city = $4, country = $5,
-     ammenities = $6, star_rating = $7, image_url = $8, updated_at = NOW()
-     WHERE hotel_id = $9 RETURNING *`,
-    [name, description, address, city, country, ammenities, star_rating, image_url, hotel_id],
+    `UPDATE hotels SET name = $1, address = $2, city = $3, country = $4,
+     star_rating = $5, image_url = $6, updated_at = NOW()
+     WHERE hotel_id = $7 RETURNING *`,
+    [name,  address, city, country,star_rating, image_url, hotel_id],
   );
   return rows[0] || null;
 };
