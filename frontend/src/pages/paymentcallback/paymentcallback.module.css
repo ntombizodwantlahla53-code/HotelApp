@@ -1,59 +1,37 @@
 .callback {
     box-sizing: border-box;
     min-height: 100vh;
-    padding: 30px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(180deg, #f5f5f2 0%, #f5f5f2 45%, #eceee9 100%);
+    padding:30px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(180deg, #f5f5f2 0%, #f5f5f2 45%, #eceee9 100%);
     color: #26332f;
     font-family: 'Nunito', 'Quicksand', 'Segoe UI', system-ui, sans-serif;
 }
-
 .box {
     box-sizing: border-box;
-    width: 100%;
-    max-width: 440px;
-    padding: 36px;
-    text-align: center;
+    width:100%;
+    max-width:440px;
+    padding:36px;
+    text-align:center;
     background: white;
     border: 2px solid #dfe4de;
     border-radius: 28px;
     box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
 }
-
 .heading {
     margin: 0 0 8px;
     color: #344b40;
     font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
-    font-size: 36px;
-    font-weight: 600;
-    line-height: 1.2;
+    font-size:36px;
+    font-weight:600;
+    line-height:1.2;
     font-size: 28px;
 }
 
-.note {
-    margin: 0 0 10px;
-    padding: 12px 16px;
-    border-radius: 16px;
-    background: #f3ecff;
-    color: #607969;
-    font-size: 14px;
-    font-weight: 700;
-    text-align: center;
-}
 
-.error {
-    margin: 0 0 10px;
-    padding: 12px 16px;
-    border-radius: 16px;
-    background: #f3e7e4;
-    color: #a34f49;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.button {
+.button{
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -64,17 +42,35 @@
     border-radius: 999px;
     background: linear-gradient(135deg, #607969, #506b5b);
     color: white;
-    font-family: inherit;
-    font-size: 15px;
-    font-weight: 800;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:800;
     text-decoration: none;
     cursor: pointer;
-    box-shadow: 0 6px 14px rgba(224, 120, 143, 0.35);
+    box-shadow:0 6px 14px rgba(224, 120, 143, 0.35);
     transition: transform 0.2s, box-shadow 0.2s;
-    margin-top: 14px;
+    margin-top:14px;
 }
-
-.button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(224, 120, 143, 0.45);
+.note {
+    margin:0 0 10px;
+    padding:12px 16px;
+    border-radius:16px;
+    background: #f3ecff;
+    color: #607969;
+    font-size:14px;
+    font-weight: 700;
+    text-align: center;
+}
+.error{
+    margin:0 0 10px;
+    padding:12px 16px;
+    border-radius:16px;
+    background: #f3e7e4;
+    color: #a34f49;
+    font-size:14px;
+    font-weight:700;
+}
+.button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(224, 120, 143, 0.45);
 }

@@ -8,21 +8,41 @@
     font-family: 'Nunito', 'Quicksand', 'Segoe UI', system-ui, sans-serif;
 }
 
-.landing {
-    overflow: hidden;
-    min-height: 520px;
-    background: linear-gradient(rgba(138, 74, 90, 0.45), rgba(224, 120, 143, 0.35)), url('../../assets/background.jpg');
+.landing{
+    overflow:hidden;
+    min-height:520px;
+    background:linear-gradient(rgba(138, 74, 90, 0.45), rgba(224, 120, 143, 0.35)), url('../../assets/background.jpg');
     background-size: cover;
     background-position: center;
     color: white;
 }
-
 .heroContent {
     max-width: 680px;
     padding: 80px 7% 90px;
 }
 
-.eyebrow {
+.ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing:border-box;
+    padding:12px 24px;
+    border:2px solid #cbd5cc;
+    background: white;
+    color: #344b40;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+.ghost:hover {
+    background: #eef1ed;
+    transform: translateY(-2px);
+}
+.eyebrow{
     display: inline-block;
     margin: 0 0 10px;
     padding: 8px 18px;
@@ -33,8 +53,7 @@
     font-weight: 800;
     letter-spacing: 3px;
 }
-
-.texts {
+.texts{
     margin: 18px 0 14px;
     color: white;
     font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
@@ -44,12 +63,11 @@
     text-shadow: 0 4px 18px rgba(90, 40, 55, 0.35);
 }
 
-.accent {
+.accent{
     color: #d8dfd7;
     font-style: italic;
 }
-
-.explore {
+.explore{
     max-width: 460px;
     margin: 0 0 22px;
     color: #f5f5f2;
@@ -69,7 +87,6 @@
     box-shadow: 0 8px 20px rgba(90, 40, 55, 0.25);
     transition: transform 0.2s;
 }
-
 .exploreButton:hover {
     transform: translateY(-3px) scale(1.03);
 }
@@ -119,7 +136,6 @@
     border-radius: 28px;
     box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
 }
-
 .field {
     display: flex;
     flex: 1 1 160px;
@@ -130,7 +146,7 @@
     font-weight: 800;
 }
 
-.input {
+.input{
     box-sizing: border-box;
     width: 100%;
     padding: 13px 16px;
@@ -144,20 +160,20 @@
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.input:focus {
+.input:focus{
     border-color: #708777;
-    box-shadow: 0 0 0 4px rgba(244, 166, 181, 0.25);
+    box-shadow:0 0 0 4px rgba(244, 166, 181, 0.25);
 }
 
-.button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
     gap: 8px;
-    box-sizing: border-box;
-    padding: 12px 24px;
+    box-sizing:border-box;
+    padding:12px 24px;
     border: none;
-    border-radius: 999px;
+
     background: linear-gradient(135deg, #607969, #506b5b);
     color: white;
     font-family: inherit;
@@ -169,42 +185,18 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(224, 120, 143, 0.45);
+.button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(224, 120, 143, 0.45);
 }
 
 .button:disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
-    transform: none;
+    opacity:0.55;
+    cursor:not-allowed;
+    transform:none;
 }
 
-.ghost {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    box-sizing: border-box;
-    padding: 12px 24px;
-    border: 2px solid #cbd5cc;
-    border-radius: 999px;
-    background: white;
-    color: #344b40;
-    font-family: inherit;
-    font-size: 15px;
-    font-weight: 800;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-}
-
-.ghost:hover {
-    background: #eef1ed;
-    transform: translateY(-2px);
-}
-
-.notice {
+.notice{
     margin: 0 0 10px;
     padding: 12px 16px;
     border-radius: 16px;
@@ -219,12 +211,12 @@
 
 .error {
     margin: 0 0 10px;
-    padding: 12px 16px;
-    border-radius: 16px;
+    padding:12px 16px;
+    border-radius:16px;
     background: #f3e7e4;
     color: #a34f49;
     font-size: 14px;
-    font-weight: 700;
+    font-weight:700;
     max-width: 1100px;
     margin: 0 auto 14px;
 }
@@ -339,7 +331,7 @@
     text-decoration: none;
 }
 
-.heart {
+.heart{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -359,7 +351,7 @@
     transform: scale(1.15);
 }
 
-.liked {
+.liked{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -375,15 +367,15 @@
     transition: transform 0.2s;
 }
 
-.liked:hover {
-    transform: scale(1.15);
+.liked:hover{
+    transform:scale(1.15);
 }
 
-.lastplace {
+.lastplace{
     height: 40px;
 }
 
-.buttnV {
+.buttnV{
     display: flex;
     flex: 1;
 }

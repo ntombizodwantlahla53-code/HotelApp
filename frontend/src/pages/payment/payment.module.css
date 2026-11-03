@@ -1,4 +1,4 @@
-.payment {
+.payment{
     box-sizing: border-box;
     min-height: 100vh;
     padding: 30px 20px;
@@ -10,7 +10,7 @@
     font-family: 'Nunito', 'Quicksand', 'Segoe UI', system-ui, sans-serif;
 }
 
-.box {
+.box{
     box-sizing: border-box;
     width: 100%;
     max-width: 440px;
@@ -21,8 +21,7 @@
     border-radius: 28px;
     box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
 }
-
-.heading {
+.heading{
     margin: 0 0 8px;
     color: #344b40;
     font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
@@ -31,29 +30,21 @@
     line-height: 1.2;
     font-size: 30px;
 }
-
-.text {
-    margin: 0 0 8px;
-    color: #66736b;
-    font-size: 16px;
-    font-weight: 700;
-}
-
 .amount {
     margin: 8px 0 22px;
     color: #e0486e;
     font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
-    font-size: 34px;
-    font-weight: 600;
+    font-size:34px;
+    font-weight:600;
 }
 
 .error {
-    margin: 0 0 10px;
-    padding: 12px 16px;
-    border-radius: 16px;
+    margin:0 0 10px;
+    padding:12px 16px;
+    border-radius:16px;
     background: #f3e7e4;
     color: #a34f49;
-    font-size: 14px;
+    font-size:14px;
     font-weight: 700;
 }
 
@@ -110,7 +101,12 @@
     transition: background 0.2s, transform 0.2s;
     width: 100%;
 }
-
+.text {
+    margin: 0 0 8px;
+    color: #66736b;
+    font-size: 16px;
+    font-weight: 700;
+}
 .ghost:hover {
     background: #eef1ed;
     transform: translateY(-2px);

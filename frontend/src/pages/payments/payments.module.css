@@ -1,21 +1,20 @@
 .payments {
     box-sizing: border-box;
-    max-width: 1250px;
-    margin: 30px auto 0;
+    max-width:1250px;
+    margin:30px auto 0;
     padding: 0 5%;
     padding-top: 10px;
 }
 
-.heading {
+.heading{
     margin: 0 0 14px;
     color: #344b40;
     font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
-    font-size: 24px;
-    font-weight: 600;
+    font-size:24px;
+    font-weight:600;
     margin-top: 30px;
 }
-
-.error {
+.error{
     margin: 0 0 10px;
     padding: 12px 16px;
     border-radius: 16px;
@@ -25,24 +24,23 @@
     font-weight: 700;
 }
 
-.paid {
+.waiting{
+    margin:0 0 10px;
+    padding:14px 18px;
+    border-radius: 18px;
+    border: 2px solid #ffe3a8;
+    background: #fff6df;
+    color: #8f6a12;
+    font-size:14px;
+    line-height:1.6;
+}
+.paid{
     margin: 0 0 10px;
     padding: 14px 18px;
     border-radius: 18px;
     border: 2px solid #bfe8d2;
     background: #e9f9f0;
     color: #2f6f52;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-.waiting {
-    margin: 0 0 10px;
-    padding: 14px 18px;
-    border-radius: 18px;
-    border: 2px solid #ffe3a8;
-    background: #fff6df;
-    color: #8f6a12;
     font-size: 14px;
     line-height: 1.6;
 }

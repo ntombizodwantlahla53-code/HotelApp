@@ -1,4 +1,12 @@
-.bar {
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.bar{
     position: relative;
     z-index: 20;
     box-sizing: border-box;
@@ -6,15 +14,6 @@
     background: rgba(255, 247, 243, 0.92);
     border-bottom: 2px dashed #d8dfd7;
     font-family: 'Nunito', 'Quicksand', 'Segoe UI', system-ui, sans-serif;
-}
-
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
 }
 
 .logo {
