@@ -1,61 +1,66 @@
-.page {
+.page{
     position: relative;
     box-sizing: border-box;
     min-height: 100vh;
     padding: 0 0 70px;
-    background: linear-gradient(180deg, #f5f5f2 0%, #f5f5f2 45%, #eceee9 100%);
-    color: #26332f;
-    font-family: 'Nunito', 'Quicksand', 'Segoe UI', system-ui, sans-serif;
+    background: #f6fafb;
+    color: #334155;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
-.landing {
-    background: linear-gradient(135deg, #fde0e6, #ece0ff);
+.landing{
+    background: #ffffff;
     padding-bottom: 6px;
 }
 
-.section {
+.section{
     box-sizing: border-box;
     max-width: 1250px;
     margin: 30px auto 0;
     padding: 0 5%;
 }
 
-.heading {
+.heading{
     margin: 0 0 8px;
-    color: #344b40;
-    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    color: #0f5c63;
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-size: 36px;
     font-weight: 600;
     line-height: 1.2;
     margin-top: 30px;
 }
 
-.note {
+.note{
     margin: 0 0 10px;
     padding: 12px 16px;
-    background: #f3ecff;
-    color: #607969;
+    border-radius: 12px;
+    background: #e6f4f5;
+    color: #0b646c;
     font-size: 14px;
     font-weight: 700;
     text-align: center;
 }
 
-.error {
+.error{
     margin: 0 0 10px;
     padding: 12px 16px;
-    border-radius: 16px;
-    background: #f3e7e4;
-    color: #a34f49;
+    border-radius: 12px;
+    background: #fdecec;
+    color: #b42323;
     font-size: 14px;
     font-weight: 700;
 }
-.flex{
+
+.flex {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
     gap: 26px;
     max-width: 1250px;
     margin: 0 auto;
     padding: 10px 5% 20px;
+}
+
+.section .flex{
     padding-left: 0;
     padding-right: 0;
 }
@@ -63,14 +68,15 @@
 .ad{
     padding: 22px;
     background: white;
-    border: 2px solid #dfe4de;
-    border-radius: 28px;
-    box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
+    border: 1px solid #dbe6ea;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(15, 92, 99, 0.08);
 }
-.name {
+
+.name{
     margin: 0 0 8px;
-    color: #344b40;
-    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    color: #0f5c63;
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-size: 23px;
     font-weight: 600;
     font-size: 20px;
@@ -78,7 +84,7 @@
 
 .email {
     margin: 0 0 6px;
-    color: #607969;
+    color: #0b646c;
     font-size: 14px;
     word-break: break-all;
 }
@@ -88,10 +94,10 @@
     margin: 0 0 12px;
     padding: 5px 14px;
     border-radius: 999px;
-    background: #e9f9f0;
-    color: #2f8f62;
+    background: #e8f6ee;
+    color: #1f7a4d;
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 600;
 }
 
 .danger {
@@ -101,18 +107,19 @@
     gap: 8px;
     box-sizing: border-box;
     padding: 10px 20px;
-    border: 2px solid #ffc9c9;
-    background: #fff0f0;
-    color: #d04b4b;
+    border: 1px solid #f2bcbc;
+    border-radius: 999px;
+    background: #fdecec;
+    color: #b42323;
     font-family: inherit;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 600;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
 
 .danger:hover {
-    background: #ffdede;
+    background: #f8d4d4;
     transform: translateY(-2px);
 }
 
@@ -124,33 +131,36 @@
     box-sizing: border-box;
     padding: 12px 24px;
     border: none;
-    background: linear-gradient(135deg, #607969, #506b5b);
+    border-radius: 999px;
+    background: #0e7c86;
     color: white;
     font-family: inherit;
     font-size: 15px;
-    font-weight: 800;
+    font-weight: 600;
     text-decoration: none;
     cursor: pointer;
-    box-shadow: 0 6px 14px rgba(224, 120, 143, 0.35);
+    box-shadow: 0 6px 14px rgba(14, 124, 134, 0.25);
     transition: transform 0.2s, box-shadow 0.2s;
     margin: 26px 0 10px;
 }
-.hotels:hover{
+
+.hotels:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(224, 120, 143, 0.45);
+    box-shadow: 0 10px 20px rgba(14, 124, 134, 0.35);
 }
 
-.firstplace{
+.firstplace {
     overflow: hidden;
     background: white;
-    border: 2px solid #dfe4de;
-    box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
+    border: 1px solid #dbe6ea;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(15, 92, 99, 0.08);
     transition: transform 0.25s, box-shadow 0.25s;
 }
 
 .firstplace:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 38px rgba(224, 120, 143, 0.26);
+    box-shadow: 0 18px 38px rgba(15, 92, 99, 0.14);
 }
 
 .image {
@@ -159,28 +169,29 @@
     height: 210px;
     object-fit: cover;
 }
-.body{
+
+.body {
     padding: 20px 22px 24px;
 }
 
 .title {
     margin: 0 0 8px;
-    color: #344b40;
-    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    color: #0f5c63;
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-size: 23px;
     font-weight: 600;
 }
 
-.text{
+.text {
     margin: 0 0 8px;
-    color: #66736b;
+    color: #475569;
     font-size: 15px;
     line-height: 1.6;
 }
 
 .where {
     margin: 0 0 6px;
-    color: #727c75;
+    color: #64748b;
     font-size: 14px;
 }
 
@@ -188,10 +199,11 @@
     display: inline-block;
     margin: 0 0 12px;
     padding: 5px 14px;
-    background: #f0eee5;
-    color: #8b7954;
+    border-radius: 999px;
+    background: #fff4d6;
+    color: #8a5a00;
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 600;
 }
 
 .actions {
@@ -208,20 +220,20 @@
     gap: 8px;
     box-sizing: border-box;
     padding: 10px 20px;
-    border: 2px solid #dccdf5;
+    border: 1px solid #b9d9dc;
     border-radius: 999px;
-    background: #eceee9;
-    color: #607969;
+    background: #f6fafb;
+    color: #0b646c;
     font-family: inherit;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 600;
     text-decoration: none;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
 
 .viewb:hover {
-    background: #eadcff;
+    background: #d3ecee;
     transform: translateY(-2px);
 }
 
@@ -233,14 +245,15 @@
     box-sizing: border-box;
     padding: 12px 24px;
     border: none;
-    background: linear-gradient(135deg, #607969, #506b5b);
+    border-radius: 999px;
+    background: #0e7c86;
     color: white;
     font-family: inherit;
     font-size: 15px;
-    font-weight: 800;
+    font-weight: 600;
     text-decoration: none;
     cursor: pointer;
-    box-shadow: 0 6px 14px rgba(224, 120, 143, 0.35);
+    box-shadow: 0 6px 14px rgba(14, 124, 134, 0.25);
     transition: transform 0.2s, box-shadow 0.2s;
     padding: 10px 20px;
     font-size: 14px;
@@ -248,9 +261,8 @@
 
 .edit:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(224, 120, 143, 0.45);
+    box-shadow: 0 10px 20px rgba(14, 124, 134, 0.35);
 }
-
 .buttnV {
     display: flex;
 }
