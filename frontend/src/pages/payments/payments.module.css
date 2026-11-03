@@ -1,46 +1,46 @@
-.payments {
+.payments{
     box-sizing: border-box;
-    max-width:1250px;
-    margin:30px auto 0;
+    max-width: 1250px;
+    margin: 30px auto 0;
     padding: 0 5%;
     padding-top: 10px;
 }
 
 .heading{
     margin: 0 0 14px;
-    color: #344b40;
-    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
-    font-size:24px;
-    font-weight:600;
+    color: #0f5c63;
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
     margin-top: 30px;
 }
+
 .error{
     margin: 0 0 10px;
     padding: 12px 16px;
-    border-radius: 16px;
-    background: #f3e7e4;
-    color: #a34f49;
+    border-radius: 12px;
+    background: #fdecec;
+    color: #b42323;
     font-size: 14px;
     font-weight: 700;
-}
-
-.waiting{
-    margin:0 0 10px;
-    padding:14px 18px;
-    border-radius: 18px;
-    border: 2px solid #ffe3a8;
-    background: #fff6df;
-    color: #8f6a12;
-    font-size:14px;
-    line-height:1.6;
 }
 .paid{
     margin: 0 0 10px;
     padding: 14px 18px;
-    border-radius: 18px;
-    border: 2px solid #bfe8d2;
-    background: #e9f9f0;
-    color: #2f6f52;
+    border-radius: 12px;
+    border: 1px solid #c4e5d1;
+    background: #e8f6ee;
+    color: #1f6b45;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.waiting{
+    margin: 0 0 10px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid #f0d9a0;
+    background: #fff4d6;
+    color: #8a5a00;
     font-size: 14px;
     line-height: 1.6;
 }
