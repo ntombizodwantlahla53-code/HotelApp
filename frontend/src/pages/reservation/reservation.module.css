@@ -6,8 +6,8 @@
 }
 .heading {
     margin: 0 0 14px;
-    color: #344b40;
-    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    color: #0f5c63;
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-size: 24px;
     font-weight: 600;
     margin-top: 30px;
@@ -15,19 +15,20 @@
 .note {
     margin: 0 0 10px;
     padding: 12px 16px;
-    border-radius: 16px;
-    background: #f3ecff;
-    color: #607969;
+    border-radius: 12px;
+    background: #e6f4f5;
+    color: #0b646c;
     font-size: 14px;
     font-weight: 700;
     text-align: center;
 }
+
 .error {
     margin: 0 0 10px;
     padding: 12px 16px;
-    border-radius: 16px;
-    background: #f3e7e4;
-    color: #a34f49;
+    border-radius: 12px;
+    background: #fdecec;
+    color: #b42323;
     font-size: 14px;
     font-weight: 700;
 }
@@ -36,15 +37,15 @@
     margin-bottom: 16px;
     padding: 22px;
     background: white;
-    border: 2px solid #dfe4de;
-    border-radius: 28px;
-    box-shadow: 0 12px 30px rgba(224, 120, 143, 0.14);
+    border: 1px solid #dbe6ea;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(15, 92, 99, 0.08);
 }
 
 .title {
     margin: 0 0 8px;
-    color: #344b40;
-    font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', sans-serif;
+    color: #0f5c63;
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-size: 23px;
     font-weight: 600;
     font-size: 20px;
@@ -52,14 +53,14 @@
 
 .text {
     margin: 0 0 6px;
-    color: #66736b;
+    color: #475569;
     font-size: 14px;
     line-height: 1.6;
 }
 
 .meta {
     margin: 0 0 14px;
-    color: #607969;
+    color: #0b646c;
     font-size: 14px;
     font-weight: 700;
     line-height: 1.6;
@@ -82,10 +83,10 @@
     box-sizing: border-box;
     width: 100%;
     padding: 13px 16px;
-    border: 2px solid #d8dfd7;
-    border-radius: 16px;
-    background: #fbfbf9;
-    color: #26332f;
+    border: 1px solid #d3dfe4;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #334155;
     font-family: inherit;
     font-size: 15px;
     outline: none;
@@ -95,8 +96,8 @@
 }
 
 .input:focus {
-    border-color: #708777;
-    box-shadow: 0 0 0 4px rgba(244, 166, 181, 0.25);
+    border-color: #0e7c86;
+    box-shadow: 0 0 0 4px rgba(14, 124, 134, 0.18);
 }
 
 .approve {
@@ -106,19 +107,19 @@
     gap: 8px;
     box-sizing: border-box;
     padding: 10px 20px;
-    border: 2px solid #bfe8d2;
+    border: 1px solid #c4e5d1;
     border-radius: 999px;
-    background: #e9f9f0;
-    color: #2f8f62;
+    background: #e8f6ee;
+    color: #1f7a4d;
     font-family: inherit;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 600;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
 
 .approve:hover {
-    background: #d3f3e2;
+    background: #d3eedd;
     transform: translateY(-2px);
 }
 
@@ -129,20 +130,20 @@
     gap: 8px;
     box-sizing: border-box;
     padding: 10px 20px;
-    border: 2px solid #dccdf5;
+    border: 1px solid #b9d9dc;
     border-radius: 999px;
-    background: #eceee9;
-    color: #607969;
+    background: #f6fafb;
+    color: #0b646c;
     font-family: inherit;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 600;
     text-decoration: none;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
 
 .modify:hover {
-    background: #eadcff;
+    background: #d3ecee;
     transform: translateY(-2px);
 }
 
@@ -153,19 +154,19 @@
     gap: 8px;
     box-sizing: border-box;
     padding: 10px 20px;
-    border: 2px solid #ffc9c9;
+    border: 1px solid #f2bcbc;
     border-radius: 999px;
-    background: #fff0f0;
-    color: #d04b4b;
+    background: #fdecec;
+    color: #b42323;
     font-family: inherit;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 600;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
 
 .cancel:hover {
-    background: #ffdede;
+    background: #f8d4d4;
     transform: translateY(-2px);
 }
 
@@ -176,19 +177,19 @@
     gap: 8px;
     box-sizing: border-box;
     padding: 10px 20px;
-    border: 2px solid #bfe8d2;
+    border: 1px solid #c4e5d1;
     border-radius: 999px;
-    background: #e9f9f0;
-    color: #2f8f62;
+    background: #e8f6ee;
+    color: #1f7a4d;
     font-family: inherit;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 600;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
 
 .save:hover {
-    background: #d3f3e2;
+    background: #d3eedd;
     transform: translateY(-2px);
 }
 
@@ -199,19 +200,18 @@
     gap: 8px;
     box-sizing: border-box;
     padding: 10px 20px;
-    border: 2px solid #cbd5cc;
+    border: 1px solid #d3dfe4;
     border-radius: 999px;
     background: white;
-    color: #344b40;
+    color: #0e7c86;
     font-family: inherit;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 600;
     text-decoration: none;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
-
 .close:hover {
-    background: #eef1ed;
+    background: #e6f4f5;
     transform: translateY(-2px);
 }
