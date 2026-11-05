@@ -109,6 +109,25 @@ export const editHotel = createAsyncThunk(
     }
   }
 );
+export const deleteHotel = createAsyncThunk(
+  "hotels/deleteHotel",
+  async (hotel_id: number, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/hotels/${hotel_id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Failed to delete hotel");
+      return hotel_id;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error ? error.message : "Something went wrong"
+      );
+    }
+  }
+);
 
 export const hotelSlice = createSlice({
   name: "hotels",
@@ -176,6 +195,12 @@ export const hotelSlice = createSlice({
       })
       .addCase(editHotel.rejected, (state, action) => {
         state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(deleteHotel.fulfilled, (state, action) => {
+        state.hotels = state.hotels.filter((h) => h.hotel_id !== action.payload);
+      })
+      .addCase(deleteHotel.rejected, (state, action) => {
         state.error = action.payload as string;
       })
   },

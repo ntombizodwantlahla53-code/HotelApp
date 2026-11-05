@@ -3,7 +3,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../Redux/store"
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
-import { fetchRoom } from "../../components/features/roomslice"
+import { fetchRoom, deleteRoom } from "../../components/features/roomslice"
 import { MdArrowBackIos } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { fetchHotel } from "../../components/features/hotelslice";
@@ -106,9 +106,16 @@ export const roomlist = () => {
                 <p className={styles.price}>Price: {room.price}</p>
                 <div>
                   {isAdminPage && (
+                    <>
                     <Link to={`/EditRoom/${room.room_id}`}>
                       <button type="button" className={styles.inputting}>Edit room</button>
                     </Link>
+                    <button type="button" className={styles.inputting}
+                    onClick={() => {if (window.confirm(`Delete room ${room.room_id}?`)) dispatch(deleteRoom(room.room_id!));
+                    }}>
+                      Delete room
+                      </button>
+                      </>
                   )}
                   {!isAdminPage && (
                     <button

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../Redux/store";
-import { fetchHotel} from "../../components/features/hotelslice";
+import { fetchHotel,deleteHotel } from "../../components/features/hotelslice";
 import { fetchUsers, deleteUsers } from "../../components/features/userslice";
 import { HiEye } from "react-icons/hi";
 import {payments as Payments} from '../payments/payments'
@@ -31,6 +31,12 @@ const handleDelete = (id: number, name: string) => {
     dispatch(deleteUsers(id));
   }
 };
+const handleDeleteHotel = (id: number | undefined, name: string) => {
+  if (id === undefined) return;
+  if (window.confirm(`Delete hotel "${name}" and all its rooms and bookings?`)) {
+    dispatch(deleteHotel(id));
+  }
+};;
 
   return (
     <div className={styles.page}>
@@ -95,6 +101,9 @@ const handleDelete = (id: number, name: string) => {
                 <Link to={`/Hotels/${hotel.hotel_id}`}>
                   <button type="button" className={styles.edit}>Edit hotel</button>
                 </Link>
+                <button type="button" className={styles.danger}
+                onClick={() => handleDeleteHotel(hotel.hotel_id, hotel.name)}>
+                  Delete hotel</button>
               </div>
             </div>
           </div>

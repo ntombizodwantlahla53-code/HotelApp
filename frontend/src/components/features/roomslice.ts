@@ -130,6 +130,25 @@ export const editRooms = createAsyncThunk(
     }
   }
 );
+export const deleteRoom = createAsyncThunk(
+  "rooms/deleteRoom",
+  async (room_id: number, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/rooms/${room_id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Failed to delete room");
+      return room_id;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error instanceof Error ? error.message : "Something went wrong"
+      );
+    }
+  }
+);
 
 export const roomSlice = createSlice({
   name: "rooms",
@@ -195,6 +214,12 @@ export const roomSlice = createSlice({
       })
       .addCase(editRooms.rejected, (state, action) => {
         state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(deleteRoom.fulfilled, (state, action) => {
+        state.rooms = state.rooms.filter((r) => r.room_id !== action.payload);
+      })
+      .addCase(deleteRoom.rejected, (state, action) => {
         state.error = action.payload as string;
       })
   },
