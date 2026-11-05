@@ -61,3 +61,7 @@ export const updateUser = async (
   );
   return rows[0] || null;
 };
+export const countAdmins = async (): Promise<number> => {
+  const { rows } = await query("SELECT COUNT(*) FROM users WHERE role = 'Admin'");
+  return Number(rows[0].count);
+};

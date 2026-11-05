@@ -10,7 +10,7 @@ export const register = async (req: Request, res: Response) => {
     if (!name || !email || !password) {
         return res.status(400).json({ message: "name, email and password are required" });
     }
-    if (role !=="Customer" && role !=="Admin") {
+    if (role !== "Customer" && role !== "Admin") {
         return res.status(400).json({ message: "Role must be customer or admin" });
     }
 
@@ -19,11 +19,20 @@ export const register = async (req: Request, res: Response) => {
         if (existingUser) {
             return res.status(409).json({ message: "Email is already in use" });
         }
-        const user = await userService.createUser(name, email, password,role);
-        res.status(201) .json({ message: "User registered successfully", 
-                userId: user.id, 
+
+        if (role === "Admin") {
+            const adminCount = await userService.countAdmins();
+            if (adminCount > 0) {
+                return res.status(403).json({
+                    message: "An admin already exists. Only an admin can add another admin.",
+                });
+            }
+        }
+        const user = await userService.createUser(name, email, password, role);
+        res.status(201).json({ message: "User registered successfully",
+                userId: user.id,
                 name: user.name,
-                role: user.role});
+                role: user.role });
     } catch (error) {
         res.status(500).json({ message: "Error registering the user" });
     }
