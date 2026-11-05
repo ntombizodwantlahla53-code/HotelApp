@@ -38,6 +38,7 @@ export const reg = () => {
         email: info.email,
         password: info.password,
         confirmPassword: info.confirmPassword,
+        role: info.role,
       }))
       .unwrap()
       .then(() => {
@@ -87,6 +88,14 @@ export const reg = () => {
             type="password"
             value={info.confirmPassword}
             onChange={(e) => dispatch(updateRegister({ confirmPassword: e.target.value }))}/>
+        </label>
+          <label className={styles.desc}>Account type
+          <select className={styles.inputtitle}
+            value={info.role}
+            onChange={(e) => dispatch(updateRegister({ role: e.target.value as "Customer" | "Admin" }))}>
+            <option value="Customer">Customer</option>
+            <option value="Admin">Admin</option>
+          </select>
         </label>
         <button type="submit" className={styles.inputting}>
           <IoIosAddCircle /> {loading ? "Creating..." : "Create Account"}

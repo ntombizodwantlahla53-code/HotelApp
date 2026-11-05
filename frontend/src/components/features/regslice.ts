@@ -7,6 +7,7 @@ export interface reg {
   email: string;
   password: string;
   confirmPassword: string;
+  role: "Customer" | "Admin";
 }
 
 interface RegisterState {
@@ -21,6 +22,7 @@ const initialState: RegisterState = {
     email: "",
     password: "",
     confirmPassword: "",
+    role: "Customer",
   },
   loading: false,
   error: null,
@@ -70,6 +72,7 @@ export const registerSlice = createSlice({
         email: "",
         password: "",
         confirmPassword: "",
+        role: "Customer",
       };
     },
   },
