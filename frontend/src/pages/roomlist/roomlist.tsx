@@ -78,7 +78,7 @@ export const roomlist = () => {
           <p className={styles.note}>No rooms are available yet.</p>
         )}
         <div className={styles.flex}>
-          {(isAdminPage ? hotelRooms : hotelRooms.slice(0, 1)).map((room) => (
+          {hotelRooms.map((room) => (
             <div className={styles.firstplace} key={room.room_id}>
               <div className={styles.gallery}>
                 {room.image_urls?.filter((url) => url.trim()).map((url, index) => (
@@ -119,11 +119,12 @@ export const roomlist = () => {
                     </button>
                   )}
                 </div>
-                {hotel_id && <Reviews hotel_id={Number(hotel_id)} />}
+                
               </div>
             </div>
           ))}
         </div>
+        {hotel_id && <Reviews hotel_id={Number(hotel_id)} />}
         {isAdminPage && (
           <Link to={`/Rooms/${hotel_id}`}>
             <button type="button" className={styles.inputting}>
