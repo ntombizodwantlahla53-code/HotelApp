@@ -38,6 +38,29 @@ export const register = async (req: Request, res: Response) => {
     }
 };
 
+export const createAdmin = async (req: Request, res: Response) => {
+    if (!req.user) {
+        return res.status(401).json({ message: "Not authorized" });
+    }
+    if (req.user.role.toLowerCase() !== "admin") {
+        return res.status(403).json({ message: "Only admins can add admins" });
+    }
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+        return res.status(400).json({ message: "name, email and password are required" });
+    }
+    try {
+        const existingUser = await userService.findUserByEmail(email);
+        if (existingUser) {
+            return res.status(409).json({ message: "Email is already in use" });
+        }
+        const user = await userService.createUser(name, email, password, "Admin");
+        res.status(201).json(user);
+    } catch (error) {
+        console.error("createAdmin error:", error);
+        res.status(500).json({ message: "Error creating admin" });
+    }
+};
 export const login = async (req: Request, res: Response) => {
     const {name,  email, password } = req.body;
     if (!name ||!email || !password) {
