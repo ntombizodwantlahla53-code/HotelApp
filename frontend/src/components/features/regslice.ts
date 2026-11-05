@@ -40,11 +40,11 @@ export const fetchRegs = createAsyncThunk(
         body: JSON.stringify(register),
       });
 
+      const data = await response.json();
       if (!response.ok) {
-        throw new Error("Failed to create account");
+        throw new Error(data.message || "Failed to create account");
       }
-
-      return await response.json();
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error instanceof Error
