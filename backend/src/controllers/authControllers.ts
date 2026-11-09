@@ -195,18 +195,17 @@ export const googleLogin = async (req: Request, res: Response) => {
         let user = await userService.findUserByEmail(googleUser.email);
         if (!user) {
             user = await userService.createUser(
-                googleUser.name || googleUser.email, googleUser.email, randomUUID(), "Customer"
+                googleUser.email, googleUser.email, randomUUID(), "Customer"
             );
         }
 
         const token = jwt.sign(
-            { userId: user.id, email: user.email, name: user.name, role: user.role },
+            { userId: user.id, email: user.email, role: user.role },
             process.env.JWT_SECRET!,
             { expiresIn: "7d" }
         );
         res.status(200).json({ message: "Login Successful", token, user: {
             id: user.id,
-            name: user.name,
             email: user.email,
             role: user.role,
         }});
