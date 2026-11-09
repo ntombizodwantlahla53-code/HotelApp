@@ -66,7 +66,9 @@ const handleDeleteHotel = (id: number | undefined, name: string) => {
         </div>
       </div>
 
-      
+      <Payments/>
+      <Reservations/>
+
       <div className={styles.section}>
         {adminProfile?.role === "Admin" && (
           <Link to="/hotels" className={styles.hotels}>+ Add Hotels</Link>
@@ -107,8 +109,6 @@ const handleDeleteHotel = (id: number | undefined, name: string) => {
           </div>
         ))}
       </div>
-      <Payments/>
-      <Reservations/>
     </div>
   )
 }
