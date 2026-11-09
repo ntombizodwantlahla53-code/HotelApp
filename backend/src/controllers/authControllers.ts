@@ -63,8 +63,8 @@ export const createAdmin = async (req: Request, res: Response) => {
 };
 export const login = async (req: Request, res: Response) => {
     const {name,  email, password } = req.body;
-    if (!name ||!email || !password) {
-        return res.status(400).json({ message: "name, email and password are required" });
+    if (!email || !password) {
+        return res.status(400).json({ message: "email and password are required" });
     }
 
     try {
@@ -80,7 +80,6 @@ export const login = async (req: Request, res: Response) => {
         const payload = { 
             userId: user.id, 
             email: user.email, 
-            name: user.name,
             role: user.role };
         const token = jwt.sign(payload, process.env.JWT_SECRET!, {
             expiresIn: "7d",
@@ -88,7 +87,6 @@ export const login = async (req: Request, res: Response) => {
 
         res.status(200).json({ message: "Login Successful", token, user: {
             id: user.id,
-            name: user.name,
             email:user.email,
             role:user.role,
         },
