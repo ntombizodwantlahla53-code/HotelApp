@@ -78,8 +78,6 @@ const handleDeleteHotel = (id: number | undefined, name: string) => {
           <p className={styles.note}>No hotels are available yet.</p>
         )}
       </div>
-      <Payments/>
-      <Reservations/>
 
       <div className={styles.flex}>
         {hotels.map((hotel) => (
@@ -109,6 +107,8 @@ const handleDeleteHotel = (id: number | undefined, name: string) => {
           </div>
         ))}
       </div>
+      <Payments/>
+      <Reservations/>
     </div>
   )
 }
