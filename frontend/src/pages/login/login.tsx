@@ -16,11 +16,6 @@ export const log = () => {
    const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
- 
-    if (!info.name) {
-      alert("Name cannot be empty. Please enter a name.");
-      return;
-    }
     
     if (!info.email) {
       alert("Email cannot be empty. Please enter an email address.");
@@ -32,7 +27,6 @@ export const log = () => {
     }
     dispatch(
       fetchLogs({
-        name: info.name,
         email: info.email,
         password: info.password,
       }))
@@ -72,13 +66,6 @@ export const log = () => {
       </div>
       <form onSubmit={handleSubmit}>
         <div className={styles.insideContainer}>
-        <label className={styles.title}>Name
-          <input className={styles.inputtitle}
-            value={info.name}
-            type="text"
-            onChange={(e) => dispatch(updateLogin({ name: e.target.value }))}
-            placeholder="Name"/>
-        </label>
         <label className={styles.title}>Email Address
           <input className={styles.inputtitle}
             value={info.email}

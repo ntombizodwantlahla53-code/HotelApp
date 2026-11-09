@@ -3,7 +3,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface log {
   id?: number;
-  name: string;
   email: string;
   password: string;
 }
@@ -16,7 +15,6 @@ interface LoginState {
 
 const initialState: LoginState = {
   info: {
-    name: "",
     email: "",
     password: "",
   },
@@ -91,7 +89,6 @@ export const loginSlice = createSlice({
 
     clearLogin: (state) => {
       state.info = {
-        name: "",
         email: "",
         password: "",
       };
